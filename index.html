@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Use Penny at Lataamo</title>
+  <meta name="description" content="A practical one-page guide for using Penny, Lataamo's AI agent in Slack." />
+  <meta property="og:title" content="How to Use Penny at Lataamo" />
+  <meta property="og:description" content="A practical one-page visual guide for using Penny effectively in Slack." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: rgba(0,0,0,.94);
+      --muted: #625d58;
+      --soft: #f6f5f4;
+      --paper: #fffdf9;
+      --blue: #0075de;
+      --blue-soft: #eff7ff;
+      --green: #1f9d55;
+      --green-soft: #eefbf4;
+      --orange: #dd5b00;
+      --orange-soft: #fff4eb;
+      --purple: #6d3fd9;
+      --purple-soft: #f5f0ff;
+      --pink: #cc3f8e;
+      --pink-soft: #fff0f8;
+      --line: rgba(0,0,0,.10);
+      --shadow: rgba(0,0,0,.04) 0 4px 18px, rgba(0,0,0,.027) 0 2px 8px, rgba(0,0,0,.02) 0 .8px 3px;
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(0,117,222,.11), transparent 30%),
+        radial-gradient(circle at 86% 16%, rgba(109,63,217,.10), transparent 28%),
+        linear-gradient(180deg, #fff 0%, var(--paper) 44%, var(--soft) 100%);
+      line-height: 1.45;
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 34px 22px 56px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      margin-bottom: 40px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.03em; }
+    .mark {
+      width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center;
+      background: var(--ink); color: white; box-shadow: var(--shadow); font-size: 21px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 999px; padding: 8px 12px; font-size: 12px; font-weight: 700;
+      color: #097fe8; background: var(--blue-soft); border: 1px solid rgba(0,117,222,.13);
+      letter-spacing: .01em;
+    }
+
+    .hero {
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; align-items: stretch;
+      margin-bottom: 24px;
+    }
+    .hero-card, .card, .formula, .memory-panel, .example-panel {
+      background: rgba(255,255,255,.86); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .hero-card { padding: clamp(28px, 5vw, 56px); min-height: 468px; display: flex; flex-direction: column; justify-content: space-between; }
+    .kicker { color: var(--blue); font-weight: 800; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: clamp(44px, 7vw, 82px); line-height: .92; letter-spacing: -.075em; max-width: 760px; }
+    .lead { margin: 22px 0 0; max-width: 670px; color: var(--muted); font-size: clamp(18px, 2.1vw, 24px); font-weight: 600; letter-spacing: -.02em; }
+    .hero-footer { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+    .pill { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 10px 14px; font-weight: 700; font-size: 13px; }
+
+    .side-stack { display: grid; gap: 16px; }
+    .mini { padding: 22px; min-height: 144px; position: relative; overflow: hidden; }
+    .mini .num { font-size: 46px; line-height: .9; font-weight: 800; letter-spacing: -.07em; }
+    .mini h3 { margin: 12px 0 6px; font-size: 21px; letter-spacing: -.035em; }
+    .mini p { margin: 0; color: var(--muted); font-weight: 500; }
+    .mini:after { content: ""; position: absolute; right: -24px; top: -24px; width: 110px; height: 110px; border-radius: 32px; transform: rotate(18deg); opacity: .72; }
+    .m1:after { background: var(--green-soft); } .m2:after { background: var(--orange-soft); } .m3:after { background: var(--purple-soft); }
+
+    .section-title { margin: 44px 0 18px; display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+    h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1; letter-spacing: -.06em; }
+    .section-title p { margin: 0; color: var(--muted); font-weight: 600; max-width: 410px; }
+
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card { padding: 22px; min-height: 242px; display: flex; flex-direction: column; gap: 12px; }
+    .icon { width: 44px; height: 44px; border-radius: 15px; display: grid; place-items: center; font-size: 22px; font-weight: 800; }
+    .blue { background: var(--blue-soft); color: var(--blue); }
+    .green { background: var(--green-soft); color: var(--green); }
+    .orange { background: var(--orange-soft); color: var(--orange); }
+    .purple { background: var(--purple-soft); color: var(--purple); }
+    .pink { background: var(--pink-soft); color: var(--pink); }
+    .card h3 { margin: 0; font-size: 21px; line-height: 1.12; letter-spacing: -.04em; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; font-weight: 500; }
+    .card strong { color: var(--ink); }
+
+    .formula { padding: 26px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
+    .prompt-box { background: #111; color: white; border-radius: 18px; padding: 22px; box-shadow: rgba(0,0,0,.12) 0 18px 42px; }
+    .prompt-box code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 15px; line-height: 1.55; color: #f3f3f3; }
+    .prompt-box .muted-code { color: #94cfff; }
+    .steps { display: grid; gap: 12px; }
+    .step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
+    .bubble { width: 34px; height: 34px; border-radius: 999px; background: var(--ink); color: white; display: grid; place-items: center; font-weight: 800; font-size: 14px; }
+    .step b { display: block; letter-spacing: -.025em; }
+    .step span { color: var(--muted); font-weight: 500; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .memory-panel, .example-panel { padding: 28px; }
+    .memory-list { display: grid; gap: 12px; margin-top: 18px; }
+    .memory-item { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; }
+    .check { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: var(--green-soft); color: var(--green); font-weight: 900; }
+    .cross { background: var(--orange-soft); color: var(--orange); }
+    .memory-item b { display: block; }
+    .memory-item span { color: var(--muted); font-weight: 500; }
+
+    .examples { display: grid; gap: 12px; margin-top: 18px; }
+    .example { border: 1px solid var(--line); border-radius: 16px; padding: 15px; background: rgba(246,245,244,.6); }
+    .example b { display: block; margin-bottom: 4px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--blue); }
+    .example p { margin: 0; font-weight: 600; color: #31302e; }
+
+    .footer-note { margin-top: 24px; padding: 22px; border-radius: 22px; background: #111; color: white; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+    .footer-note p { margin: 0; color: rgba(255,255,255,.78); font-weight: 600; }
+    .footer-note strong { color: white; }
+
+    @media (max-width: 920px) {
+      .hero, .formula, .two-col { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-card { min-height: 390px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 22px 14px 36px; }
+      .grid { grid-template-columns: 1fr; }
+      .section-title { display: block; }
+      .section-title p { margin-top: 10px; }
+      .footer-note { display: block; }
+      .hero-card, .card, .formula, .memory-panel, .example-panel { border-radius: 19px; }
+      .prompt-box code { font-size: 13px; }
+    }
+
+    @media print {
+      body { background: white; }
+      .wrap { max-width: none; padding: 18px; }
+      .hero-card, .card, .formula, .memory-panel, .example-panel { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="topbar" aria-label="Page header">
+      <div class="brand"><div class="mark">P</div><div>Penny × Lataamo</div></div>
+      <div class="badge">Slack guide · for everyone on the team</div>
+    </header>
+
+    <section class="hero" aria-label="Intro">
+      <div class="hero-card">
+        <div>
+          <div class="kicker">How to use Penny</div>
+          <h1>Brief her like a fast junior producer.</h1>
+          <p class="lead">Penny is Lataamo’s AI agent in Slack. Give her a clear outcome, useful context, and the format you want — she will research, structure, draft, compare, and create.</p>
+        </div>
+        <div class="hero-footer">
+          <span class="pill">Research</span>
+          <span class="pill">Vendor comparisons</span>
+          <span class="pill">Client drafts</span>
+          <span class="pill">Ideas</span>
+          <span class="pill">Docs & sheets</span>
+        </div>
+      </div>
+
+      <aside class="side-stack" aria-label="Three essentials">
+        <div class="card mini m1">
+          <div class="num">1</div>
+          <h3>One thread = one working context</h3>
+          <p>Keep each task in one Slack thread when possible.</p>
+        </div>
+        <div class="card mini m2">
+          <div class="num">2</div>
+          <h3>Ask for the output</h3>
+          <p>“Find, compare, cite sources, and recommend.”</p>
+        </div>
+        <div class="card mini m3">
+          <div class="num">3</div>
+          <h3>Tell her what matters</h3>
+          <p>Date, city, capacity, budget, tone, audience, constraints.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section aria-label="What Penny can do">
+      <div class="section-title">
+        <h2>Use Penny for complete work.</h2>
+        <p>Do not only ask where to look. Ask her to make the thing usable.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="icon blue">🔎</div>
+          <h3>Research with sources</h3>
+          <p>Venues, suppliers, speakers, benchmarks, market info — with links and caveats.</p>
+        </article>
+        <article class="card">
+          <div class="icon green">📊</div>
+          <h3>Compare options</h3>
+          <p>Ask for tables with fit, capacity, pricing signals, contacts, risks, and recommendation.</p>
+        </article>
+        <article class="card">
+          <div class="icon orange">✍️</div>
+          <h3>Draft client material</h3>
+          <p>Emails, concepts, proposals, summaries, scripts, briefs — in English or Finnish.</p>
+        </article>
+        <article class="card">
+          <div class="icon purple">🧰</div>
+          <h3>Create assets</h3>
+          <p>For bigger work, ask for a Google Sheet, Google Doc, PDF-ready copy, or web page.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-label="Prompt formula">
+      <div class="section-title">
+        <h2>The best prompt formula</h2>
+        <p>Short is fine — but include the decision-making ingredients.</p>
+      </div>
+      <div class="formula">
+        <div class="steps">
+          <div class="step"><div class="bubble">1</div><div><b>Outcome</b><span>What should Penny deliver?</span></div></div>
+          <div class="step"><div class="bubble">2</div><div><b>Context</b><span>Event type, audience, city, date, budget, vibe, constraints.</span></div></div>
+          <div class="step"><div class="bubble">3</div><div><b>Format</b><span>Slack bullets, comparison table, client-facing text, Google Sheet, Google Doc.</span></div></div>
+          <div class="step"><div class="bubble">4</div><div><b>Quality bar</b><span>Sources, recommendation, caveats, next checks.</span></div></div>
+        </div>
+        <div class="prompt-box" aria-label="Example prompt">
+          <code><span class="muted-code">Example:</span><br>
+Find 3–5 Helsinki venues for 150 people in September. Premium but warm vibe. Include capacity, location, source links, pricing signals if available, and a clear recommendation. Output as a comparison table for internal use.</code>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Session and memory">
+      <div class="section-title">
+        <h2>Threads, context & memory</h2>
+        <p>No AI jargon needed — just know what Penny can and cannot carry forward.</p>
+      </div>
+      <div class="two-col">
+        <article class="memory-panel">
+          <div class="icon pink">💬</div>
+          <h3>Current thread = short-term context</h3>
+          <div class="memory-list">
+            <div class="memory-item"><div class="check">✓</div><div><b>Use one Slack thread per task</b><span>Penny follows the task best when the brief, files, corrections, and decisions stay together.</span></div></div>
+            <div class="memory-item"><div class="check">✓</div><div><b>Paste key context</b><span>Penny cannot freely search all Slack history. Add the relevant notes, links, or files.</span></div></div>
+            <div class="memory-item"><div class="check cross">!</div><div><b>Very long threads can lose detail</b><span>If the task has evolved a lot, restate the latest brief and desired output.</span></div></div>
+          </div>
+        </article>
+
+        <article class="memory-panel">
+          <div class="icon green">🧠</div>
+          <h3>Memory = durable preferences</h3>
+          <div class="memory-list">
+            <div class="memory-item"><div class="check">✓</div><div><b>Good to remember</b><span>Team preferences, recurring workflows, office location, output style, stable conventions.</span></div></div>
+            <div class="memory-item"><div class="check cross">×</div><div><b>Not good to remember</b><span>One-off deadlines, temporary drafts, old event details, information that will soon be stale.</span></div></div>
+            <div class="memory-item"><div class="check">✓</div><div><b>Say it explicitly</b><span>Use “Remember this for future tasks” or “For this task only…”</span></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-label="Examples">
+      <div class="section-title">
+        <h2>Copy these prompts</h2>
+        <p>Small improvements in the brief create much better results.</p>
+      </div>
+      <div class="example-panel">
+        <div class="examples">
+          <div class="example"><b>Vendor research</b><p>Compare three caterers for a 120-person evening event. Focus on dietary flexibility, premium feel, logistics, and likely price level. Include sources and recommendation.</p></div>
+          <div class="example"><b>Client copy</b><p>Turn this rough text into a polished Finnish client email. Keep it concise, warm, and confident.</p></div>
+          <div class="example"><b>Meeting notes</b><p>Summarise this meeting into decisions, open questions, owners, and next steps.</p></div>
+          <div class="example"><b>Concept ideas</b><p>Create 3 event concept directions for a B2B tech client. Audience 200 people, Helsinki, premium but human tone. Output in English, client-facing.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-note">
+      <p><strong>Final rule:</strong> Treat Penny like an extra producer with tools — brief clearly, ask for a concrete deliverable, request sources, and correct her when needed.</p>
+      <div class="badge">Verify critical facts before client use</div>
+    </footer>
+  </main>
+</body>
+</html>
