@@ -71,9 +71,24 @@
       backdrop-filter: blur(10px);
     }
     .hero-card { padding: clamp(28px, 5vw, 56px); min-height: 468px; display: flex; flex-direction: column; justify-content: space-between; }
+    .hero-intro { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 28px; align-items: start; }
     .kicker { color: var(--blue); font-weight: 800; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; margin-bottom: 12px; }
-    h1 { margin: 0; font-size: clamp(44px, 7vw, 82px); line-height: .92; letter-spacing: -.075em; max-width: 760px; }
+    h1 { margin: 0; font-size: clamp(42px, 6.3vw, 74px); line-height: .92; letter-spacing: -.075em; max-width: 760px; }
     .lead { margin: 22px 0 0; max-width: 670px; color: var(--muted); font-size: clamp(18px, 2.1vw, 24px); font-weight: 600; letter-spacing: -.02em; }
+    .avatar-cardlet { position: relative; justify-self: end; width: min(190px, 100%); }
+    .avatar-frame {
+      position: relative; border-radius: 34px; padding: 8px;
+      background: linear-gradient(135deg, #ff7a18, #ff2d7a 45%, #7a4cff);
+      box-shadow: rgba(204,63,142,.24) 0 18px 42px, rgba(0,0,0,.08) 0 6px 18px;
+      transform: rotate(2deg);
+    }
+    .avatar-frame img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 27px; border: 3px solid rgba(255,255,255,.78); }
+    .avatar-tag {
+      position: absolute; left: -14px; bottom: -12px; max-width: 154px;
+      border-radius: 16px; padding: 10px 12px; background: rgba(255,255,255,.94);
+      border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 12px; font-weight: 800; line-height: 1.15;
+    }
+    .avatar-tag span { display: block; color: var(--pink); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
     .hero-footer { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
     .pill { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 10px 14px; font-weight: 700; font-size: 13px; }
 
@@ -132,6 +147,8 @@
 
     @media (max-width: 920px) {
       .hero, .formula, .two-col { grid-template-columns: 1fr; }
+      .hero-intro { grid-template-columns: 1fr; }
+      .avatar-cardlet { justify-self: start; width: 168px; order: -1; margin-bottom: 8px; }
       .grid { grid-template-columns: repeat(2, 1fr); }
       .hero-card { min-height: 390px; }
       .topbar { align-items: flex-start; flex-direction: column; }
@@ -162,10 +179,18 @@
 
     <section class="hero" aria-label="Intro">
       <div class="hero-card">
-        <div>
-          <div class="kicker">How to use Penny</div>
-          <h1>Brief her like a fast junior producer.</h1>
-          <p class="lead">Penny is Lataamo’s AI agent in Slack. Give her a clear outcome, useful context, and the format you want — she will research, structure, draft, compare, and create.</p>
+        <div class="hero-intro">
+          <div>
+            <div class="kicker">Meet Penny</div>
+            <h1>Brief her like a fast junior producer.</h1>
+            <p class="lead">Penny is Lataamo’s AI agent in Slack. Give her a clear outcome, useful context, and the format you want — she will research, structure, draft, compare, and create.</p>
+          </div>
+          <figure class="avatar-cardlet" aria-label="Penny avatar">
+            <div class="avatar-frame">
+              <img src="assets/penny-avatar.png" alt="Penny, Lataamo’s AI agent avatar" />
+            </div>
+            <figcaption class="avatar-tag"><span>Hello, I’m Penny</span>Your AI producer in Slack</figcaption>
+          </figure>
         </div>
         <div class="hero-footer">
           <span class="pill">Research</span>
