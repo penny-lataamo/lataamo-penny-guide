@@ -33,6 +33,10 @@
       --color-action-bg: #D70376;
       --color-action-bg-hover: #B90263;
       --color-action-text: #FFFFFF;
+      --color-secondary-bg: #FFFFFF;
+      --color-secondary-bg-hover: #FFF1EA;
+      --color-secondary-text: #111111;
+      --color-secondary-border: #B9AAB2;
       --color-link: #B90263;
       --color-focus: rgba(215, 3, 118, 0.28);
       --shadow-card: 0 14px 34px rgba(17, 17, 17, 0.08);
@@ -51,6 +55,10 @@
       --color-action-bg: #EC0382;
       --color-action-bg-hover: #FF2A9B;
       --color-action-text: #FFFFFF;
+      --color-secondary-bg: #332B34;
+      --color-secondary-bg-hover: #433846;
+      --color-secondary-text: #FFFFFF;
+      --color-secondary-border: rgba(255,255,255,.32);
       --color-link: #FF7ABF;
       --color-focus: rgba(236, 3, 130, 0.38);
       --shadow-card: 0 18px 46px rgba(0,0,0,.35);
@@ -82,7 +90,8 @@
     .button-primary { background: var(--color-action-bg); color: var(--color-action-text); }
     .button-primary:hover { background: var(--color-action-bg-hover); }
     .button-accent { background: var(--brand-gradient); color: #fff; box-shadow: 0 10px 24px rgba(236, 3, 130, .20); }
-    .button-secondary { background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); }
+    .button-secondary { background: var(--color-secondary-bg); color: var(--color-secondary-text); border-color: var(--color-secondary-border); box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 8%, transparent); }
+    .button-secondary:hover { background: var(--color-secondary-bg-hover); border-color: var(--color-action-bg); }
     .button-ghost { background: transparent; color: var(--color-text-muted); border-color: transparent; }
     .button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
     .grid { display: grid; gap: var(--space-5); }
@@ -103,7 +112,8 @@
     .textarea { min-height: 96px; resize: vertical; }
     .input:focus, .select:focus, .textarea:focus { outline: 3px solid var(--color-focus); border-color: var(--color-action-bg); }
     .badge { display: inline-flex; align-items: center; width: fit-content; gap: 6px; border-radius: var(--radius-pill); padding: 4px 8px; font: 800 12px / 1 var(--font); border: 1px solid var(--color-border); white-space: nowrap; }
-    .badge-brand { color: var(--color-link); background: color-mix(in srgb, var(--color-action-bg) 12%, transparent); }
+    .badge-brand { color: var(--color-link); background: color-mix(in srgb, var(--color-action-bg) 14%, var(--color-surface)); border-color: color-mix(in srgb, var(--color-action-bg) 45%, var(--color-border)); }
+    [data-theme="dark"] .badge-brand { color: #FFD7EA; background: color-mix(in srgb, var(--color-action-bg) 22%, var(--color-surface)); border-color: color-mix(in srgb, var(--color-action-bg) 58%, var(--color-border)); }
     .badge-success { background: #E7F6EE; color: #0A5B41; border-color: #B7E4CC; }
     .badge-warning { background: #FFF1D6; color: #7A4300; border-color: #FFD891; }
     [data-theme="dark"] .badge-success { background: rgba(10, 91, 65, .34); color: #8BE0BC; border-color: rgba(139, 224, 188, .25); }
@@ -147,7 +157,8 @@
     .sidebar-demo { border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-3); }
     .side-link { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: var(--radius-md); color: var(--color-text-muted); font-weight: 800; font-size: 13px; }
     .side-link.active { color: var(--color-text); background: var(--color-surface-subtle); border-left: 3px solid var(--color-action-bg); }
-    .filter-chip { display: inline-flex; align-items: center; gap: 6px; margin: 4px 4px 0 0; padding: 5px 8px; border-radius: var(--radius-pill); background: var(--color-surface-subtle); color: var(--color-text); font-size: 12px; font-weight: 800; }
+    .filter-chip { display: inline-flex; align-items: center; gap: 6px; margin: 4px 4px 0 0; padding: 6px 10px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--color-action-bg) 14%, var(--color-surface)); color: var(--color-link); border: 1px solid color-mix(in srgb, var(--color-action-bg) 45%, var(--color-border)); font-size: 12px; font-weight: 900; box-shadow: 0 1px 0 color-mix(in srgb, var(--color-action-bg) 10%, transparent); }
+    [data-theme="dark"] .filter-chip { background: color-mix(in srgb, var(--color-action-bg) 22%, var(--color-surface)); color: #FFD7EA; border-color: color-mix(in srgb, var(--color-action-bg) 58%, var(--color-border)); }
     .avatar-row { display: flex; align-items: center; gap: var(--space-3); }
     .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--brand-gradient); color: #fff; font-weight: 900; font-size: 12px; }
     .timeline { display: grid; gap: var(--space-4); }
@@ -158,11 +169,19 @@
     .skeleton-stack { display: grid; gap: 10px; }
     .skeleton { height: 14px; border-radius: var(--radius-sm); background: linear-gradient(90deg, color-mix(in srgb, var(--color-border) 45%, transparent), color-mix(in srgb, var(--color-border) 20%, transparent), color-mix(in srgb, var(--color-border) 45%, transparent)); background-size: 220% 100%; animation: skeleton 1.4s ease-in-out infinite; }
     @keyframes skeleton { to { background-position-x: -220%; } }
-    .toast-demo { display: grid; gap: var(--space-2); }
-    .toast { display: flex; align-items: flex-start; gap: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); padding: var(--space-3); box-shadow: var(--shadow-card); }
-    .toast-icon { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; background: var(--color-action-bg); }
-    .toast.success .toast-icon { background: #12805C; }
-    .toast.warning .toast-icon { background: #B35C00; }
+    .loader-demo { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-4); padding: var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-action-bg) 7%, var(--color-surface)); }
+    .logo-loader { width: 56px; height: 56px; position: relative; display: grid; place-items: center; flex: 0 0 auto; }
+    .logo-loader::before { content: ""; position: absolute; inset: -5px; border-radius: 18px; background: conic-gradient(from 0deg, #FF6B35, #EC0382, transparent 70%); animation: logo-orbit 1.1s linear infinite; }
+    .logo-loader img { position: relative; width: 42px; height: 42px; border-radius: 12px; background: var(--color-surface); padding: 4px; box-shadow: var(--shadow-card); }
+    @keyframes logo-orbit { to { transform: rotate(360deg); } }
+    .toast-demo { display: grid; gap: var(--space-2); padding: var(--space-3); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-text) 6%, transparent); }
+    .toast { --toast-accent: var(--color-action-bg); display: flex; align-items: flex-start; gap: var(--space-3); border: 1px solid var(--color-border-strong); border-left: 5px solid var(--toast-accent); border-radius: var(--radius-md); background: var(--color-surface-raised); padding: var(--space-3); box-shadow: 0 18px 42px rgba(17, 17, 17, .14); }
+    [data-theme="dark"] .toast { box-shadow: 0 20px 50px rgba(0, 0, 0, .42); }
+    .toast-icon { width: 14px; height: 14px; border-radius: 50%; margin-top: 4px; background: var(--toast-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--toast-accent) 18%, transparent); }
+    .toast.success { --toast-accent: #12805C; }
+    .toast.warning { --toast-accent: #B35C00; }
+    [data-theme="dark"] .toast.success { --toast-accent: #7DDCB4; }
+    [data-theme="dark"] .toast.warning { --toast-accent: #FFD28C; }
     .modal-preview { border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: color-mix(in srgb, var(--color-text) 8%, transparent); padding: var(--space-5); }
     .dialog { max-width: 520px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-5); box-shadow: var(--shadow-card); }
 
@@ -317,7 +336,7 @@
             </aside>
             <div>
               <h3 class="card-title">Filter pattern</h3>
-              <p class="muted">Use removable chips for active filters and a subtle sidebar active state. A gradient border is enough brand expression.</p>
+              <p class="muted">Use removable chips for active filters. They need visible fill and border contrast, otherwise they read as disabled or decorative.</p>
               <span class="filter-chip">Helsinki ×</span><span class="filter-chip">Client-ready ×</span><span class="filter-chip">AI concept ×</span>
             </div>
           </div>
@@ -328,7 +347,7 @@
           <div class="modal-preview">
             <div class="dialog" role="dialog" aria-label="Example modal preview">
               <h3 class="card-title">Send concept to review?</h3>
-              <p class="muted">Use modals for focused confirmation. Keep the title app-sized and reserve destructive styling for destructive actions.</p>
+              <p class="muted">Use modals for focused confirmation. Secondary actions use visible borders/backgrounds so they do not disappear into dark or light surfaces.</p>
               <div class="top-actions"><button class="button button-primary" type="button">Send to review</button><button class="button button-secondary" type="button">Cancel</button></div>
             </div>
           </div>
@@ -342,7 +361,7 @@
       <section class="grid three" style="margin-top: var(--space-5);">
         <article class="card"><h2 class="card-title">Avatars</h2><div class="avatar-row"><span class="avatar">JL</span><div><strong>Jarno</strong><br><span class="muted">Owner / reviewer</span></div></div></article>
         <article class="card"><h2 class="card-title">File cards</h2><div class="file-card"><div class="avatar-row"><span class="file-icon">PDF</span><div><strong>Event brief</strong><br><span class="muted">Updated today</span></div></div><button class="button button-secondary" type="button">Open</button></div></article>
-        <article class="card"><h2 class="card-title">Skeleton loading</h2><div class="skeleton-stack"><i class="skeleton" style="width: 80%"></i><i class="skeleton" style="width: 100%"></i><i class="skeleton" style="width: 62%"></i></div></article>
+        <article class="card"><h2 class="card-title">Loading states</h2><div class="skeleton-stack"><i class="skeleton" style="width: 80%"></i><i class="skeleton" style="width: 100%"></i><i class="skeleton" style="width: 62%"></i></div><div class="loader-demo"><span class="logo-loader" aria-label="Loading"><img src="https://www.lataamo.fi/hubfs/Lataamo_Creative_RGB-merkki-liuku_400x400px.png" alt="" /></span><span><strong>Creating concept</strong><br><span class="muted">Logo loader for AI generation; skeletons for layout loading.</span></span></div></article>
       </section>
 
       <section class="card" style="margin-top: var(--space-5);">
