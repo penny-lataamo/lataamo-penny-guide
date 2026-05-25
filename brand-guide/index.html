@@ -1,174 +1,237 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lataamo App Example</title>
+  <title>Lataamo App UI System Example</title>
+  <meta name="description" content="Lataamo app UI system example with light and dark modes, app-scale components and reusable templates." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@700;800;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --lataamo-orange: #FF6B35;
-      --lataamo-orange-deep: #FF5500;
-      --lataamo-magenta: #EC0382;
-      --lataamo-magenta-deep: #D70376;
-      --lataamo-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
-      --black: #111111;
-      --charcoal: #242124;
-      --grey-700: #666666;
-      --grey-300: #D9D9D9;
-      --grey-100: #F4F2F0;
-      --white: #FFFFFF;
-      --font-heading: "Big Shoulders", "Arial Narrow", Arial, sans-serif;
-      --font-body: "Montserrat", Inter, system-ui, sans-serif;
+      --brand-orange: #FF6B35;
+      --brand-orange-deep: #FF5500;
+      --brand-magenta: #EC0382;
+      --brand-magenta-deep: #D70376;
+      --brand-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
+      --font: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 22px; --radius-pill: 999px;
+    }
+    :root, [data-theme="light"] {
+      color-scheme: light;
+      --color-bg: #F7F4F2;
+      --color-surface: #FFFFFF;
+      --color-surface-raised: #FFFFFF;
+      --color-surface-subtle: #FFF1EA;
+      --color-text: #111111;
+      --color-text-muted: #5F565B;
+      --color-text-soft: #82777D;
+      --color-border: #E6E0E3;
+      --color-border-strong: #CFC5CB;
+      --color-action-bg: #D70376;
+      --color-action-bg-hover: #B90263;
+      --color-action-text: #FFFFFF;
+      --color-link: #B90263;
+      --color-focus: rgba(215, 3, 118, 0.28);
+      --shadow-card: 0 14px 34px rgba(17, 17, 17, 0.08);
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --color-bg: #111012;
+      --color-surface: #1A171B;
+      --color-surface-raised: #231F24;
+      --color-surface-subtle: #2B1724;
+      --color-text: #F7F3F5;
+      --color-text-muted: #C9BDC4;
+      --color-text-soft: #9D9098;
+      --color-border: rgba(255,255,255,.12);
+      --color-border-strong: rgba(255,255,255,.20);
+      --color-action-bg: #EC0382;
+      --color-action-bg-hover: #FF2A9B;
+      --color-action-text: #FFFFFF;
+      --color-link: #FF7ABF;
+      --color-focus: rgba(236, 3, 130, 0.38);
+      --shadow-card: 0 18px 46px rgba(0,0,0,.35);
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: var(--font-body); color: var(--black); background: var(--grey-100); }
-    a { color: var(--lataamo-magenta-deep); text-decoration: underline; text-underline-offset: 3px; }
-    .app { min-height: 100vh; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.5rem; background: #fff; border-bottom: 1px solid rgba(17,17,17,.08); position: sticky; top: 0; z-index: 2; }
-    .brand { display: flex; align-items: center; gap: .75rem; font-weight: 900; }
-    .brand img { width: 38px; height: 38px; border-radius: 10px; }
-    .nav { display: flex; gap: .4rem; align-items: center; }
-    .nav a { color: var(--black); text-decoration: none; font-weight: 800; padding: .65rem .8rem; border-radius: 999px; }
-    .nav a.active { color: #fff; background: var(--lataamo-gradient); }
-    .button { border: 0; border-radius: 999px; padding: .85rem 1.1rem; font-weight: 900; cursor: pointer; font-family: inherit; transition: .15s ease; }
-    .button:hover { transform: translateY(-1px); }
-    .button-primary { color: #fff; background: var(--lataamo-gradient); box-shadow: 0 12px 28px rgba(236,3,130,.24); }
-    .button-secondary { color: var(--black); background: #fff; border: 1px solid var(--grey-300); }
-    .button-dark { color: #fff; background: var(--black); }
-    .page { max-width: 1180px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-    .hero { display: grid; grid-template-columns: 1.3fr .7fr; gap: 1.25rem; align-items: stretch; margin-bottom: 1.25rem; }
-    .hero-main { border-radius: 30px; padding: 2rem; color: #fff; background: var(--lataamo-gradient); min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
-    .hero-main:after { content: ""; position: absolute; inset: auto -80px -120px auto; width: 280px; height: 280px; background: rgba(255,255,255,.16); border-radius: 999px; }
-    .eyebrow { font-weight: 900; text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; opacity: .86; }
-    h1, h2, h3 { font-family: var(--font-heading); line-height: .92; margin: 0; letter-spacing: .01em; }
-    h1 { font-size: clamp(3rem, 7vw, 6.3rem); text-transform: uppercase; max-width: 760px; }
-    h2 { font-size: 2.7rem; text-transform: uppercase; margin-bottom: 1rem; }
-    h3 { font-size: 1.8rem; }
-    p { line-height: 1.55; color: var(--grey-700); }
-    .hero-main p { color: rgba(255,255,255,.9); max-width: 620px; font-weight: 600; }
-    .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; position: relative; z-index: 1; }
-    .panel { background: #fff; border: 1px solid rgba(17,17,17,.08); border-radius: 28px; padding: 1.25rem; box-shadow: 0 18px 50px rgba(17,17,17,.08); }
-    .metrics { display: grid; gap: .75rem; }
-    .metric { padding: 1rem; border-radius: 20px; background: #fff; border: 1px solid rgba(17,17,17,.08); }
-    .metric strong { display: block; font-family: var(--font-heading); font-size: 2.7rem; line-height: 1; }
-    .metric span { color: var(--grey-700); font-weight: 700; font-size: .9rem; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.25rem; }
-    .card { background: #fff; border: 1px solid rgba(17,17,17,.10); border-radius: 24px; padding: 1.25rem; box-shadow: 0 18px 50px rgba(17,17,17,.07); }
-    .card.featured { border-top: 7px solid var(--lataamo-magenta); }
-    .tabs { display: flex; gap: .5rem; padding: .35rem; background: var(--grey-100); border-radius: 999px; width: max-content; margin-bottom: 1rem; }
-    .tab { border: 0; padding: .65rem .9rem; border-radius: 999px; background: transparent; font-weight: 900; }
-    .tab.active { background: #fff; box-shadow: 0 8px 20px rgba(17,17,17,.08); }
-    label { display: block; font-weight: 900; margin: .9rem 0 .35rem; }
-    input, select, textarea { width: 100%; border: 1px solid var(--grey-300); border-radius: 14px; padding: .85rem 1rem; font: inherit; background: #fff; }
-    input:focus, select:focus, textarea:focus { outline: 3px solid rgba(236,3,130,.22); border-color: var(--lataamo-magenta-deep); }
-    .alert { border-radius: 18px; padding: 1rem; background: linear-gradient(135deg, rgba(255,107,53,.14), rgba(236,3,130,.12)); border: 1px solid rgba(236,3,130,.22); font-weight: 700; }
-    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 18px; }
-    th, td { text-align: left; padding: .85rem; border-bottom: 1px solid rgba(17,17,17,.08); vertical-align: top; }
-    th { color: #fff; background: var(--black); font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; }
-    tr:hover td { background: rgba(236,3,130,.045); }
-    .badge { display: inline-block; border-radius: 999px; padding: .35rem .65rem; font-size: .78rem; font-weight: 900; }
-    .badge-brand { background: linear-gradient(135deg, rgba(255,107,53,.18), rgba(236,3,130,.16)); color: var(--lataamo-magenta-deep); }
-    .badge-success { background: #E6F6EF; color: #0A5B41; }
-    .badge-warning { background: #FFF2DF; color: #8A4600; }
-    .empty { text-align: center; padding: 2rem; border: 2px dashed rgba(17,17,17,.18); border-radius: 24px; background: rgba(255,255,255,.55); }
-    .footer-note { margin-top: 2rem; color: var(--grey-700); font-size: .9rem; }
-    @media (max-width: 850px) { .hero, .grid { grid-template-columns: 1fr; } .nav { display: none; } }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--font); background: var(--color-bg); color: var(--color-text); font-size: 15px; line-height: 1.55; }
+    a { color: var(--color-link); text-decoration: underline; text-underline-offset: 3px; }
+    .app-shell { min-height: 100vh; }
+    .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 64px; padding: 0 var(--space-6); background: color-mix(in srgb, var(--color-surface) 92%, transparent); border-bottom: 1px solid var(--color-border); backdrop-filter: blur(18px); }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: max-content; font-weight: 900; }
+    .brand img { width: 34px; height: 34px; border-radius: 8px; }
+    .brand span { letter-spacing: -0.02em; }
+    .nav { display: flex; align-items: center; gap: 3px; }
+    .nav a { color: var(--color-text-muted); text-decoration: none; font-size: 13px; font-weight: 800; padding: 8px 10px; border-radius: var(--radius-pill); }
+    .nav a.active { color: var(--color-text); background: var(--color-surface-subtle); position: relative; }
+    .nav a.active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 99px; background: var(--brand-gradient); }
+    .top-actions { display: flex; gap: var(--space-2); align-items: center; }
+    .page { max-width: 1200px; margin: 0 auto; padding: var(--space-6); }
+    .page-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-5); align-items: end; margin: var(--space-4) 0 var(--space-6); }
+    .eyebrow { display: inline-flex; align-items: center; width: fit-content; gap: 8px; font-size: 12px; font-weight: 900; color: var(--color-link); text-transform: uppercase; letter-spacing: .08em; }
+    .eyebrow::before { content: ""; width: 24px; height: 3px; border-radius: 99px; background: var(--brand-gradient); }
+    h1, h2, h3, p { margin-top: 0; }
+    .page-title { margin: 6px 0 8px; font-size: clamp(28px, 2.4vw, 36px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 900; max-width: 780px; }
+    .page-description { margin: 0; color: var(--color-text-muted); max-width: 760px; font-size: 15px; }
+    .section-title { margin-bottom: var(--space-4); font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 900; }
+    .card-title { margin-bottom: 6px; font-size: 18px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 900; }
+    .button { min-height: 40px; border-radius: var(--radius-md); padding: 0 14px; font: 800 14px / 1 var(--font); border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+    .button-primary { background: var(--color-action-bg); color: var(--color-action-text); }
+    .button-primary:hover { background: var(--color-action-bg-hover); }
+    .button-accent { background: var(--brand-gradient); color: #fff; box-shadow: 0 10px 24px rgba(236, 3, 130, .20); }
+    .button-secondary { background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); }
+    .button-ghost { background: transparent; color: var(--color-text-muted); border-color: transparent; }
+    .button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .grid { display: grid; gap: var(--space-5); }
+    .grid.metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid.two { grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { position: relative; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-5); overflow: hidden; }
+    .card-accent::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--brand-gradient); }
+    .metric-value { display: block; margin-top: 4px; font-size: 28px; line-height: 1; font-weight: 900; letter-spacing: -0.03em; }
+    .metric-label { color: var(--color-text-muted); font-size: 13px; font-weight: 700; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+    .tabs { display: flex; gap: 4px; padding: 4px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); width: max-content; background: var(--color-surface-raised); }
+    .tab { border: 0; background: transparent; color: var(--color-text-muted); border-radius: var(--radius-pill); padding: 7px 10px; font: 800 13px / 1 var(--font); cursor: pointer; }
+    .tab.active { background: var(--color-surface-subtle); color: var(--color-text); }
+    .field { margin-top: var(--space-4); }
+    .field label { display: block; margin-bottom: 6px; color: var(--color-text); font: 800 13px / 1.3 var(--font); }
+    .input, .select, .textarea { width: 100%; min-height: 40px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); color: var(--color-text); padding: 10px 12px; font: 500 14px / 1.4 var(--font); }
+    .textarea { min-height: 96px; resize: vertical; }
+    .input:focus, .select:focus, .textarea:focus { outline: 3px solid var(--color-focus); border-color: var(--color-action-bg); }
+    .badge { display: inline-flex; align-items: center; width: fit-content; gap: 6px; border-radius: var(--radius-pill); padding: 4px 8px; font: 800 12px / 1 var(--font); border: 1px solid var(--color-border); white-space: nowrap; }
+    .badge-brand { color: var(--color-link); background: color-mix(in srgb, var(--color-action-bg) 12%, transparent); }
+    .badge-success { background: #E7F6EE; color: #0A5B41; border-color: #B7E4CC; }
+    .badge-warning { background: #FFF1D6; color: #7A4300; border-color: #FFD891; }
+    [data-theme="dark"] .badge-success { background: rgba(10, 91, 65, .34); color: #8BE0BC; border-color: rgba(139, 224, 188, .25); }
+    [data-theme="dark"] .badge-warning { background: rgba(122, 67, 0, .34); color: #FFD28C; border-color: rgba(255, 210, 140, .25); }
+    .alert { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); border: 1px solid color-mix(in srgb, var(--color-action-bg) 35%, var(--color-border)); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-action-bg) 10%, var(--color-surface)); color: var(--color-text); }
+    .alert strong { display: block; margin-bottom: 2px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+    th { font-size: 12px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 900; }
+    tr:hover td { background: color-mix(in srgb, var(--color-action-bg) 5%, transparent); }
+    .empty { text-align: center; border: 1.5px dashed var(--color-border-strong); border-radius: var(--radius-lg); padding: var(--space-8); background: color-mix(in srgb, var(--color-surface) 70%, transparent); }
+    .template-list { display: grid; gap: var(--space-3); }
+    .template-item { display: grid; grid-template-columns: 130px 1fr; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); }
+    .template-item code { font-weight: 900; color: var(--color-link); }
+    .muted { color: var(--color-text-muted); }
+    .footer { margin: var(--space-8) 0 var(--space-4); color: var(--color-text-soft); font-size: 13px; }
+    @media (max-width: 900px) { .nav { display: none; } .page-header, .grid.two { grid-template-columns: 1fr; } .grid.metrics, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 620px) { .topbar { padding: 0 var(--space-4); } .page { padding: var(--space-4); } .grid.metrics, .grid.three { grid-template-columns: 1fr; } .page-header .top-actions { flex-wrap: wrap; } .template-item { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <div class="app">
+  <div class="app-shell">
     <header class="topbar">
       <div class="brand">
         <img src="https://www.lataamo.fi/hubfs/Lataamo_Creative_RGB-merkki-liuku_400x400px.png" alt="Lataamo brandmark" />
-        <span>Lataamo App</span>
+        <span>Lataamo UI System</span>
       </div>
       <nav class="nav" aria-label="Main navigation">
-        <a class="active" href="#">Dashboard</a>
-        <a href="#">Concepts</a>
-        <a href="#">Vendors</a>
-        <a href="#">Reports</a>
+        <a class="active" href="#dashboard">Dashboard</a>
+        <a href="#form">Concepts</a>
+        <a href="#table">Vendors</a>
+        <a href="#templates">Templates</a>
       </nav>
-      <button class="button button-primary">Create concept</button>
+      <div class="top-actions">
+        <button class="button button-secondary" id="themeToggle" type="button">Dark mode</button>
+        <button class="button button-accent" type="button">Create concept</button>
+      </div>
     </header>
 
     <main class="page">
-      <section class="hero">
-        <div class="hero-main">
-          <div>
-            <div class="eyebrow">Tekojen toimisto</div>
-            <h1>Turn the brief into a remembered moment.</h1>
-            <p>Use Lataamo’s brand energy for clear, useful apps: bold actions, emotional context and production-ready next steps.</p>
-          </div>
-          <div class="hero-actions">
-            <button class="button button-dark">Open event view</button>
-            <button class="button button-secondary">View recommendations</button>
-          </div>
+      <section class="page-header" id="dashboard">
+        <div>
+          <div class="eyebrow">App-scale brand system</div>
+          <h1 class="page-title">Readable Lataamo apps with reusable components.</h1>
+          <p class="page-description">This example uses practical product UI sizing, semantic tokens and light/dark themes. The brand gradient creates emphasis, while forms, cards and tables stay calm enough for real app work.</p>
         </div>
-        <aside class="metrics">
-          <div class="metric"><strong>24</strong><span>active event ideas</span></div>
-          <div class="metric"><strong>91%</strong><span>brief completeness</span></div>
-          <div class="metric"><strong>7</strong><span>next production actions</span></div>
+        <div class="top-actions">
+          <button class="button button-primary" type="button">Generate summary</button>
+          <button class="button button-secondary" type="button">Export view</button>
+        </div>
+      </section>
+
+      <section class="grid metrics" aria-label="Metrics">
+        <article class="card card-accent"><span class="metric-label">Brief completeness</span><strong class="metric-value">91%</strong></article>
+        <article class="card"><span class="metric-label">Open actions</span><strong class="metric-value">7</strong></article>
+        <article class="card"><span class="metric-label">Vendor options</span><strong class="metric-value">18</strong></article>
+        <article class="card"><span class="metric-label">Client-ready items</span><strong class="metric-value">4</strong></article>
+      </section>
+
+      <section class="grid two" style="margin-top: var(--space-5);">
+        <article class="card" id="form">
+          <div class="toolbar">
+            <h2 class="section-title" style="margin:0">Concept generator</h2>
+            <div class="tabs" role="tablist" aria-label="Concept steps">
+              <button class="tab active" type="button">Brief</button>
+              <button class="tab" type="button">Journey</button>
+              <button class="tab" type="button">Output</button>
+            </div>
+          </div>
+          <p class="muted">A normal app form: compact, readable and reusable. The visual brand appears in focus states, action color and one accent treatment.</p>
+          <div class="field"><label for="eventName">Event name</label><input class="input" id="eventName" value="Future Customer Forum" /></div>
+          <div class="field"><label for="objective">Objective</label><select class="select" id="objective"><option>Strengthen customer relationship</option><option>Launch new service</option><option>Build internal culture</option></select></div>
+          <div class="field"><label for="memory">Desired memory trace</label><textarea class="textarea" id="memory">Participants should feel that the brand understands their future and gives them practical momentum.</textarea></div>
+          <div class="top-actions" style="margin-top: var(--space-5);"><button class="button button-primary" type="button">Build participant journey</button><button class="button button-ghost" type="button">Save draft</button></div>
+        </article>
+
+        <aside class="card card-accent">
+          <h2 class="section-title">Production pulse</h2>
+          <div class="alert"><span aria-hidden="true">●</span><div><strong>Next best step</strong><span class="muted">Confirm the emotional arc before locking venue layout.</span></div></div>
+          <h3 class="card-title" style="margin-top: var(--space-5);">Component states</h3>
+          <p><span class="badge badge-brand">Brand moment</span> <span class="badge badge-success">Approved</span> <span class="badge badge-warning">Needs input</span></p>
+          <p class="muted">Status colors are semantic. Brand colors are for emphasis, not operational severity.</p>
+          <div class="empty"><h3 class="card-title">Empty state</h3><p class="muted">No concepts yet. Create the first event concept and turn the brief into a participant journey.</p><button class="button button-accent" type="button">Create first concept</button></div>
         </aside>
       </section>
 
-      <section class="grid">
-        <div class="card featured">
-          <div class="tabs" role="tablist" aria-label="Concept stages">
-            <button class="tab active">Brief</button>
-            <button class="tab">Journey</button>
-            <button class="tab">Production</button>
-          </div>
-          <h2>Concept builder</h2>
-          <p>Capture what people should feel, remember and do after the event.</p>
-          <label for="event-name">Event name</label>
-          <input id="event-name" value="Future Customer Forum" />
-          <label for="objective">Business objective</label>
-          <select id="objective">
-            <option>Strengthen customer relationship</option>
-            <option>Launch new service</option>
-            <option>Build internal culture</option>
-          </select>
-          <label for="memory">Desired memory trace</label>
-          <textarea id="memory" rows="4">Participants should feel that the brand understands their future and gives them practical momentum.</textarea>
-          <p><button class="button button-primary">Generate participant journey</button></p>
-        </div>
+      <section class="card" id="table" style="margin-top: var(--space-5);">
+        <div class="toolbar"><h2 class="section-title" style="margin:0">Data table pattern</h2><button class="button button-secondary" type="button">Filter</button></div>
+        <table>
+          <thead><tr><th>Action</th><th>Owner</th><th>Status</th><th>Next step</th></tr></thead>
+          <tbody>
+            <tr><td>Define hero moment</td><td>Creative</td><td><span class="badge badge-brand">In progress</span></td><td>Draft two directions</td></tr>
+            <tr><td>Check AV constraints</td><td>Production</td><td><span class="badge badge-warning">Needs input</span></td><td>Confirm venue specs</td></tr>
+            <tr><td>Draft invitation copy</td><td>Content</td><td><span class="badge badge-success">Ready</span></td><td>Send to client review</td></tr>
+          </tbody>
+        </table>
+      </section>
 
-        <div class="card">
-          <h2>Production pulse</h2>
-          <div class="alert">Next best step: confirm the emotional arc before locking venue layout.</div>
-          <h3 style="margin-top:1.25rem">Recommended actions</h3>
-          <table>
-            <thead><tr><th>Action</th><th>Owner</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td>Define hero moment</td><td>Creative</td><td><span class="badge badge-brand">In progress</span></td></tr>
-              <tr><td>Check AV constraints</td><td>Production</td><td><span class="badge badge-warning">Needs input</span></td></tr>
-              <tr><td>Draft invitation copy</td><td>Content</td><td><span class="badge badge-success">Ready</span></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section class="grid three" id="templates" style="margin-top: var(--space-5);">
+        <article class="card"><h2 class="card-title">Dashboard template</h2><p class="muted">Page header, metric grid, main cards, side panel and optional data table.</p></article>
+        <article class="card"><h2 class="card-title">Form template</h2><p class="muted">Step tabs, grouped fields, preview panel and stable action bar.</p></article>
+        <article class="card"><h2 class="card-title">Detail template</h2><p class="muted">Title metadata, summary card, tabs, activity notes and related actions.</p></article>
+      </section>
 
-        <div class="card">
-          <h2>Cards & badges</h2>
-          <p><span class="badge badge-brand">Brand moment</span> <span class="badge badge-success">Approved</span> <span class="badge badge-warning">Check budget</span></p>
-          <p>Use cards for concepts, vendors, next actions and summaries. Keep the top line strong and the supporting copy practical.</p>
-          <button class="button button-secondary">Secondary action</button>
-        </div>
-
-        <div class="card">
-          <h2>Empty state</h2>
-          <div class="empty">
-            <h3>No concepts yet</h3>
-            <p>Create the first event concept and turn the brief into a memorable participant journey.</p>
-            <button class="button button-primary">Create first concept</button>
-          </div>
+      <section class="card" style="margin-top: var(--space-5);">
+        <h2 class="section-title">Implementation map</h2>
+        <div class="template-list">
+          <div class="template-item"><code>tokens.css</code><span>Raw brand values plus semantic light/dark variables. Change themes here, not inside components.</span></div>
+          <div class="template-item"><code>components.css</code><span>Buttons, cards, fields, badges, tables, nav and alerts consume semantic tokens only.</span></div>
+          <div class="template-item"><code>templates.css</code><span>Dashboard, form, detail and table layouts compose reusable components.</span></div>
         </div>
       </section>
 
-      <p class="footer-note">Brand guidance: use the gradient for emphasis, keep text readable, and make every screen help the user move from idea to action.</p>
+      <p class="footer">Lataamo rule: keep the app readable first; use the orange/magenta energy to highlight moments of action.</p>
     </main>
   </div>
+  <script>
+    const root = document.documentElement;
+    const saved = localStorage.getItem('lataamo-theme');
+    if (saved) root.dataset.theme = saved;
+    const button = document.getElementById('themeToggle');
+    function syncLabel() { button.textContent = root.dataset.theme === 'dark' ? 'Light mode' : 'Dark mode'; }
+    syncLabel();
+    button.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('lataamo-theme', root.dataset.theme);
+      syncLabel();
+    });
+  </script>
 </body>
 </html>
