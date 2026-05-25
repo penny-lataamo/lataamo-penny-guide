@@ -65,7 +65,8 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: var(--font); background: var(--color-bg); color: var(--color-text); font-size: 15px; line-height: 1.55; }
+    body { margin: 0; font-family: var(--font); background: var(--color-bg); color: var(--color-text); font-size: 15px; line-height: 1.55; overflow-x: hidden; }
+    img, svg { max-width: 100%; }
     a { color: var(--color-link); text-decoration: underline; text-underline-offset: 3px; }
     .app-shell { min-height: 100vh; }
     .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 64px; padding: 0 var(--space-6); background: color-mix(in srgb, var(--color-surface) 92%, transparent); border-bottom: 1px solid var(--color-border); backdrop-filter: blur(18px); }
@@ -120,7 +121,8 @@
     [data-theme="dark"] .badge-warning { background: rgba(122, 67, 0, .34); color: #FFD28C; border-color: rgba(255, 210, 140, .25); }
     .alert { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); border: 1px solid color-mix(in srgb, var(--color-action-bg) 35%, var(--color-border)); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-action-bg) 10%, var(--color-surface)); color: var(--color-text); }
     .alert strong { display: block; margin-bottom: 2px; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; }
     th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
     th { font-size: 12px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 900; }
     tr:hover td { background: color-mix(in srgb, var(--color-action-bg) 5%, transparent); }
@@ -171,9 +173,9 @@
     @keyframes skeleton { to { background-position-x: -220%; } }
     .loader-demo { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-4); padding: var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-action-bg) 7%, var(--color-surface)); }
     .logo-loader { width: 56px; height: 56px; position: relative; display: grid; place-items: center; flex: 0 0 auto; }
-    .logo-loader::before { content: ""; position: absolute; inset: -5px; border-radius: 18px; background: conic-gradient(from 0deg, #FF6B35, #EC0382, transparent 70%); animation: logo-orbit 1.1s linear infinite; }
-    .logo-loader img { position: relative; width: 42px; height: 42px; border-radius: 12px; background: var(--color-surface); padding: 4px; box-shadow: var(--shadow-card); }
-    @keyframes logo-orbit { to { transform: rotate(360deg); } }
+    .logo-loader::before { content: ""; position: absolute; inset: -4px; border-radius: 18px; background: var(--brand-gradient); opacity: .16; }
+    .logo-loader img { position: relative; width: 42px; height: 42px; border-radius: 12px; background: var(--color-surface); padding: 4px; box-shadow: var(--shadow-card); animation: logo-spin 1.25s cubic-bezier(.55,.08,.35,1) infinite; transform-origin: center; }
+    @keyframes logo-spin { 0% { transform: rotate(0deg) scale(1); } 72% { transform: rotate(360deg) scale(1.04); } 100% { transform: rotate(360deg) scale(1); } }
     .toast-demo { display: grid; gap: var(--space-2); padding: var(--space-3); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-text) 6%, transparent); }
     .toast { --toast-accent: var(--color-action-bg); display: flex; align-items: flex-start; gap: var(--space-3); border: 1px solid var(--color-border-strong); border-left: 5px solid var(--toast-accent); border-radius: var(--radius-md); background: var(--color-surface-raised); padding: var(--space-3); box-shadow: 0 18px 42px rgba(17, 17, 17, .14); }
     [data-theme="dark"] .toast { box-shadow: 0 20px 50px rgba(0, 0, 0, .42); }
@@ -185,8 +187,44 @@
     .modal-preview { border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: color-mix(in srgb, var(--color-text) 8%, transparent); padding: var(--space-5); }
     .dialog { max-width: 520px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-5); box-shadow: var(--shadow-card); }
 
-    @media (max-width: 900px) { .nav { display: none; } .page-header, .grid.two { grid-template-columns: 1fr; } .grid.metrics, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 620px) { .topbar { padding: 0 var(--space-4); } .page { padding: var(--space-4); } .grid.metrics, .grid.three { grid-template-columns: 1fr; } .page-header .top-actions { flex-wrap: wrap; } .template-item { grid-template-columns: 1fr; } .app-layout-demo { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .page-header, .grid.two, .app-layout-demo { grid-template-columns: 1fr; }
+      .grid.metrics, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chart-card { min-height: auto; }
+    }
+    @media (max-width: 620px) {
+      .topbar { position: static; min-height: auto; padding: var(--space-3) var(--space-4); align-items: flex-start; flex-wrap: wrap; }
+      .brand { width: 100%; }
+      .brand span { font-size: 14px; }
+      .top-actions { width: 100%; flex-wrap: wrap; align-items: stretch; }
+      .top-actions .button { flex: 1 1 auto; min-width: min(150px, 100%); }
+      .page { padding: var(--space-4); }
+      .page-header { margin-top: var(--space-2); align-items: start; }
+      .page-title { font-size: clamp(26px, 8vw, 32px); }
+      .section-title { font-size: 20px; }
+      .toolbar { align-items: flex-start; flex-direction: column; }
+      .tabs { width: 100%; overflow-x: auto; border-radius: var(--radius-md); }
+      .tab { flex: 1 0 auto; }
+      .grid.metrics, .grid.three { grid-template-columns: 1fr; }
+      .template-item { grid-template-columns: 1fr; }
+      .card { padding: var(--space-4); border-radius: var(--radius-md); }
+      .modal-preview { padding: var(--space-3); border-radius: var(--radius-lg); }
+      .dialog .top-actions { width: 100%; }
+      .dialog .button { flex: 1 1 100%; }
+      .toast { width: 100%; }
+      .file-card, .loader-demo { align-items: flex-start; flex-direction: column; }
+      .file-card .button { width: 100%; }
+      .chart-wrap { padding: var(--space-3); }
+      .chart { min-width: 520px; }
+      .chart-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    }
+    @media (max-width: 430px) {
+      .page { padding: var(--space-3); }
+      .button { width: 100%; }
+      .page-header .top-actions { width: 100%; }
+      .metric-value { font-size: 26px; }
+    }
   </style>
 </head>
 <body>
@@ -213,7 +251,7 @@
         <div>
           <div class="eyebrow">App-scale brand system</div>
           <h1 class="page-title">Readable Lataamo apps with reusable components.</h1>
-          <p class="page-description">This example uses practical product UI sizing, semantic tokens and light/dark themes. The brand gradient creates emphasis, while forms, cards and tables stay calm enough for real app work.</p>
+          <p class="page-description">This example uses practical product UI sizing, mobile-first responsive rules, semantic tokens and light/dark themes. The brand gradient creates emphasis, while forms, cards and tables stay calm enough for real app work.</p>
         </div>
         <div class="top-actions">
           <button class="button button-primary" type="button">Generate summary</button>
@@ -257,14 +295,14 @@
 
       <section class="card" id="table" style="margin-top: var(--space-5);">
         <div class="toolbar"><h2 class="section-title" style="margin:0">Data table pattern</h2><button class="button button-secondary" type="button">Filter</button></div>
-        <table>
+        <div class="table-scroll"><table>
           <thead><tr><th>Action</th><th>Owner</th><th>Status</th><th>Next step</th></tr></thead>
           <tbody>
             <tr><td>Define hero moment</td><td>Creative</td><td><span class="badge badge-brand">In progress</span></td><td>Draft two directions</td></tr>
             <tr><td>Check AV constraints</td><td>Production</td><td><span class="badge badge-warning">Needs input</span></td><td>Confirm venue specs</td></tr>
             <tr><td>Draft invitation copy</td><td>Content</td><td><span class="badge badge-success">Ready</span></td><td>Send to client review</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </section>
 
       <section class="grid three" id="templates" style="margin-top: var(--space-5);">
@@ -361,7 +399,7 @@
       <section class="grid three" style="margin-top: var(--space-5);">
         <article class="card"><h2 class="card-title">Avatars</h2><div class="avatar-row"><span class="avatar">JL</span><div><strong>Jarno</strong><br><span class="muted">Owner / reviewer</span></div></div></article>
         <article class="card"><h2 class="card-title">File cards</h2><div class="file-card"><div class="avatar-row"><span class="file-icon">PDF</span><div><strong>Event brief</strong><br><span class="muted">Updated today</span></div></div><button class="button button-secondary" type="button">Open</button></div></article>
-        <article class="card"><h2 class="card-title">Loading states</h2><div class="skeleton-stack"><i class="skeleton" style="width: 80%"></i><i class="skeleton" style="width: 100%"></i><i class="skeleton" style="width: 62%"></i></div><div class="loader-demo"><span class="logo-loader" aria-label="Loading"><img src="https://www.lataamo.fi/hubfs/Lataamo_Creative_RGB-merkki-liuku_400x400px.png" alt="" /></span><span><strong>Creating concept</strong><br><span class="muted">Logo loader for AI generation; skeletons for layout loading.</span></span></div></article>
+        <article class="card"><h2 class="card-title">Loading states</h2><div class="skeleton-stack"><i class="skeleton" style="width: 80%"></i><i class="skeleton" style="width: 100%"></i><i class="skeleton" style="width: 62%"></i></div><div class="loader-demo"><span class="logo-loader" aria-label="Loading"><img src="https://www.lataamo.fi/hubfs/Lataamo_Creative_RGB-merkki-liuku_400x400px.png" alt="" /></span><span><strong>Creating concept</strong><br><span class="muted">Logo itself rotates for AI generation; skeletons preserve loading layout.</span></span></div></article>
       </section>
 
       <section class="card" style="margin-top: var(--space-5);">
