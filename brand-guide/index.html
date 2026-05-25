@@ -120,8 +120,54 @@
     .template-item code { font-weight: 900; color: var(--color-link); }
     .muted { color: var(--color-text-muted); }
     .footer { margin: var(--space-8) 0 var(--space-4); color: var(--color-text-soft); font-size: 13px; }
+
+    .chart-card { min-height: 320px; }
+    .chart-wrap { width: 100%; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-raised); padding: var(--space-4); }
+    .chart { width: 100%; height: auto; display: block; }
+    .chart-grid { stroke: var(--color-border); stroke-width: 1; }
+    .chart-axis { stroke: var(--color-border-strong); stroke-width: 1; }
+    .chart-label { fill: var(--color-text-soft); font: 700 11px var(--font); }
+    .chart-primary { stroke: var(--color-action-bg); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .chart-secondary { stroke: var(--brand-orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .78; }
+    .chart-area { fill: url(#areaGradient); }
+    .bar-neutral { fill: color-mix(in srgb, var(--color-text-soft) 26%, transparent); }
+    .bar-active { fill: var(--color-action-bg); }
+    .donut-track { stroke: color-mix(in srgb, var(--color-border) 70%, transparent); }
+    .donut-a { stroke: var(--color-action-bg); }
+    .donut-b { stroke: var(--brand-orange); }
+    .donut-c { stroke: #7A3EF0; }
+    [data-theme="dark"] .chart-secondary { stroke: #FF8A5C; }
+    [data-theme="dark"] .donut-c { stroke: #B79CFF; }
+    .legend { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-3); color: var(--color-text-muted); font-size: 12px; font-weight: 800; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--color-action-bg); }
+    .dot.orange { background: var(--brand-orange); }
+    .dot.purple { background: #7A3EF0; }
+    .app-layout-demo { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: var(--space-5); }
+    .sidebar-demo { border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-3); }
+    .side-link { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: var(--radius-md); color: var(--color-text-muted); font-weight: 800; font-size: 13px; }
+    .side-link.active { color: var(--color-text); background: var(--color-surface-subtle); border-left: 3px solid var(--color-action-bg); }
+    .filter-chip { display: inline-flex; align-items: center; gap: 6px; margin: 4px 4px 0 0; padding: 5px 8px; border-radius: var(--radius-pill); background: var(--color-surface-subtle); color: var(--color-text); font-size: 12px; font-weight: 800; }
+    .avatar-row { display: flex; align-items: center; gap: var(--space-3); }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--brand-gradient); color: #fff; font-weight: 900; font-size: 12px; }
+    .timeline { display: grid; gap: var(--space-4); }
+    .timeline-item { display: grid; grid-template-columns: 18px 1fr; gap: var(--space-3); }
+    .timeline-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; background: var(--color-action-bg); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-action-bg) 15%, transparent); }
+    .file-card { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); }
+    .file-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); display: grid; place-items: center; background: var(--color-surface-subtle); color: var(--color-link); font-weight: 900; font-size: 12px; }
+    .skeleton-stack { display: grid; gap: 10px; }
+    .skeleton { height: 14px; border-radius: var(--radius-sm); background: linear-gradient(90deg, color-mix(in srgb, var(--color-border) 45%, transparent), color-mix(in srgb, var(--color-border) 20%, transparent), color-mix(in srgb, var(--color-border) 45%, transparent)); background-size: 220% 100%; animation: skeleton 1.4s ease-in-out infinite; }
+    @keyframes skeleton { to { background-position-x: -220%; } }
+    .toast-demo { display: grid; gap: var(--space-2); }
+    .toast { display: flex; align-items: flex-start; gap: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); padding: var(--space-3); box-shadow: var(--shadow-card); }
+    .toast-icon { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; background: var(--color-action-bg); }
+    .toast.success .toast-icon { background: #12805C; }
+    .toast.warning .toast-icon { background: #B35C00; }
+    .modal-preview { border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: color-mix(in srgb, var(--color-text) 8%, transparent); padding: var(--space-5); }
+    .dialog { max-width: 520px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-5); box-shadow: var(--shadow-card); }
+
     @media (max-width: 900px) { .nav { display: none; } .page-header, .grid.two { grid-template-columns: 1fr; } .grid.metrics, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 620px) { .topbar { padding: 0 var(--space-4); } .page { padding: var(--space-4); } .grid.metrics, .grid.three { grid-template-columns: 1fr; } .page-header .top-actions { flex-wrap: wrap; } .template-item { grid-template-columns: 1fr; } }
+    @media (max-width: 620px) { .topbar { padding: 0 var(--space-4); } .page { padding: var(--space-4); } .grid.metrics, .grid.three { grid-template-columns: 1fr; } .page-header .top-actions { flex-wrap: wrap; } .template-item { grid-template-columns: 1fr; } .app-layout-demo { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -216,6 +262,97 @@
           <div class="template-item"><code>templates.css</code><span>Dashboard, form, detail and table layouts compose reusable components.</span></div>
         </div>
       </section>
+
+
+      <section class="grid two" id="charts" style="margin-top: var(--space-5);">
+        <article class="card chart-card card-accent">
+          <div class="toolbar"><h2 class="section-title" style="margin:0">Charts and graphs</h2><span class="badge badge-brand">Data viz</span></div>
+          <p class="muted">Use brand color for the main story, muted lines for comparison, and calm grid lines. Charts should be clear first, branded second.</p>
+          <div class="chart-wrap" aria-label="Line and area chart example">
+            <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example event interest line chart">
+              <defs>
+                <linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#EC0382" stop-opacity="0.26"/>
+                  <stop offset="100%" stop-color="#EC0382" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <line class="chart-grid" x1="50" y1="40" x2="590" y2="40"/><line class="chart-grid" x1="50" y1="90" x2="590" y2="90"/><line class="chart-grid" x1="50" y1="140" x2="590" y2="140"/><line class="chart-grid" x1="50" y1="190" x2="590" y2="190"/>
+              <line class="chart-axis" x1="50" y1="218" x2="590" y2="218"/>
+              <text class="chart-label" x="50" y="240">Mon</text><text class="chart-label" x="155" y="240">Tue</text><text class="chart-label" x="260" y="240">Wed</text><text class="chart-label" x="365" y="240">Thu</text><text class="chart-label" x="470" y="240">Fri</text><text class="chart-label" x="560" y="240">Sat</text>
+              <path class="chart-area" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42 L590,218 L50,218 Z"/>
+              <path class="chart-primary" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42"/>
+              <path class="chart-secondary" d="M50,198 C112,188 135,172 170,168 C220,162 250,145 285,150 C330,154 365,132 405,126 C455,118 510,116 590,108"/>
+            </svg>
+            <div class="legend"><span><i class="dot"></i>Current concept interest</span><span><i class="dot orange"></i>Previous benchmark</span></div>
+          </div>
+        </article>
+
+        <article class="card chart-card">
+          <h2 class="section-title">Bars, donut and progress</h2>
+          <div class="chart-wrap" aria-label="Bar chart and donut chart examples">
+            <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example chart components">
+              <line class="chart-grid" x1="40" y1="44" x2="350" y2="44"/><line class="chart-grid" x1="40" y1="94" x2="350" y2="94"/><line class="chart-grid" x1="40" y1="144" x2="350" y2="144"/><line class="chart-axis" x1="40" y1="210" x2="350" y2="210"/>
+              <rect class="bar-neutral" x="62" y="112" width="32" height="98" rx="7"/><rect class="bar-neutral" x="112" y="82" width="32" height="128" rx="7"/><rect class="bar-active" x="162" y="52" width="32" height="158" rx="7"/><rect class="bar-neutral" x="212" y="126" width="32" height="84" rx="7"/><rect class="bar-neutral" x="262" y="92" width="32" height="118" rx="7"/>
+              <text class="chart-label" x="56" y="236">Reach</text><text class="chart-label" x="140" y="236">Emotion</text><text class="chart-label" x="245" y="236">Actions</text>
+              <circle class="donut-track" cx="480" cy="126" r="64" fill="none" stroke-width="18"/>
+              <circle class="donut-a" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="210 402" transform="rotate(-90 480 126)"/>
+              <circle class="donut-b" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="92 402" stroke-dashoffset="-216" transform="rotate(-90 480 126)"/>
+              <circle class="donut-c" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="58 402" stroke-dashoffset="-314" transform="rotate(-90 480 126)"/>
+              <text x="480" y="120" text-anchor="middle" class="chart-label">TOTAL</text><text x="480" y="148" text-anchor="middle" fill="var(--color-text)" style="font:900 28px var(--font)">86%</text>
+            </svg>
+            <div class="legend"><span><i class="dot"></i>Main segment</span><span><i class="dot orange"></i>Secondary</span><span><i class="dot purple"></i>Support</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid two" id="patterns" style="margin-top: var(--space-5);">
+        <article class="card">
+          <h2 class="section-title">Sidebar, filters and chips</h2>
+          <div class="app-layout-demo">
+            <aside class="sidebar-demo" aria-label="Example sidebar">
+              <div class="side-link active"><span>Overview</span><span>12</span></div>
+              <div class="side-link"><span>Concepts</span><span>8</span></div>
+              <div class="side-link"><span>Vendors</span><span>18</span></div>
+              <div class="side-link"><span>Budget</span><span>3</span></div>
+            </aside>
+            <div>
+              <h3 class="card-title">Filter pattern</h3>
+              <p class="muted">Use removable chips for active filters and a subtle sidebar active state. A gradient border is enough brand expression.</p>
+              <span class="filter-chip">Helsinki ×</span><span class="filter-chip">Client-ready ×</span><span class="filter-chip">AI concept ×</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2 class="section-title">Modals and toasts</h2>
+          <div class="modal-preview">
+            <div class="dialog" role="dialog" aria-label="Example modal preview">
+              <h3 class="card-title">Send concept to review?</h3>
+              <p class="muted">Use modals for focused confirmation. Keep the title app-sized and reserve destructive styling for destructive actions.</p>
+              <div class="top-actions"><button class="button button-primary" type="button">Send to review</button><button class="button button-secondary" type="button">Cancel</button></div>
+            </div>
+          </div>
+          <div class="toast-demo" style="margin-top: var(--space-4);">
+            <div class="toast success"><i class="toast-icon"></i><div><strong>Saved</strong><br><span class="muted">The concept draft is ready for client review.</span></div></div>
+            <div class="toast warning"><i class="toast-icon"></i><div><strong>Check budget</strong><br><span class="muted">Two production items still need estimates.</span></div></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid three" style="margin-top: var(--space-5);">
+        <article class="card"><h2 class="card-title">Avatars</h2><div class="avatar-row"><span class="avatar">JL</span><div><strong>Jarno</strong><br><span class="muted">Owner / reviewer</span></div></div></article>
+        <article class="card"><h2 class="card-title">File cards</h2><div class="file-card"><div class="avatar-row"><span class="file-icon">PDF</span><div><strong>Event brief</strong><br><span class="muted">Updated today</span></div></div><button class="button button-secondary" type="button">Open</button></div></article>
+        <article class="card"><h2 class="card-title">Skeleton loading</h2><div class="skeleton-stack"><i class="skeleton" style="width: 80%"></i><i class="skeleton" style="width: 100%"></i><i class="skeleton" style="width: 62%"></i></div></article>
+      </section>
+
+      <section class="card" style="margin-top: var(--space-5);">
+        <h2 class="section-title">Timeline / activity feed</h2>
+        <div class="timeline">
+          <div class="timeline-item"><i class="timeline-dot"></i><div><strong>Concept summary generated</strong><br><span class="muted">Use compact timeline items for activity, not oversized cards.</span></div></div>
+          <div class="timeline-item"><i class="timeline-dot"></i><div><strong>Vendor shortlist attached</strong><br><span class="muted">Status dots can use semantic colors or one brand accent.</span></div></div>
+        </div>
+      </section>
+
 
       <p class="footer">Lataamo rule: keep the app readable first; use the orange/magenta energy to highlight moments of action.</p>
     </main>
