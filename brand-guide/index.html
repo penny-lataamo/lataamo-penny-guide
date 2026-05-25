@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lataamo App Example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@700;800;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --lataamo-orange: #FF6B35;
+      --lataamo-orange-deep: #FF5500;
+      --lataamo-magenta: #EC0382;
+      --lataamo-magenta-deep: #D70376;
+      --lataamo-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
+      --black: #111111;
+      --charcoal: #242124;
+      --grey-700: #666666;
+      --grey-300: #D9D9D9;
+      --grey-100: #F4F2F0;
+      --white: #FFFFFF;
+      --font-heading: "Big Shoulders", "Arial Narrow", Arial, sans-serif;
+      --font-body: "Montserrat", Inter, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font-body); color: var(--black); background: var(--grey-100); }
+    a { color: var(--lataamo-magenta-deep); text-decoration: underline; text-underline-offset: 3px; }
+    .app { min-height: 100vh; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.5rem; background: #fff; border-bottom: 1px solid rgba(17,17,17,.08); position: sticky; top: 0; z-index: 2; }
+    .brand { display: flex; align-items: center; gap: .75rem; font-weight: 900; }
+    .brand img { width: 38px; height: 38px; border-radius: 10px; }
+    .nav { display: flex; gap: .4rem; align-items: center; }
+    .nav a { color: var(--black); text-decoration: none; font-weight: 800; padding: .65rem .8rem; border-radius: 999px; }
+    .nav a.active { color: #fff; background: var(--lataamo-gradient); }
+    .button { border: 0; border-radius: 999px; padding: .85rem 1.1rem; font-weight: 900; cursor: pointer; font-family: inherit; transition: .15s ease; }
+    .button:hover { transform: translateY(-1px); }
+    .button-primary { color: #fff; background: var(--lataamo-gradient); box-shadow: 0 12px 28px rgba(236,3,130,.24); }
+    .button-secondary { color: var(--black); background: #fff; border: 1px solid var(--grey-300); }
+    .button-dark { color: #fff; background: var(--black); }
+    .page { max-width: 1180px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .hero { display: grid; grid-template-columns: 1.3fr .7fr; gap: 1.25rem; align-items: stretch; margin-bottom: 1.25rem; }
+    .hero-main { border-radius: 30px; padding: 2rem; color: #fff; background: var(--lataamo-gradient); min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; position: relative; }
+    .hero-main:after { content: ""; position: absolute; inset: auto -80px -120px auto; width: 280px; height: 280px; background: rgba(255,255,255,.16); border-radius: 999px; }
+    .eyebrow { font-weight: 900; text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; opacity: .86; }
+    h1, h2, h3 { font-family: var(--font-heading); line-height: .92; margin: 0; letter-spacing: .01em; }
+    h1 { font-size: clamp(3rem, 7vw, 6.3rem); text-transform: uppercase; max-width: 760px; }
+    h2 { font-size: 2.7rem; text-transform: uppercase; margin-bottom: 1rem; }
+    h3 { font-size: 1.8rem; }
+    p { line-height: 1.55; color: var(--grey-700); }
+    .hero-main p { color: rgba(255,255,255,.9); max-width: 620px; font-weight: 600; }
+    .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; position: relative; z-index: 1; }
+    .panel { background: #fff; border: 1px solid rgba(17,17,17,.08); border-radius: 28px; padding: 1.25rem; box-shadow: 0 18px 50px rgba(17,17,17,.08); }
+    .metrics { display: grid; gap: .75rem; }
+    .metric { padding: 1rem; border-radius: 20px; background: #fff; border: 1px solid rgba(17,17,17,.08); }
+    .metric strong { display: block; font-family: var(--font-heading); font-size: 2.7rem; line-height: 1; }
+    .metric span { color: var(--grey-700); font-weight: 700; font-size: .9rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.25rem; }
+    .card { background: #fff; border: 1px solid rgba(17,17,17,.10); border-radius: 24px; padding: 1.25rem; box-shadow: 0 18px 50px rgba(17,17,17,.07); }
+    .card.featured { border-top: 7px solid var(--lataamo-magenta); }
+    .tabs { display: flex; gap: .5rem; padding: .35rem; background: var(--grey-100); border-radius: 999px; width: max-content; margin-bottom: 1rem; }
+    .tab { border: 0; padding: .65rem .9rem; border-radius: 999px; background: transparent; font-weight: 900; }
+    .tab.active { background: #fff; box-shadow: 0 8px 20px rgba(17,17,17,.08); }
+    label { display: block; font-weight: 900; margin: .9rem 0 .35rem; }
+    input, select, textarea { width: 100%; border: 1px solid var(--grey-300); border-radius: 14px; padding: .85rem 1rem; font: inherit; background: #fff; }
+    input:focus, select:focus, textarea:focus { outline: 3px solid rgba(236,3,130,.22); border-color: var(--lataamo-magenta-deep); }
+    .alert { border-radius: 18px; padding: 1rem; background: linear-gradient(135deg, rgba(255,107,53,.14), rgba(236,3,130,.12)); border: 1px solid rgba(236,3,130,.22); font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 18px; }
+    th, td { text-align: left; padding: .85rem; border-bottom: 1px solid rgba(17,17,17,.08); vertical-align: top; }
+    th { color: #fff; background: var(--black); font-size: .82rem; text-transform: uppercase; letter-spacing: .04em; }
+    tr:hover td { background: rgba(236,3,130,.045); }
+    .badge { display: inline-block; border-radius: 999px; padding: .35rem .65rem; font-size: .78rem; font-weight: 900; }
+    .badge-brand { background: linear-gradient(135deg, rgba(255,107,53,.18), rgba(236,3,130,.16)); color: var(--lataamo-magenta-deep); }
+    .badge-success { background: #E6F6EF; color: #0A5B41; }
+    .badge-warning { background: #FFF2DF; color: #8A4600; }
+    .empty { text-align: center; padding: 2rem; border: 2px dashed rgba(17,17,17,.18); border-radius: 24px; background: rgba(255,255,255,.55); }
+    .footer-note { margin-top: 2rem; color: var(--grey-700); font-size: .9rem; }
+    @media (max-width: 850px) { .hero, .grid { grid-template-columns: 1fr; } .nav { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="https://www.lataamo.fi/hubfs/Lataamo_Creative_RGB-merkki-liuku_400x400px.png" alt="Lataamo brandmark" />
+        <span>Lataamo App</span>
+      </div>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="active" href="#">Dashboard</a>
+        <a href="#">Concepts</a>
+        <a href="#">Vendors</a>
+        <a href="#">Reports</a>
+      </nav>
+      <button class="button button-primary">Create concept</button>
+    </header>
+
+    <main class="page">
+      <section class="hero">
+        <div class="hero-main">
+          <div>
+            <div class="eyebrow">Tekojen toimisto</div>
+            <h1>Turn the brief into a remembered moment.</h1>
+            <p>Use Lataamo’s brand energy for clear, useful apps: bold actions, emotional context and production-ready next steps.</p>
+          </div>
+          <div class="hero-actions">
+            <button class="button button-dark">Open event view</button>
+            <button class="button button-secondary">View recommendations</button>
+          </div>
+        </div>
+        <aside class="metrics">
+          <div class="metric"><strong>24</strong><span>active event ideas</span></div>
+          <div class="metric"><strong>91%</strong><span>brief completeness</span></div>
+          <div class="metric"><strong>7</strong><span>next production actions</span></div>
+        </aside>
+      </section>
+
+      <section class="grid">
+        <div class="card featured">
+          <div class="tabs" role="tablist" aria-label="Concept stages">
+            <button class="tab active">Brief</button>
+            <button class="tab">Journey</button>
+            <button class="tab">Production</button>
+          </div>
+          <h2>Concept builder</h2>
+          <p>Capture what people should feel, remember and do after the event.</p>
+          <label for="event-name">Event name</label>
+          <input id="event-name" value="Future Customer Forum" />
+          <label for="objective">Business objective</label>
+          <select id="objective">
+            <option>Strengthen customer relationship</option>
+            <option>Launch new service</option>
+            <option>Build internal culture</option>
+          </select>
+          <label for="memory">Desired memory trace</label>
+          <textarea id="memory" rows="4">Participants should feel that the brand understands their future and gives them practical momentum.</textarea>
+          <p><button class="button button-primary">Generate participant journey</button></p>
+        </div>
+
+        <div class="card">
+          <h2>Production pulse</h2>
+          <div class="alert">Next best step: confirm the emotional arc before locking venue layout.</div>
+          <h3 style="margin-top:1.25rem">Recommended actions</h3>
+          <table>
+            <thead><tr><th>Action</th><th>Owner</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Define hero moment</td><td>Creative</td><td><span class="badge badge-brand">In progress</span></td></tr>
+              <tr><td>Check AV constraints</td><td>Production</td><td><span class="badge badge-warning">Needs input</span></td></tr>
+              <tr><td>Draft invitation copy</td><td>Content</td><td><span class="badge badge-success">Ready</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>Cards & badges</h2>
+          <p><span class="badge badge-brand">Brand moment</span> <span class="badge badge-success">Approved</span> <span class="badge badge-warning">Check budget</span></p>
+          <p>Use cards for concepts, vendors, next actions and summaries. Keep the top line strong and the supporting copy practical.</p>
+          <button class="button button-secondary">Secondary action</button>
+        </div>
+
+        <div class="card">
+          <h2>Empty state</h2>
+          <div class="empty">
+            <h3>No concepts yet</h3>
+            <p>Create the first event concept and turn the brief into a memorable participant journey.</p>
+            <button class="button button-primary">Create first concept</button>
+          </div>
+        </div>
+      </section>
+
+      <p class="footer-note">Brand guidance: use the gradient for emphasis, keep text readable, and make every screen help the user move from idea to action.</p>
+    </main>
+  </div>
+</body>
+</html>
