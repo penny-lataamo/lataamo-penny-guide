@@ -263,7 +263,61 @@
     .swirl::after { background: radial-gradient(circle at 72% 18%, rgba(255,255,255,.18), transparent 32%), linear-gradient(160deg, transparent 40%, rgba(255,255,255,.10)); }
     .empty { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.045); }
     .plain { color: var(--muted); border-color: rgba(255,255,255,.12); }
-    .footer { color: rgba(248,244,241,.48); }
+    /* Accessibility pass aligned with the Sharp app dark mode: readable first, glass second. */
+    :root {
+      --ink: #F7F3F5;
+      --muted: #DED6DC;
+      --soft: #D0C5CD;
+      --panel: rgba(26, 23, 27, .90);
+      --panel-strong: rgba(35, 31, 36, .94);
+      --line: rgba(255,255,255,.20);
+      --line-dim: rgba(255,255,255,.14);
+      --focus: rgba(236, 3, 130, .42);
+    }
+    .glass, .panel {
+      background: linear-gradient(145deg, rgba(35,31,36,.88), rgba(26,23,27,.84));
+      border-color: var(--line);
+    }
+    .lead, .muted, .micro, .small { color: var(--muted); }
+    .footer { color: var(--soft); }
+    .nav-label, th, .chart-text { color: var(--soft); fill: var(--soft); }
+    .chart-text { font: 800 12px var(--font); }
+    .nav-item { color: var(--muted); }
+    .nav-item.active, .pill.active, .tab.active { color: var(--ink); border-color: rgba(236,3,130,.42); }
+    .brand-orb, .logo-orb, .pill, .template-switch, .search, .icon-btn, .secondary,
+    .tabs, .badge, .list-item, .file-card, .feed-item, .toast, .dialog, .spinner {
+      background: rgba(51,43,52,.82);
+      border-color: rgba(255,255,255,.22);
+    }
+    .sidebar-footer, .chart-wrap, .modal-preview, .loader-row, .table-wrap, .empty {
+      background: rgba(35,31,36,.74);
+      border-color: rgba(255,255,255,.20);
+    }
+    .template-switch select, .input, .select, .textarea {
+      background: rgba(35,31,36,.94);
+      border-color: rgba(255,255,255,.28);
+      color: var(--ink);
+    }
+    .search input::placeholder { color: rgba(247,243,245,.82); }
+    .template-switch::before, .eyebrow { color: #FF8A5C; }
+    .template-switch::after { color: #FF7ABF; }
+    .plain { color: var(--muted); border-color: rgba(255,255,255,.24); }
+    .badge.brand { color: #FFD7EA; background: rgba(236,3,130,.22); border-color: rgba(236,3,130,.58); }
+    .badge.good { color: #8BE0BC; background: rgba(10,91,65,.34); border-color: rgba(139,224,188,.32); }
+    .badge.warn { color: #FFD28C; background: rgba(122,67,0,.34); border-color: rgba(255,210,140,.34); }
+    .grid-line { stroke: rgba(255,255,255,.14); }
+    .axis { stroke: rgba(255,255,255,.24); }
+    th, td { border-bottom-color: rgba(255,255,255,.16); }
+    tr:hover td { background: rgba(236,3,130,.07); }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
+    .pill:focus-visible, .tab:focus-visible, .icon-btn:focus-visible, .cta:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: #EC0382;
+      box-shadow: var(--inset), 0 0 0 4px rgba(236,3,130,.18);
+    }
 
   </style>
 </head>
@@ -351,7 +405,7 @@
           </article>
           <article class="panel panel-pad">
             <h2 class="section-title">Bars, donut and progress</h2>
-            <div class="chart-wrap"><svg class="chart" viewBox="0 0 520 300" role="img" aria-label="Bar and donut examples"><defs><linearGradient id="barGrad" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#EC0382"/><stop offset="1" stop-color="#FF6B35"/></linearGradient></defs><rect class="bar" x="44" y="132" width="36" height="98" rx="12"/><rect class="bar" x="101" y="91" width="36" height="139" rx="12"/><rect fill="url(#barGrad)" x="158" y="52" width="36" height="178" rx="12"/><rect class="bar" x="215" y="116" width="36" height="114" rx="12"/><circle cx="390" cy="142" r="68" fill="none" stroke="rgba(24,22,25,.10)" stroke-width="20"/><circle cx="390" cy="142" r="68" fill="none" stroke="#EC0382" stroke-width="20" stroke-linecap="round" stroke-dasharray="260 427" transform="rotate(-90 390 142)"/><circle cx="390" cy="142" r="68" fill="none" stroke="#FF6B35" stroke-width="20" stroke-linecap="round" stroke-dasharray="92 427" stroke-dashoffset="-270" transform="rotate(-90 390 142)"/><text x="390" y="135" text-anchor="middle" class="chart-text">READY</text><text x="390" y="166" text-anchor="middle" fill="#181619" style="font:850 30px var(--font)">86%</text></svg></div>
+            <div class="chart-wrap"><svg class="chart" viewBox="0 0 520 300" role="img" aria-label="Bar and donut examples"><defs><linearGradient id="barGrad" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#EC0382"/><stop offset="1" stop-color="#FF6B35"/></linearGradient></defs><rect class="bar" x="44" y="132" width="36" height="98" rx="12"/><rect class="bar" x="101" y="91" width="36" height="139" rx="12"/><rect fill="url(#barGrad)" x="158" y="52" width="36" height="178" rx="12"/><rect class="bar" x="215" y="116" width="36" height="114" rx="12"/><circle cx="390" cy="142" r="68" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="20"/><circle cx="390" cy="142" r="68" fill="none" stroke="#EC0382" stroke-width="20" stroke-linecap="round" stroke-dasharray="260 427" transform="rotate(-90 390 142)"/><circle cx="390" cy="142" r="68" fill="none" stroke="#FF6B35" stroke-width="20" stroke-linecap="round" stroke-dasharray="92 427" stroke-dashoffset="-270" transform="rotate(-90 390 142)"/><text x="390" y="135" text-anchor="middle" class="chart-text">READY</text><text x="390" y="166" text-anchor="middle" fill="#F7F3F5" style="font:900 32px var(--font)">86%</text></svg></div>
           </article>
         </section>
 
