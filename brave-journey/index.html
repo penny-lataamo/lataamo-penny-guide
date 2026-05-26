@@ -281,7 +281,7 @@
       z-index: 1;
       display: flex;
       flex-direction: column;
-      min-height: 406px;
+      min-height: 260px;
       padding: var(--space-5);
       border-radius: var(--radius-xl);
       border: 1px solid var(--color-border);
@@ -304,9 +304,6 @@
     .stage { display: inline-block; width: fit-content; margin-bottom: 9px; color: var(--color-link); font-size: 11px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
     .touchpoint h3 { margin: 0 0 9px; font-size: 21px; line-height: 1.12; letter-spacing: -.04em; }
     .touchpoint p { color: var(--color-text-muted); font-weight: 600; margin-bottom: var(--space-4); }
-    .move { margin-top: auto; padding: var(--space-4); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--brand-orange) 10%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--brand-orange) 28%, var(--color-border)); }
-    .move b { display: block; font-size: 12px; color: var(--color-text); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
-    .move span { display: block; color: var(--color-text-muted); font-size: 13px; font-weight: 650; }
 
     .rail-wrap { display: grid; grid-template-columns: .76fr 1.24fr; gap: var(--space-5); align-items: stretch; }
     .rail-card { padding: var(--space-6); overflow: hidden; }
@@ -386,8 +383,8 @@
       .rail-row { grid-template-columns: 1fr; gap: 6px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.12); }
       .rail-outcome { justify-self: start; }
       .footer-note { grid-template-columns: 1fr; }
-      h1 { font-size: clamp(49px, 16vw, 78px); }
-      h2 { font-size: clamp(40px, 14vw, 64px); }
+      h1 { font-size: clamp(34px, 10vw, 56px); }
+      h2 { font-size: clamp(28px, 9vw, 46px); }
     }
     @media print {
       .topbar { display: none; }
@@ -442,7 +439,7 @@
     <section id="polku" aria-label="Kahdeksan kohtauspisteen kokemuspolku">
       <div class="section-head">
         <h2>8 kohtauspisteen BRAVE-polku</h2>
-        <p>Jokaisessa vaiheessa on tuotettava sekä tunne että seuraava teko. Kortin alaosa kertoo konkreettisen kokemusteon.</p>
+        <p>Jokainen kohtauspiste näyttää, miten BRAVE rakentuu osallistujan matkaksi ennen tapahtumaa, sen aikana ja sen jälkeen.</p>
       </div>
 
       <div class="journey">
@@ -451,7 +448,6 @@
           <span class="stage">Ennen</span>
           <h3>Kutsu ja ennakkomarkkinointi</h3>
           <p>Kutsu ei vain informoi — se avaa BRAVE-maailman ja luo riittävästi odotusarvoa jo ennen tapahtumapäivää.</p>
-          <div class="move"><b>Rohkea teko</b><span>Lähetä kutsu, jossa osallistuja tekee pienen valinnan, lupauksen tai oman “brave move” -noston — jotain, joka tekee kutsusta ensimmäisen kokemuksellisen kosketuspisteen.</span></div>
         </article>
 
         <article class="touchpoint">
@@ -459,7 +455,6 @@
           <span class="stage">Ensivaikutelma</span>
           <h3>Saapuminen rautatieasemalle</h3>
           <p>Ensivaikutelma syntyy rautatieasemalla: vastaanotto, opastus, henkilöstö, musiikki ja visuaaliset elementit tekevät BRAVE-maailmasta fyysisen.</p>
-          <div class="move"><b>Rohkea teko</b><span>Muuta rautatieasema “portiksi”: tunnistettava hostaus, sound cue, selkeä BRAVE-opastus ja ensimmäinen kuvallinen merkki.</span></div>
         </article>
 
         <article class="touchpoint">
@@ -467,7 +462,6 @@
           <span class="stage">Siirtymä</span>
           <h3>Junamatka</h3>
           <p>Junamatka voi olla verkostoitumisen ja yhdessä tekemisen pääalusta — ei vain kuljetus paikasta toiseen.</p>
-          <div class="move"><b>Rohkea teko</b><span>Rakenna junaan fasilitoitu “conversation carriage”: keskustelukortit, pienet yhteistehtävät, paikkakunta-/toimiala-mix ja vaihtopisteet.</span></div>
         </article>
 
         <article class="touchpoint">
@@ -475,7 +469,6 @@
           <span class="stage">Kynnys</span>
           <h3>Saapuminen Verkatehtaalle</h3>
           <p>Yllätys ennen ohjelman alkua vahvistaa, että tapahtuma on jo käynnissä.</p>
-          <div class="move"><b>Rohkea teko</b><span>Tee “threshold moment”: näyttävä vastaanotto, nopea osallistava ele tai salaperäinen ensimmäinen tehtävä ennen saliin menoa.</span></div>
         </article>
 
         <article class="touchpoint">
@@ -483,7 +476,6 @@
           <span class="stage">Sisältö</span>
           <h3>Asiaosuus</h3>
           <p>Sisältö rakentuu rohkeuden ja yhdessä tekemisen ympärille — kysymys on, mikä muuttuu aikaisemmista vuosista poiketen.</p>
-          <div class="move"><b>Rohkea teko</b><span>Seuraava askel: määritellään, miten rohkeus ja yhdessä tekeminen näkyvät formaattina, osallistamisena tai ohjelman rytminä.</span></div>
         </article>
 
         <article class="touchpoint">
@@ -491,7 +483,6 @@
           <span class="stage">Aistit</span>
           <h3>Ruoka ja juoma</h3>
           <p>Ruokailun pitää olla osa teemaa: maut, tarjoilutapa ja pöytäkohtaamiset voivat tukea rohkeutta ja yhdessä tekemistä.</p>
-          <div class="move"><b>Rohkea teko</b><span>Tee ruokailusta BRAVE-kohtaaminen: teeman mukaiset tarjoilupisteet, yhteiset pöytätehtävät, odottamaton makupari tai valintatilanne.</span></div>
         </article>
 
         <article class="touchpoint">
@@ -499,7 +490,6 @@
           <span class="stage">Yhtenäisyys</span>
           <h3>Visuaalinen maailma</h3>
           <p>Visuaalisen ilmeen pitää ulottua kutsuista opasteisiin, junaan, materiaaleihin, esityksiin, henkilökunnan asuihin ja kaikkiin muihin kohtauspisteisiin.</p>
-          <div class="move"><b>Rohkea teko</b><span>Luo yksi modulaarinen BRAVE-kit: värit, typografia, ikonit, opasteet, junan elementit, henkilöstöasut, materiaalipohjat ja presentaatioilme.</span></div>
         </article>
 
         <article class="touchpoint">
@@ -507,7 +497,6 @@
           <span class="stage">Jälki</span>
           <h3>Jälkimarkkinointi</h3>
           <p>Tavoite ei ole vain kiitosviesti vaan varmistaa, että BRAVE-teema jää hetkeksi elämään osallistujan arkeen.</p>
-          <div class="move"><b>Rohkea teko</b><span>Lähetä 3–7 päivän BRAVE-sarja: oma lupaus, ohjelman nostot, verkostokontaktit ja yksi arkeen vietävä mikrohaaste.</span></div>
         </article>
       </div>
     </section>
