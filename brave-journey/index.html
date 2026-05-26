@@ -10,7 +10,7 @@
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --brand-orange: #FF6B35;
@@ -19,7 +19,7 @@
       --brand-magenta-deep: #D70376;
       --brand-purple: #37104B;
       --brand-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
-      --font-display: 'Big Shoulders Display', Montserrat, Inter, system-ui, sans-serif;
+      --font-display: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --font-body: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --space-1: 4px;
       --space-2: 8px;
@@ -163,11 +163,12 @@
       right: -58px;
       top: 20px;
       font-family: var(--font-display);
-      font-size: clamp(120px, 16vw, 220px);
-      font-weight: 900;
-      line-height: .75;
-      letter-spacing: .04em;
-      color: rgba(255,255,255,.055);
+      font-size: clamp(76px, 9vw, 128px);
+      font-weight: 800;
+      line-height: .82;
+      letter-spacing: -.08em;
+      color: rgba(255,255,255,.55);
+      opacity: .09;
       transform: rotate(-4deg);
       pointer-events: none;
     }
@@ -200,13 +201,14 @@
     h1 {
       position: relative;
       z-index: 1;
-      max-width: 760px;
+      max-width: 720px;
       margin: 0;
       font-family: var(--font-display);
-      font-size: clamp(56px, 8.4vw, 112px);
-      line-height: .82;
-      text-transform: uppercase;
-      letter-spacing: .03em;
+      font-size: clamp(38px, 5.4vw, 72px);
+      font-weight: 800;
+      line-height: .98;
+      text-transform: none;
+      letter-spacing: -.045em;
     }
     .lead {
       position: relative;
@@ -225,7 +227,7 @@
     .hero-punchline span { display: block; font-size: clamp(20px, 2.1vw, 29px); font-weight: 900; line-height: 1.1; letter-spacing: -.035em; }
 
     .hero-side { padding: var(--space-5); display: grid; gap: var(--space-4); }
-    .brief-title { font-family: var(--font-display); font-size: 38px; text-transform: uppercase; line-height: .92; letter-spacing: .035em; margin-bottom: 6px; }
+    .brief-title { font-family: var(--font-display); font-size: 28px; font-weight: 800; text-transform: none; line-height: 1.08; letter-spacing: -.035em; margin-bottom: 8px; }
     .muted { color: var(--color-text-muted); }
     .signal-grid { display: grid; gap: var(--space-3); }
     .signal {
@@ -255,7 +257,7 @@
     .signal span { color: var(--color-text-muted); font-size: 13px; font-weight: 650; }
 
     .section-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-6); margin: var(--space-10) 0 var(--space-5); }
-    h2 { margin: 0; font-family: var(--font-display); font-size: clamp(44px, 6.2vw, 84px); line-height: .84; text-transform: uppercase; letter-spacing: .035em; }
+    h2 { margin: 0; font-family: var(--font-display); font-size: clamp(30px, 4.2vw, 52px); font-weight: 800; line-height: 1.03; text-transform: none; letter-spacing: -.04em; }
     .section-head p { margin: 0; max-width: 460px; color: var(--color-text-muted); font-weight: 650; }
 
     .journey {
@@ -361,7 +363,7 @@
       background: var(--brand-gradient);
       box-shadow: 0 20px 54px rgba(236,3,130,.22);
     }
-    .footer-note h2 { font-size: clamp(38px, 5vw, 64px); }
+    .footer-note h2 { font-size: clamp(30px, 4vw, 48px); }
     .footer-note p { margin: 8px 0 0; color: rgba(255,255,255,.80); font-weight: 650; max-width: 820px; }
 
     @media (max-width: 1040px) {
