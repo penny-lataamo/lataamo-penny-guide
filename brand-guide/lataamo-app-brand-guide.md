@@ -418,6 +418,20 @@ Use semantic colors for operational status. Use brand colors only for brand/cate
 
 Create templates as composable layouts. Each template should use the same `AppShell`, `PageHeader`, `Card`, `Button`, `Field`, `Badge` and `DataTable` primitives.
 
+Important: in this system a **template is not a hero image or single mockup**. Every new template page must include a reusable element/component section like the first template pages. The hero/preview can show the visual direction, but the deliverable is incomplete unless it also documents the reusable pieces.
+
+Minimum element catalogue for every new template:
+
+- Buttons: primary, secondary and ghost/low-emphasis states.
+- Badges/status pills: active, success, warning/review and neutral/draft.
+- Navigation: top/app chrome and, when relevant, side nav or mobile bottom nav.
+- Forms: labels, text input, select, textarea, focus state and action row.
+- Cards/lists: content card, row/list item, metric/report card if applicable.
+- Data: table or structured list with statuses and row actions.
+- Feedback states: alert, toast/notification, empty state and modal/dialog.
+- Tokens/anatomy: color swatches or token notes plus a short “how to compose this template” section.
+- Light/dark mode: every element must be demonstrated or verified in both modes.
+
 ### Dashboard template
 
 Use for overviews and operational command centers.
@@ -544,6 +558,7 @@ Before shipping a Lataamo app screen:
 - [ ] One clear primary action per view.
 - [ ] Gradient is used as accent/emphasis, not everywhere.
 - [ ] Components are reusable and template-friendly.
+- [ ] New template pages include the required element catalogue: buttons, badges, nav, forms, cards/lists, data table/structured data, alert/toast, empty state, modal/dialog, tokens/anatomy.
 - [ ] Tables and forms remain calm and readable.
 - [ ] Copy is action-oriented and human, not generic AI/SaaS filler.
 
