@@ -62,7 +62,7 @@ Key updates:
 - The system is organized for developers: primitives → semantic tokens → components → templates.
 - The gradient remains a brand accent, not the default surface for every element.
 - The example page is now a component/template lab rather than a campaign-style landing page.
-- Published example pages now include a themed template switcher dropdown so AI developers can compare approved visual moods from the UI itself.
+- Published example pages now include a template switcher dropdown for approved template families only; light/dark mode lives inside each template as its own toggle.
 
 ## 2. Research basis for app UI decisions
 
