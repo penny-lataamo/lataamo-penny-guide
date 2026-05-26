@@ -209,13 +209,75 @@
     .spec-card b { display: block; margin-bottom: 6px; font-size: 13px; color: var(--action); text-transform: uppercase; letter-spacing: .08em; }
     .spec-card span { color: var(--muted); font-size: 13px; line-height: 1.45; }
 
+    .elements { margin-top: 34px; padding: 28px; border: 1px solid var(--line); border-radius: 30px; background: color-mix(in srgb, var(--surface) 70%, transparent); box-shadow: var(--shadow-card); }
+    .elements-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; margin-bottom: 22px; }
+    .elements-head h2 { margin: 7px 0 8px; font-size: clamp(30px, 3.6vw, 52px); line-height: .95; letter-spacing: -.07em; }
+    .elements-head p { margin: 0; max-width: 720px; color: var(--muted); line-height: 1.55; }
+    .element-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+    .element-card { padding: 18px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); box-shadow: 0 12px 28px rgba(17,17,17,.06); min-width: 0; }
+    .element-card.wide { grid-column: span 2; }
+    .element-card.full { grid-column: 1 / -1; }
+    .element-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .element-title h3 { margin: 0; font-size: 18px; letter-spacing: -.04em; }
+    .code-tag { color: var(--action); background: color-mix(in srgb, var(--action) 11%, var(--surface)); border: 1px solid color-mix(in srgb, var(--action) 30%, var(--line)); border-radius: var(--radius-pill); padding: 5px 9px; font-size: 11px; font-weight: 950; white-space: nowrap; }
+    .button-row, .badge-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .button.secondary { border-color: color-mix(in srgb, var(--action) 28%, var(--line)); background: var(--surface); color: var(--ink); }
+    .button.ghost { background: transparent; color: var(--muted); }
+    .badge { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 10px; border-radius: var(--radius-pill); border: 1px solid var(--line); color: var(--muted); font-size: 12px; font-weight: 900; }
+    .badge.brand { color: var(--action); background: color-mix(in srgb, var(--action) 10%, var(--surface)); border-color: color-mix(in srgb, var(--action) 36%, var(--line)); }
+    .badge.success { color: #0A5B41; background: #E7F6EE; border-color: #B7E4CC; }
+    .badge.warning { color: #7A4300; background: #FFF1D6; border-color: #FFD891; }
+    [data-theme="dark"] .badge.success { color: #8BE0BC; background: rgba(10,91,65,.34); border-color: rgba(139,224,188,.25); }
+    [data-theme="dark"] .badge.warning { color: #FFD28C; background: rgba(122,67,0,.34); border-color: rgba(255,210,140,.25); }
+    .component-tabs { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 5px; border: 1px solid var(--line); border-radius: 18px; background: color-mix(in srgb, var(--line) 38%, transparent); }
+    .component-tabs .tab { padding: 0 13px; }
+    .mini-phone-frame { max-width: 260px; margin: 0 auto; border: 1px solid var(--line); border-radius: 28px; background: var(--surface-raised); padding: 16px; box-shadow: 0 18px 42px rgba(17,17,17,.10); }
+    .mini-nav-demo { position: relative; padding-bottom: 76px; }
+    .mini-list { display: grid; gap: 10px; }
+    .form-demo { display: grid; gap: 12px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-control label { display: block; margin: 0 0 6px; color: var(--muted); font-size: 12px; font-weight: 900; }
+    .control { width: 100%; min-height: 46px; border: 1px solid var(--line); border-radius: 16px; background: var(--field); color: var(--ink); padding: 0 14px; font-weight: 720; }
+    .control.textarea { min-height: 96px; padding-top: 12px; resize: vertical; }
+    .control:focus { outline: 4px solid color-mix(in srgb, var(--action) 16%, transparent); border-color: var(--action); }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; overflow: hidden; }
+    .data-table th, .data-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--line); }
+    .data-table th { color: var(--muted); font-size: 11px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; }
+    .data-table tr:hover td { background: color-mix(in srgb, var(--action) 6%, transparent); }
+    .alert { display: flex; gap: 12px; padding: 14px; border: 1px solid color-mix(in srgb, var(--action) 34%, var(--line)); border-radius: 18px; background: color-mix(in srgb, var(--action) 9%, var(--surface)); }
+    .alert-dot { width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; background: var(--brand-gradient); box-shadow: 0 0 0 5px color-mix(in srgb, var(--action) 16%, transparent); flex: 0 0 auto; }
+    .empty-state { display: grid; place-items: center; text-align: center; min-height: 210px; padding: 24px; border: 1.5px dashed color-mix(in srgb, var(--action) 34%, var(--line)); border-radius: 22px; background: color-mix(in srgb, var(--surface-soft) 55%, transparent); }
+    .empty-state img { width: 54px; height: 54px; margin-bottom: 14px; }
+    .empty-state h3 { margin: 0 0 7px; font-size: 20px; letter-spacing: -.045em; }
+    .empty-state p { margin: 0 0 16px; color: var(--muted); max-width: 320px; }
+    .modal-preview { padding: 20px; border-radius: 24px; background: linear-gradient(135deg, color-mix(in srgb, var(--action) 12%, transparent), color-mix(in srgb, var(--brand-orange) 12%, transparent)); }
+    .dialog { max-width: 460px; margin: 0 auto; padding: 20px; border-radius: 22px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow-card); }
+    .dialog h3 { margin: 0 0 7px; font-size: 21px; letter-spacing: -.045em; }
+    .dialog p { margin: 0 0 16px; color: var(--muted); }
+    .toast-stack { display: grid; gap: 10px; }
+    .toast { display: flex; align-items: start; gap: 12px; padding: 12px; border-radius: 16px; border: 1px solid var(--line); border-left: 5px solid var(--action); background: var(--surface-raised); }
+    .toast b { display: block; font-size: 13px; }
+    .toast span { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+    .swatch-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
+    .swatch { min-height: 76px; border-radius: 18px; padding: 11px; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; font-size: 11px; font-weight: 900; box-shadow: 0 12px 26px rgba(17,17,17,.08); }
+    .swatch.orange { background: #FF6B35; }
+    .swatch.deep-orange { background: #FF5500; }
+    .swatch.magenta { background: #EC0382; }
+    .swatch.deep-magenta { background: #D70376; }
+    .template-anatomy { display: grid; grid-template-columns: 190px 1fr; gap: 14px; align-items: start; }
+    .anatomy-list { display: grid; gap: 10px; }
+    .anatomy-item { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+    .anatomy-item b { display: block; font-size: 13px; }
+    .anatomy-item span { color: var(--muted); font-size: 12px; }
+
     @media (max-width: 1180px) {
       .hero { grid-template-columns: 1fr; }
       .intro { max-width: 760px; }
       .phone-stage { min-height: 720px; }
       .phone.profile { left: 3%; }
       .phone.login { right: 3%; }
-      .template-spec { grid-template-columns: repeat(2, 1fr); }
+      .template-spec, .element-grid { grid-template-columns: repeat(2, 1fr); }
+      .element-card.wide { grid-column: span 2; }
     }
     @media (max-width: 900px) {
       .topbar { align-items: flex-start; flex-direction: column; }
@@ -234,7 +296,10 @@
       .phone-inner { padding: 24px 20px 18px; }
       .profile-head { grid-template-columns: 78px 1fr; }
       .profile-pic { width: 78px; height: 78px; }
-      .report-grid, .template-spec { grid-template-columns: 1fr; }
+      .report-grid, .template-spec, .element-grid, .form-row, .swatch-row, .template-anatomy { grid-template-columns: 1fr; }
+      .element-card.wide { grid-column: span 1; }
+      .elements { padding: 18px; border-radius: 24px; }
+      .elements-head { grid-template-columns: 1fr; }
       .spec-card { padding: 16px; }
     }
   </style>
@@ -343,6 +408,126 @@
                 <button type="button"><b>G</b>Login with Google</button>
                 <button type="button"><b>f</b>Login with Facebook</button>
                 <button type="button"><b>𝕏</b>Login with X</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="elements" aria-label="Reusable mobile UI elements">
+        <div class="elements-head">
+          <div>
+            <div class="eyebrow">Element system</div>
+            <h2>Reusable pieces, not just a pretty hero.</h2>
+            <p>This is the actual template kit: the mobile phone composition above is the preview, and the elements below are the reusable building blocks developers can copy into real app screens.</p>
+          </div>
+          <div class="badge-row" aria-label="Element status badges"><span class="badge brand">Mobile-first</span><span class="badge success">Light + dark</span><span class="badge warning">Use gradient sparingly</span></div>
+        </div>
+
+        <div class="element-grid">
+          <article class="element-card">
+            <div class="element-title"><h3>Buttons</h3><span class="code-tag">.button</span></div>
+            <div class="button-row">
+              <button class="button primary" type="button">Primary action</button>
+              <button class="button secondary" type="button">Secondary</button>
+              <button class="button ghost" type="button">Ghost</button>
+            </div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Badges</h3><span class="code-tag">.badge</span></div>
+            <div class="badge-row"><span class="badge brand">Top 25</span><span class="badge success">Ready</span><span class="badge warning">Review</span><span class="badge">Draft</span></div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Tabs</h3><span class="code-tag">.tabs</span></div>
+            <div class="component-tabs" role="tablist" aria-label="Component tab example"><button class="tab active" type="button">General</button><button class="tab" type="button">Locations</button><button class="tab" type="button">Reports</button></div>
+          </article>
+
+          <article class="element-card wide">
+            <div class="element-title"><h3>Forms and inputs</h3><span class="code-tag">.control</span></div>
+            <div class="form-demo">
+              <div class="form-row">
+                <div class="form-control"><label for="conceptName">Concept name</label><input class="control" id="conceptName" value="Launch night" /></div>
+                <div class="form-control"><label for="eventType">Event type</label><select class="control" id="eventType"><option>Client event</option><option>Internal workshop</option><option>Public launch</option></select></div>
+              </div>
+              <div class="form-control"><label for="notes">Producer notes</label><textarea class="control textarea" id="notes">Guest flow, staffing, key brand moments and next actions.</textarea></div>
+              <div class="button-row"><button class="button primary" type="button">Save concept</button><button class="button secondary" type="button">Preview</button></div>
+            </div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Mobile card stack</h3><span class="code-tag">.list-item</span></div>
+            <div class="mini-list">
+              <div class="list-item"><div style="display:flex;align-items:center;gap:12px"><div class="list-icon">🪩</div><div><b>Launch night</b><br><span class="muted">Flow approved</span></div></div><b>›</b></div>
+              <div class="list-item"><div style="display:flex;align-items:center;gap:12px"><div class="list-icon">🎤</div><div><b>Keynote</b><br><span class="muted">Speaker pending</span></div></div><b>›</b></div>
+              <div class="list-item"><div style="display:flex;align-items:center;gap:12px"><div class="list-icon">✓</div><div><b>Venue</b><br><span class="muted">Confirmed</span></div></div><b>›</b></div>
+            </div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Report cards</h3><span class="code-tag">.report-card</span></div>
+            <div class="report-grid">
+              <div class="report-card magenta"><b>Event pulse</b><span>Live sentiment and guest movement.</span></div>
+              <div class="report-card orange"><b>Client impact</b><span>KPIs and follow-up moments.</span></div>
+            </div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Phone navigation</h3><span class="code-tag">.bottom-nav</span></div>
+            <div class="mini-phone-frame mini-nav-demo">
+              <div class="list-item"><div style="display:flex;align-items:center;gap:12px"><div class="avatar">LC</div><div><b>Mobile shell</b><br><span class="muted">Reusable bottom nav + FAB</span></div></div></div>
+              <nav class="bottom-nav" aria-label="Element bottom navigation"><div class="nav-link active"><b>⌂</b>Home</div><div class="nav-link"><b>▣</b>Feeds</div><div class="nav-link"><b>◔</b>Reports</div><div class="nav-link"><b>●</b>Profile</div></nav>
+              <div class="fab" aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <article class="element-card wide">
+            <div class="element-title"><h3>Data table</h3><span class="code-tag">.data-table</span></div>
+            <div style="overflow:auto">
+              <table class="data-table">
+                <thead><tr><th>Item</th><th>Status</th><th>Owner</th><th>Next step</th></tr></thead>
+                <tbody>
+                  <tr><td>Venue walkthrough</td><td><span class="badge success">Ready</span></td><td>Producer</td><td>Send recap</td></tr>
+                  <tr><td>AV supplier</td><td><span class="badge warning">Review</span></td><td>Tech</td><td>Confirm quote</td></tr>
+                  <tr><td>Guest flow</td><td><span class="badge brand">Active</span></td><td>Creative</td><td>Lock signage</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Alerts and toasts</h3><span class="code-tag">.toast</span></div>
+            <div class="toast-stack">
+              <div class="alert"><div class="alert-dot"></div><div><b>Action needed</b><br><span class="muted">Vendor quote expires today.</span></div></div>
+              <div class="toast"><div class="alert-dot"></div><div><b>Saved</b><span>Concept notes updated.</span></div></div>
+            </div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Empty state</h3><span class="code-tag">.empty-state</span></div>
+            <div class="empty-state"><img src="../assets/lataamo-brandmark-transparent.png" alt="" /><h3>No reports yet</h3><p>Create the first event report to start the project pulse.</p><button class="button primary" type="button">Create report</button></div>
+          </article>
+
+          <article class="element-card wide">
+            <div class="element-title"><h3>Modal / dialog</h3><span class="code-tag">.dialog</span></div>
+            <div class="modal-preview"><div class="dialog"><h3>Publish event pulse?</h3><p>This pushes the report to the client view and notifies the production team.</p><div class="button-row"><button class="button primary" type="button">Publish</button><button class="button secondary" type="button">Keep editing</button></div></div></div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Brand swatches</h3><span class="code-tag">tokens</span></div>
+            <div class="swatch-row"><div class="swatch orange">#FF6B35</div><div class="swatch deep-orange">#FF5500</div><div class="swatch magenta">#EC0382</div><div class="swatch deep-magenta">#D70376</div></div>
+          </article>
+
+          <article class="element-card full">
+            <div class="element-title"><h3>Template anatomy</h3><span class="code-tag">copy pattern</span></div>
+            <div class="template-anatomy">
+              <div class="mini-phone-frame"><div class="phone-top"><div class="hamburger"><i></i><i></i></div><div class="app-logo"><img src="../assets/lataamo-brandmark-transparent.png" alt="" />Pulse</div><div class="avatar">LC</div></div><div class="streak"><h2>Hero card</h2><p>Primary mobile content block</p></div></div>
+              <div class="anatomy-list">
+                <div class="anatomy-item"><div class="note-icon">1</div><div><b>Phone shell</b><span>Use `.phone`, `.phone-inner`, `.phone-top` as the mobile frame and app chrome.</span></div></div>
+                <div class="anatomy-item"><div class="note-icon">2</div><div><b>Content modules</b><span>Compose `.streak`, `.report-card`, `.list-item`, `.field`, `.input-wrap` depending on flow.</span></div></div>
+                <div class="anatomy-item"><div class="note-icon">3</div><div><b>Navigation</b><span>Bottom nav and floating action button are optional, but keep them consistent across mobile screens.</span></div></div>
+                <div class="anatomy-item"><div class="note-icon">4</div><div><b>Theme safety</b><span>Everything uses semantic variables so the same elements work in light and dark modes.</span></div></div>
               </div>
             </div>
           </article>
