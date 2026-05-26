@@ -264,11 +264,52 @@
     .swatch.deep-orange { background: #FF5500; }
     .swatch.magenta { background: #EC0382; }
     .swatch.deep-magenta { background: #D70376; }
-    .template-anatomy { display: grid; grid-template-columns: 190px 1fr; gap: 14px; align-items: start; }
-    .anatomy-list { display: grid; gap: 10px; }
-    .anatomy-item { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+    .template-anatomy { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); gap: 18px; align-items: stretch; }
+    .anatomy-blueprint { display: grid; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: 24px; background: color-mix(in srgb, var(--surface-soft) 34%, var(--surface)); }
+    .blueprint-bar { min-height: 46px; border-radius: 16px; padding: 11px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 8px 18px rgba(17,17,17,.05); }
+    .blueprint-bar strong { font-size: 13px; }
+    .blueprint-bar span { color: var(--muted); font-size: 12px; font-weight: 760; }
+    .blueprint-bar.primary { color: #fff; border: 0; background: #252226; }
+    .blueprint-bar.accent { color: #fff; border: 0; background: var(--brand-gradient); }
+    .anatomy-list { display: grid; gap: 10px; align-content: center; }
+    .anatomy-item { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; padding: 10px; border: 1px solid var(--line); border-radius: 16px; background: color-mix(in srgb, var(--surface) 76%, transparent); }
     .anatomy-item b { display: block; font-size: 13px; }
     .anatomy-item span { color: var(--muted); font-size: 12px; }
+    .chart-card { min-height: 320px; }
+    .chart-wrap { width: 100%; overflow: visible; border: 1px solid var(--line); border-radius: 20px; background: var(--surface-raised); padding: 14px; }
+    .chart { width: 100%; height: auto; display: block; min-width: 0; }
+    .chart-grid { stroke: var(--line); stroke-width: 1; }
+    .chart-axis { stroke: color-mix(in srgb, var(--muted) 42%, transparent); stroke-width: 1; }
+    .chart-label { fill: var(--muted); font: 800 11px var(--font); }
+    .chart-primary { stroke: var(--action); fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+    .chart-secondary { stroke: var(--brand-orange); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: .82; }
+    .chart-area { fill: url(#mobileAreaGradient); }
+    .bar-neutral { fill: color-mix(in srgb, var(--muted) 24%, transparent); }
+    .bar-active { fill: var(--action); }
+    .donut-track { stroke: color-mix(in srgb, var(--muted) 20%, transparent); }
+    .donut-a { stroke: var(--action); }
+    .donut-b { stroke: var(--brand-orange); }
+    .donut-c { stroke: #7A3EF0; }
+    [data-theme="dark"] .donut-c { stroke: #B79CFF; }
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 12px; font-weight: 900; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--action); }
+    .dot.orange { background: var(--brand-orange); }
+    .dot.purple { background: #7A3EF0; }
+    .loader-row { display: flex; align-items: center; gap: 14px; padding: 15px; border: 1px solid var(--line); border-radius: 20px; background: color-mix(in srgb, var(--action) 7%, var(--surface)); }
+    .logo-loader { width: 58px; height: 58px; position: relative; display: grid; place-items: center; flex: 0 0 auto; }
+    .logo-loader::before { content: ""; position: absolute; inset: -4px; border-radius: 20px; background: var(--brand-gradient); opacity: .13; filter: blur(1px); }
+    .logo-loader img { position: relative; width: 46px; height: 46px; animation: logo-spin 1.25s cubic-bezier(.55,.08,.35,1) infinite; transform-origin: center; }
+    @keyframes logo-spin { 0% { transform: rotate(0deg) scale(1); } 72% { transform: rotate(360deg) scale(1.04); } 100% { transform: rotate(360deg) scale(1); } }
+    .skeletons { display: grid; gap: 10px; flex: 1; }
+    .skel { height: 12px; border-radius: 999px; background: linear-gradient(90deg, color-mix(in srgb, var(--line) 65%, transparent), color-mix(in srgb, var(--surface) 88%, var(--line)), color-mix(in srgb, var(--line) 65%, transparent)); background-size: 220% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+    @keyframes shimmer { to { background-position-x: -220%; } }
+    .file-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface-raised); }
+    .file-icon { width: 40px; height: 40px; border-radius: 14px; display: grid; place-items: center; background: var(--surface-soft); color: var(--action); font-weight: 950; }
+    .progress-stack { display: grid; gap: 10px; margin-top: 14px; }
+    .progress-line { display: grid; grid-template-columns: 86px 1fr 40px; gap: 10px; align-items: center; font-size: 12px; color: var(--muted); font-weight: 850; }
+    .progress-track { height: 10px; border-radius: 999px; background: color-mix(in srgb, var(--muted) 16%, transparent); overflow: hidden; }
+    .progress-fill { display: block; height: 100%; border-radius: inherit; background: var(--brand-gradient); }
 
     @media (max-width: 1180px) {
       .hero { grid-template-columns: 1fr; }
@@ -297,6 +338,8 @@
       .profile-head { grid-template-columns: 78px 1fr; }
       .profile-pic { width: 78px; height: 78px; }
       .report-grid, .template-spec, .element-grid, .form-row, .swatch-row, .template-anatomy { grid-template-columns: 1fr; }
+      .chart-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .loader-row, .file-card { align-items: flex-start; flex-direction: column; }
       .element-card.wide { grid-column: span 1; }
       .elements { padding: 18px; border-radius: 24px; }
       .elements-head { grid-template-columns: 1fr; }
@@ -482,6 +525,51 @@
             </div>
           </article>
 
+          <article class="element-card wide chart-card">
+            <div class="element-title"><h3>Charts and graphs</h3><span class="code-tag">.chart</span></div>
+            <p class="muted">Use brand color for the main story, orange for comparison, and quiet grid lines. Clear first, branded second.</p>
+            <div class="chart-wrap" aria-label="Line and area chart example">
+              <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example event pulse line chart">
+                <defs><linearGradient id="mobileAreaGradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#EC0382" stop-opacity=".25"/><stop offset="1" stop-color="#EC0382" stop-opacity="0"/></linearGradient></defs>
+                <line class="chart-grid" x1="50" y1="40" x2="590" y2="40"/><line class="chart-grid" x1="50" y1="90" x2="590" y2="90"/><line class="chart-grid" x1="50" y1="140" x2="590" y2="140"/><line class="chart-grid" x1="50" y1="190" x2="590" y2="190"/>
+                <line class="chart-axis" x1="50" y1="218" x2="590" y2="218"/>
+                <text class="chart-label" x="50" y="240">Mon</text><text class="chart-label" x="155" y="240">Tue</text><text class="chart-label" x="260" y="240">Wed</text><text class="chart-label" x="365" y="240">Thu</text><text class="chart-label" x="470" y="240">Fri</text><text class="chart-label" x="560" y="240">Sat</text>
+                <path class="chart-area" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42 L590,218 L50,218 Z"/>
+                <path class="chart-primary" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42"/>
+                <path class="chart-secondary" d="M50,198 C112,188 135,172 170,168 C220,162 250,145 285,150 C330,154 365,132 405,126 C455,118 510,116 590,108"/>
+              </svg>
+            </div>
+            <div class="legend"><span><i class="dot"></i>Guest energy</span><span><i class="dot orange"></i>Operational readiness</span></div>
+          </article>
+
+          <article class="element-card chart-card">
+            <div class="element-title"><h3>Bars, donut and progress</h3><span class="code-tag">data viz</span></div>
+            <div class="chart-wrap" aria-label="Bar and donut chart examples">
+              <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example mobile chart components">
+                <line class="chart-grid" x1="40" y1="44" x2="350" y2="44"/><line class="chart-grid" x1="40" y1="94" x2="350" y2="94"/><line class="chart-grid" x1="40" y1="144" x2="350" y2="144"/><line class="chart-axis" x1="40" y1="210" x2="350" y2="210"/>
+                <rect class="bar-neutral" x="62" y="112" width="32" height="98" rx="7"/><rect class="bar-neutral" x="112" y="82" width="32" height="128" rx="7"/><rect class="bar-active" x="162" y="52" width="32" height="158" rx="7"/><rect class="bar-neutral" x="212" y="126" width="32" height="84" rx="7"/><rect class="bar-neutral" x="262" y="92" width="32" height="118" rx="7"/>
+                <text class="chart-label" x="56" y="236">Reach</text><text class="chart-label" x="140" y="236">Emotion</text><text class="chart-label" x="245" y="236">Actions</text>
+                <circle class="donut-track" cx="480" cy="126" r="64" fill="none" stroke-width="18"/>
+                <circle class="donut-a" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="210 402" transform="rotate(-90 480 126)"/>
+                <circle class="donut-b" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="92 402" stroke-dashoffset="-220" transform="rotate(-90 480 126)"/>
+                <circle class="donut-c" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="58 402" stroke-dashoffset="-314" transform="rotate(-90 480 126)"/>
+                <text x="480" y="120" text-anchor="middle" class="chart-label">TOTAL</text><text x="480" y="148" text-anchor="middle" fill="var(--ink)" style="font:900 28px var(--font)">86%</text>
+              </svg>
+            </div>
+            <div class="legend"><span><i class="dot"></i>Primary</span><span><i class="dot orange"></i>Secondary</span><span><i class="dot purple"></i>Support</span></div>
+            <div class="progress-stack" aria-label="Progress examples">
+              <div class="progress-line"><span>Budget</span><div class="progress-track"><span class="progress-fill" style="width:78%"></span></div><strong>78%</strong></div>
+              <div class="progress-line"><span>Staffing</span><div class="progress-track"><span class="progress-fill" style="width:64%"></span></div><strong>64%</strong></div>
+              <div class="progress-line"><span>Content</span><div class="progress-track"><span class="progress-fill" style="width:91%"></span></div><strong>91%</strong></div>
+            </div>
+          </article>
+
+          <article class="element-card">
+            <div class="element-title"><h3>Loading states</h3><span class="code-tag">.logo-loader</span></div>
+            <div class="loader-row"><span class="logo-loader"><img src="../assets/lataamo-brandmark-transparent.png" alt="" /></span><div class="skeletons"><span class="skel" style="width:86%"></span><span class="skel" style="width:62%"></span><span class="skel" style="width:74%"></span></div></div>
+            <div class="file-card" style="margin-top:12px"><div style="display:flex;align-items:center;gap:12px"><span class="file-icon">PDF</span><div><b>Event pulse export</b><br><span class="muted">Generating summary...</span></div></div><span class="badge brand">Loading</span></div>
+          </article>
+
           <article class="element-card wide">
             <div class="element-title"><h3>Data table</h3><span class="code-tag">.data-table</span></div>
             <div style="overflow:auto">
@@ -522,12 +610,18 @@
           <article class="element-card full">
             <div class="element-title"><h3>Template anatomy</h3><span class="code-tag">copy pattern</span></div>
             <div class="template-anatomy">
-              <div class="mini-phone-frame"><div class="phone-top"><div class="hamburger"><i></i><i></i></div><div class="app-logo"><img src="../assets/lataamo-brandmark-transparent.png" alt="" />Pulse</div><div class="avatar">LC</div></div><div class="streak"><h2>Hero card</h2><p>Primary mobile content block</p></div></div>
+              <div class="anatomy-blueprint" aria-label="Template anatomy blueprint">
+                <div class="blueprint-bar"><strong>App chrome</strong><span>logo · menu · avatar</span></div>
+                <div class="blueprint-bar primary"><strong>Primary content card</strong><span>one focal story</span></div>
+                <div class="blueprint-bar accent"><strong>Action / highlight</strong><span>gradient accent</span></div>
+                <div class="blueprint-bar"><strong>List / form / data module</strong><span>calm surface</span></div>
+                <div class="blueprint-bar"><strong>Bottom navigation</strong><span>consistent mobile route</span></div>
+              </div>
               <div class="anatomy-list">
-                <div class="anatomy-item"><div class="note-icon">1</div><div><b>Phone shell</b><span>Use `.phone`, `.phone-inner`, `.phone-top` as the mobile frame and app chrome.</span></div></div>
-                <div class="anatomy-item"><div class="note-icon">2</div><div><b>Content modules</b><span>Compose `.streak`, `.report-card`, `.list-item`, `.field`, `.input-wrap` depending on flow.</span></div></div>
-                <div class="anatomy-item"><div class="note-icon">3</div><div><b>Navigation</b><span>Bottom nav and floating action button are optional, but keep them consistent across mobile screens.</span></div></div>
-                <div class="anatomy-item"><div class="note-icon">4</div><div><b>Theme safety</b><span>Everything uses semantic variables so the same elements work in light and dark modes.</span></div></div>
+                <div class="anatomy-item"><div class="note-icon">1</div><div><b>Start from app chrome</b><span>Use consistent top navigation, logo placement and user affordance.</span></div></div>
+                <div class="anatomy-item"><div class="note-icon">2</div><div><b>Choose one hero module</b><span>Use the dark/streak card or a report card for the main story — not oversized decorative UI.</span></div></div>
+                <div class="anatomy-item"><div class="note-icon">3</div><div><b>Compose real elements</b><span>Add forms, lists, tables, charts, empty states, modals and loading states from this catalogue.</span></div></div>
+                <div class="anatomy-item"><div class="note-icon">4</div><div><b>Keep theme safety</b><span>Everything uses semantic variables so the same elements work in light and dark modes.</span></div></div>
               </div>
             </div>
           </article>
