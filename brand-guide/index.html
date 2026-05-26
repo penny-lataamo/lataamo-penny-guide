@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lataamo App UI System Example</title>
+  <meta name="description" content="Lataamo app UI system example with light and dark modes, app-scale components and reusable templates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-orange: #FF6B35;
+      --brand-orange-deep: #FF5500;
+      --brand-magenta: #EC0382;
+      --brand-magenta-deep: #D70376;
+      --brand-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
+      --font: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 22px; --radius-pill: 999px;
+    }
+    :root, [data-theme="light"] {
+      color-scheme: light;
+      --color-bg: #F7F4F2;
+      --color-surface: #FFFFFF;
+      --color-surface-raised: #FFFFFF;
+      --color-surface-subtle: #FFF1EA;
+      --color-text: #111111;
+      --color-text-muted: #5F565B;
+      --color-text-soft: #82777D;
+      --color-border: #E6E0E3;
+      --color-border-strong: #CFC5CB;
+      --color-action-bg: #D70376;
+      --color-action-bg-hover: #B90263;
+      --color-action-text: #FFFFFF;
+      --color-secondary-bg: #FFFFFF;
+      --color-secondary-bg-hover: #FFF1EA;
+      --color-secondary-text: #111111;
+      --color-secondary-border: #B9AAB2;
+      --color-link: #B90263;
+      --color-focus: rgba(215, 3, 118, 0.28);
+      --shadow-card: 0 14px 34px rgba(17, 17, 17, 0.08);
+    }
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --color-bg: #111012;
+      --color-surface: #1A171B;
+      --color-surface-raised: #231F24;
+      --color-surface-subtle: #2B1724;
+      --color-text: #F7F3F5;
+      --color-text-muted: #C9BDC4;
+      --color-text-soft: #9D9098;
+      --color-border: rgba(255,255,255,.12);
+      --color-border-strong: rgba(255,255,255,.20);
+      --color-action-bg: #EC0382;
+      --color-action-bg-hover: #FF2A9B;
+      --color-action-text: #FFFFFF;
+      --color-secondary-bg: #332B34;
+      --color-secondary-bg-hover: #433846;
+      --color-secondary-text: #FFFFFF;
+      --color-secondary-border: rgba(255,255,255,.32);
+      --color-link: #FF7ABF;
+      --color-focus: rgba(236, 3, 130, 0.38);
+      --shadow-card: 0 18px 46px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--font); background: var(--color-bg); color: var(--color-text); font-size: 15px; line-height: 1.55; overflow-x: hidden; }
+    img, svg { max-width: 100%; }
+    a { color: var(--color-link); text-decoration: underline; text-underline-offset: 3px; }
+    .app-shell { min-height: 100vh; }
+    .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 64px; padding: 0 var(--space-6); background: color-mix(in srgb, var(--color-surface) 92%, transparent); border-bottom: 1px solid var(--color-border); backdrop-filter: blur(18px); }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: max-content; font-weight: 900; }
+    .brand img { width: 34px; height: 34px; object-fit: contain; }
+    .brand span { letter-spacing: -0.02em; }
+    .nav { display: flex; align-items: center; gap: 3px; }
+    .nav a { color: var(--color-text-muted); text-decoration: none; font-size: 13px; font-weight: 800; padding: 8px 10px; border-radius: var(--radius-pill); }
+    .nav a.active { color: var(--color-text); background: var(--color-surface-subtle); position: relative; }
+    .nav a.active::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 99px; background: var(--brand-gradient); }
+    .top-actions { display: flex; gap: var(--space-2); align-items: center; }
+    .template-switch { position: relative; display: inline-flex; align-items: center; min-height: 40px; border-radius: var(--radius-pill); background: var(--brand-gradient); padding: 2px; box-shadow: 0 12px 26px rgba(236, 3, 130, .18); }
+    .template-switch::before { content: "Template"; padding-left: 13px; color: #fff; font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .template-switch select { min-height: 36px; min-width: 184px; margin-left: 8px; padding: 0 38px 0 13px; border: 0; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--color-surface) 94%, transparent); color: var(--color-text); font: 900 13px / 1 var(--font); appearance: none; cursor: pointer; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 75%, transparent); }
+    .template-switch::after { content: "⌄"; position: absolute; right: 13px; top: 50%; transform: translateY(-54%); color: var(--color-link); font-size: 17px; font-weight: 900; pointer-events: none; }
+    .template-switch select:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+    .page { max-width: 1200px; margin: 0 auto; padding: var(--space-6); }
+    .page-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-5); align-items: end; margin: var(--space-4) 0 var(--space-6); }
+    .eyebrow { display: inline-flex; align-items: center; width: fit-content; gap: 8px; font-size: 12px; font-weight: 900; color: var(--color-link); text-transform: uppercase; letter-spacing: .08em; }
+    .eyebrow::before { content: ""; width: 24px; height: 3px; border-radius: 99px; background: var(--brand-gradient); }
+    h1, h2, h3, p { margin-top: 0; }
+    .page-title { margin: 6px 0 8px; font-size: clamp(28px, 2.4vw, 36px); line-height: 1.15; letter-spacing: -0.03em; font-weight: 900; max-width: 780px; }
+    .page-description { margin: 0; color: var(--color-text-muted); max-width: 760px; font-size: 15px; }
+    .section-title { margin-bottom: var(--space-4); font-size: 22px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 900; }
+    .card-title { margin-bottom: 6px; font-size: 18px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 900; }
+    .button { min-height: 40px; border-radius: var(--radius-md); padding: 0 14px; font: 800 14px / 1 var(--font); border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+    .button-primary { background: var(--color-action-bg); color: var(--color-action-text); }
+    .button-primary:hover { background: var(--color-action-bg-hover); }
+    .button-accent { background: var(--brand-gradient); color: #fff; box-shadow: 0 10px 24px rgba(236, 3, 130, .20); }
+    .button-secondary { background: var(--color-secondary-bg); color: var(--color-secondary-text); border-color: var(--color-secondary-border); box-shadow: 0 1px 0 color-mix(in srgb, var(--color-text) 8%, transparent); }
+    .button-secondary:hover { background: var(--color-secondary-bg-hover); border-color: var(--color-action-bg); }
+    .button-ghost { background: transparent; color: var(--color-text-muted); border-color: transparent; }
+    .button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+    .grid { display: grid; gap: var(--space-5); }
+    .grid.metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid.two { grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card { position: relative; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-5); overflow: hidden; }
+    .card-accent::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: var(--brand-gradient); }
+    .metric-value { display: block; margin-top: 4px; font-size: 28px; line-height: 1; font-weight: 900; letter-spacing: -0.03em; }
+    .metric-label { color: var(--color-text-muted); font-size: 13px; font-weight: 700; }
+    .toolbar { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+    .tabs { display: flex; gap: 4px; padding: 4px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); width: max-content; background: var(--color-surface-raised); }
+    .tab { border: 0; background: transparent; color: var(--color-text-muted); border-radius: var(--radius-pill); padding: 7px 10px; font: 800 13px / 1 var(--font); cursor: pointer; }
+    .tab.active { background: var(--color-surface-subtle); color: var(--color-text); }
+    .field { margin-top: var(--space-4); }
+    .field label { display: block; margin-bottom: 6px; color: var(--color-text); font: 800 13px / 1.3 var(--font); }
+    .input, .select, .textarea { width: 100%; min-height: 40px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); color: var(--color-text); padding: 10px 12px; font: 500 14px / 1.4 var(--font); }
+    .textarea { min-height: 96px; resize: vertical; }
+    .input:focus, .select:focus, .textarea:focus { outline: 3px solid var(--color-focus); border-color: var(--color-action-bg); }
+    .badge { display: inline-flex; align-items: center; width: fit-content; gap: 6px; border-radius: var(--radius-pill); padding: 4px 8px; font: 800 12px / 1 var(--font); border: 1px solid var(--color-border); white-space: nowrap; }
+    .badge-brand { color: var(--color-link); background: color-mix(in srgb, var(--color-action-bg) 14%, var(--color-surface)); border-color: color-mix(in srgb, var(--color-action-bg) 45%, var(--color-border)); }
+    [data-theme="dark"] .badge-brand { color: #FFD7EA; background: color-mix(in srgb, var(--color-action-bg) 22%, var(--color-surface)); border-color: color-mix(in srgb, var(--color-action-bg) 58%, var(--color-border)); }
+    .badge-success { background: #E7F6EE; color: #0A5B41; border-color: #B7E4CC; }
+    .badge-warning { background: #FFF1D6; color: #7A4300; border-color: #FFD891; }
+    [data-theme="dark"] .badge-success { background: rgba(10, 91, 65, .34); color: #8BE0BC; border-color: rgba(139, 224, 188, .25); }
+    [data-theme="dark"] .badge-warning { background: rgba(122, 67, 0, .34); color: #FFD28C; border-color: rgba(255, 210, 140, .25); }
+    .alert { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-4); border: 1px solid color-mix(in srgb, var(--color-action-bg) 35%, var(--color-border)); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-action-bg) 10%, var(--color-surface)); color: var(--color-text); }
+    .alert strong { display: block; margin-bottom: 2px; }
+    .table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+    th { font-size: 12px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 900; }
+    tr:hover td { background: color-mix(in srgb, var(--color-action-bg) 5%, transparent); }
+    .empty { text-align: center; border: 1.5px dashed var(--color-border-strong); border-radius: var(--radius-lg); padding: var(--space-8); background: color-mix(in srgb, var(--color-surface) 70%, transparent); }
+    .template-list { display: grid; gap: var(--space-3); }
+    .template-item { display: grid; grid-template-columns: 130px 1fr; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); }
+    .template-item code { font-weight: 900; color: var(--color-link); }
+    .muted { color: var(--color-text-muted); }
+    .footer { margin: var(--space-8) 0 var(--space-4); color: var(--color-text-soft); font-size: 13px; }
+
+    .chart-card { min-height: 320px; }
+    .chart-wrap { width: 100%; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface-raised); padding: var(--space-4); }
+    .chart { width: 100%; height: auto; display: block; }
+    .chart-grid { stroke: var(--color-border); stroke-width: 1; }
+    .chart-axis { stroke: var(--color-border-strong); stroke-width: 1; }
+    .chart-label { fill: var(--color-text-soft); font: 700 11px var(--font); }
+    .chart-primary { stroke: var(--color-action-bg); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .chart-secondary { stroke: var(--brand-orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .78; }
+    .chart-area { fill: url(#areaGradient); }
+    .bar-neutral { fill: color-mix(in srgb, var(--color-text-soft) 26%, transparent); }
+    .bar-active { fill: var(--color-action-bg); }
+    .donut-track { stroke: color-mix(in srgb, var(--color-border) 70%, transparent); }
+    .donut-a { stroke: var(--color-action-bg); }
+    .donut-b { stroke: var(--brand-orange); }
+    .donut-c { stroke: #7A3EF0; }
+    [data-theme="dark"] .chart-secondary { stroke: #FF8A5C; }
+    [data-theme="dark"] .donut-c { stroke: #B79CFF; }
+    .legend { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-3); color: var(--color-text-muted); font-size: 12px; font-weight: 800; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--color-action-bg); }
+    .dot.orange { background: var(--brand-orange); }
+    .dot.purple { background: #7A3EF0; }
+    .app-layout-demo { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: var(--space-5); }
+    .sidebar-demo { border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-3); }
+    .side-link { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-radius: var(--radius-md); color: var(--color-text-muted); font-weight: 800; font-size: 13px; }
+    .side-link.active { color: var(--color-text); background: var(--color-surface-subtle); border-left: 3px solid var(--color-action-bg); }
+    .filter-chip { display: inline-flex; align-items: center; gap: 6px; margin: 4px 4px 0 0; padding: 6px 10px; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--color-action-bg) 14%, var(--color-surface)); color: var(--color-link); border: 1px solid color-mix(in srgb, var(--color-action-bg) 45%, var(--color-border)); font-size: 12px; font-weight: 900; box-shadow: 0 1px 0 color-mix(in srgb, var(--color-action-bg) 10%, transparent); }
+    [data-theme="dark"] .filter-chip { background: color-mix(in srgb, var(--color-action-bg) 22%, var(--color-surface)); color: #FFD7EA; border-color: color-mix(in srgb, var(--color-action-bg) 58%, var(--color-border)); }
+    .avatar-row { display: flex; align-items: center; gap: var(--space-3); }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--brand-gradient); color: #fff; font-weight: 900; font-size: 12px; }
+    .timeline { display: grid; gap: var(--space-4); }
+    .timeline-item { display: grid; grid-template-columns: 18px 1fr; gap: var(--space-3); }
+    .timeline-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; background: var(--color-action-bg); box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-action-bg) 15%, transparent); }
+    .file-card { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-raised); }
+    .file-icon { width: 36px; height: 36px; border-radius: var(--radius-sm); display: grid; place-items: center; background: var(--color-surface-subtle); color: var(--color-link); font-weight: 900; font-size: 12px; }
+    .skeleton-stack { display: grid; gap: 10px; }
+    .skeleton { height: 14px; border-radius: var(--radius-sm); background: linear-gradient(90deg, color-mix(in srgb, var(--color-border) 45%, transparent), color-mix(in srgb, var(--color-border) 20%, transparent), color-mix(in srgb, var(--color-border) 45%, transparent)); background-size: 220% 100%; animation: skeleton 1.4s ease-in-out infinite; }
+    @keyframes skeleton { to { background-position-x: -220%; } }
+    .loader-demo { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-4); padding: var(--space-3); border: 1px solid var(--color-border-strong); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-action-bg) 7%, var(--color-surface)); }
+    .logo-loader { width: 56px; height: 56px; position: relative; display: grid; place-items: center; flex: 0 0 auto; }
+    .logo-loader::before { content: ""; position: absolute; inset: -4px; border-radius: 18px; background: var(--brand-gradient); opacity: .12; filter: blur(1px); }
+    .logo-loader img { position: relative; width: 44px; height: 44px; padding: 0; background: transparent; box-shadow: none; animation: logo-spin 1.25s cubic-bezier(.55,.08,.35,1) infinite; transform-origin: center; }
+    @keyframes logo-spin { 0% { transform: rotate(0deg) scale(1); } 72% { transform: rotate(360deg) scale(1.04); } 100% { transform: rotate(360deg) scale(1); } }
+    .toast-demo { display: grid; gap: var(--space-2); padding: var(--space-3); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-text) 6%, transparent); }
+    .toast { --toast-accent: var(--color-action-bg); display: flex; align-items: flex-start; gap: var(--space-3); border: 1px solid var(--color-border-strong); border-left: 5px solid var(--toast-accent); border-radius: var(--radius-md); background: var(--color-surface-raised); padding: var(--space-3); box-shadow: 0 18px 42px rgba(17, 17, 17, .14); }
+    [data-theme="dark"] .toast { box-shadow: 0 20px 50px rgba(0, 0, 0, .42); }
+    .toast-icon { width: 14px; height: 14px; border-radius: 50%; margin-top: 4px; background: var(--toast-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--toast-accent) 18%, transparent); }
+    .toast.success { --toast-accent: #12805C; }
+    .toast.warning { --toast-accent: #B35C00; }
+    [data-theme="dark"] .toast.success { --toast-accent: #7DDCB4; }
+    [data-theme="dark"] .toast.warning { --toast-accent: #FFD28C; }
+    .modal-preview { border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: color-mix(in srgb, var(--color-text) 8%, transparent); padding: var(--space-5); }
+    .dialog { max-width: 520px; margin: 0 auto; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); padding: var(--space-5); box-shadow: var(--shadow-card); }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .page-header, .grid.two, .app-layout-demo { grid-template-columns: 1fr; }
+      .grid.metrics, .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chart-card { min-height: auto; }
+    }
+    @media (max-width: 620px) {
+      .topbar { position: static; min-height: auto; padding: var(--space-3) var(--space-4); align-items: flex-start; flex-wrap: wrap; }
+      .brand { width: 100%; }
+      .brand span { font-size: 14px; }
+      .top-actions { width: 100%; flex-wrap: wrap; align-items: stretch; }
+      .top-actions .button { flex: 1 1 auto; min-width: min(150px, 100%); }
+      .page { padding: var(--space-4); }
+      .page-header { margin-top: var(--space-2); align-items: start; }
+      .page-title { font-size: clamp(26px, 8vw, 32px); }
+      .section-title { font-size: 20px; }
+      .toolbar { align-items: flex-start; flex-direction: column; }
+      .tabs { width: 100%; overflow-x: auto; border-radius: var(--radius-md); }
+      .tab { flex: 1 0 auto; }
+      .grid.metrics, .grid.three { grid-template-columns: 1fr; }
+      .template-item { grid-template-columns: 1fr; }
+      .card { padding: var(--space-4); border-radius: var(--radius-md); }
+      .modal-preview { padding: var(--space-3); border-radius: var(--radius-lg); }
+      .dialog .top-actions { width: 100%; }
+      .dialog .button { flex: 1 1 100%; }
+      .toast { width: 100%; }
+      .file-card, .loader-demo { align-items: flex-start; flex-direction: column; }
+      .file-card .button { width: 100%; }
+      .chart-wrap { padding: var(--space-3); }
+      .chart { min-width: 520px; }
+      .chart-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    }
+    @media (max-width: 430px) {
+      .page { padding: var(--space-3); }
+      .button { width: 100%; }
+      .page-header .top-actions { width: 100%; }
+      .metric-value { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="../assets/lataamo-brandmark-transparent.png" alt="Lataamo brandmark" />
+        <span>Lataamo UI System</span>
+      </div>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="active" href="#dashboard">Dashboard</a>
+        <a href="#form">Concepts</a>
+        <a href="#table">Vendors</a>
+        <a href="#templates">Templates</a>
+      </nav>
+      <div class="top-actions">
+        <label class="template-switch" for="templateSelect">
+          <select id="templateSelect" aria-label="Choose template style">
+            <option value="../brand-guide/" selected>Sharp app system</option>
+            <option value="../brand-guide-sense/">Soft glass system</option>
+            <option value="../brand-guide-mobile/">Mobile app trio</option>
+          </select>
+        </label>
+        <button class="button button-secondary" id="themeToggle" type="button">Dark mode</button>
+        <button class="button button-accent" type="button">Create concept</button>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="page-header" id="dashboard">
+        <div>
+          <div class="eyebrow">App-scale brand system</div>
+          <h1 class="page-title">Readable Lataamo apps with reusable components.</h1>
+          <p class="page-description">This example uses practical product UI sizing, mobile-first responsive rules, semantic tokens and light/dark themes. The brand gradient creates emphasis, while forms, cards and tables stay calm enough for real app work.</p>
+        </div>
+        <div class="top-actions">
+          <button class="button button-primary" type="button">Generate summary</button>
+          <button class="button button-secondary" type="button">Export view</button>
+        </div>
+      </section>
+
+      <section class="grid metrics" aria-label="Metrics">
+        <article class="card card-accent"><span class="metric-label">Brief completeness</span><strong class="metric-value">91%</strong></article>
+        <article class="card"><span class="metric-label">Open actions</span><strong class="metric-value">7</strong></article>
+        <article class="card"><span class="metric-label">Vendor options</span><strong class="metric-value">18</strong></article>
+        <article class="card"><span class="metric-label">Client-ready items</span><strong class="metric-value">4</strong></article>
+      </section>
+
+      <section class="grid two" style="margin-top: var(--space-5);">
+        <article class="card" id="form">
+          <div class="toolbar">
+            <h2 class="section-title" style="margin:0">Concept generator</h2>
+            <div class="tabs" role="tablist" aria-label="Concept steps">
+              <button class="tab active" type="button">Brief</button>
+              <button class="tab" type="button">Journey</button>
+              <button class="tab" type="button">Output</button>
+            </div>
+          </div>
+          <p class="muted">A normal app form: compact, readable and reusable. The visual brand appears in focus states, action color and one accent treatment.</p>
+          <div class="field"><label for="eventName">Event name</label><input class="input" id="eventName" value="Future Customer Forum" /></div>
+          <div class="field"><label for="objective">Objective</label><select class="select" id="objective"><option>Strengthen customer relationship</option><option>Launch new service</option><option>Build internal culture</option></select></div>
+          <div class="field"><label for="memory">Desired memory trace</label><textarea class="textarea" id="memory">Participants should feel that the brand understands their future and gives them practical momentum.</textarea></div>
+          <div class="top-actions" style="margin-top: var(--space-5);"><button class="button button-primary" type="button">Build participant journey</button><button class="button button-ghost" type="button">Save draft</button></div>
+        </article>
+
+        <aside class="card card-accent">
+          <h2 class="section-title">Production pulse</h2>
+          <div class="alert"><span aria-hidden="true">●</span><div><strong>Next best step</strong><span class="muted">Confirm the emotional arc before locking venue layout.</span></div></div>
+          <h3 class="card-title" style="margin-top: var(--space-5);">Component states</h3>
+          <p><span class="badge badge-brand">Brand moment</span> <span class="badge badge-success">Approved</span> <span class="badge badge-warning">Needs input</span></p>
+          <p class="muted">Status colors are semantic. Brand colors are for emphasis, not operational severity.</p>
+          <div class="empty"><h3 class="card-title">Empty state</h3><p class="muted">No concepts yet. Create the first event concept and turn the brief into a participant journey.</p><button class="button button-accent" type="button">Create first concept</button></div>
+        </aside>
+      </section>
+
+      <section class="card" id="table" style="margin-top: var(--space-5);">
+        <div class="toolbar"><h2 class="section-title" style="margin:0">Data table pattern</h2><button class="button button-secondary" type="button">Filter</button></div>
+        <div class="table-scroll"><table>
+          <thead><tr><th>Action</th><th>Owner</th><th>Status</th><th>Next step</th></tr></thead>
+          <tbody>
+            <tr><td>Define hero moment</td><td>Creative</td><td><span class="badge badge-brand">In progress</span></td><td>Draft two directions</td></tr>
+            <tr><td>Check AV constraints</td><td>Production</td><td><span class="badge badge-warning">Needs input</span></td><td>Confirm venue specs</td></tr>
+            <tr><td>Draft invitation copy</td><td>Content</td><td><span class="badge badge-success">Ready</span></td><td>Send to client review</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="grid three" id="templates" style="margin-top: var(--space-5);">
+        <article class="card"><h2 class="card-title">Dashboard template</h2><p class="muted">Page header, metric grid, main cards, side panel and optional data table.</p></article>
+        <article class="card"><h2 class="card-title">Form template</h2><p class="muted">Step tabs, grouped fields, preview panel and stable action bar.</p></article>
+        <article class="card"><h2 class="card-title">Detail template</h2><p class="muted">Title metadata, summary card, tabs, activity notes and related actions.</p></article>
+      </section>
+
+      <section class="card" style="margin-top: var(--space-5);">
+        <h2 class="section-title">Implementation map</h2>
+        <div class="template-list">
+          <div class="template-item"><code>tokens.css</code><span>Raw brand values plus semantic light/dark variables. Change themes here, not inside components.</span></div>
+          <div class="template-item"><code>components.css</code><span>Buttons, cards, fields, badges, tables, nav and alerts consume semantic tokens only.</span></div>
+          <div class="template-item"><code>templates.css</code><span>Dashboard, form, detail and table layouts compose reusable components.</span></div>
+        </div>
+      </section>
+
+
+      <section class="grid two" id="charts" style="margin-top: var(--space-5);">
+        <article class="card chart-card card-accent">
+          <div class="toolbar"><h2 class="section-title" style="margin:0">Charts and graphs</h2><span class="badge badge-brand">Data viz</span></div>
+          <p class="muted">Use brand color for the main story, muted lines for comparison, and calm grid lines. Charts should be clear first, branded second.</p>
+          <div class="chart-wrap" aria-label="Line and area chart example">
+            <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example event interest line chart">
+              <defs>
+                <linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#EC0382" stop-opacity="0.26"/>
+                  <stop offset="100%" stop-color="#EC0382" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <line class="chart-grid" x1="50" y1="40" x2="590" y2="40"/><line class="chart-grid" x1="50" y1="90" x2="590" y2="90"/><line class="chart-grid" x1="50" y1="140" x2="590" y2="140"/><line class="chart-grid" x1="50" y1="190" x2="590" y2="190"/>
+              <line class="chart-axis" x1="50" y1="218" x2="590" y2="218"/>
+              <text class="chart-label" x="50" y="240">Mon</text><text class="chart-label" x="155" y="240">Tue</text><text class="chart-label" x="260" y="240">Wed</text><text class="chart-label" x="365" y="240">Thu</text><text class="chart-label" x="470" y="240">Fri</text><text class="chart-label" x="560" y="240">Sat</text>
+              <path class="chart-area" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42 L590,218 L50,218 Z"/>
+              <path class="chart-primary" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42"/>
+              <path class="chart-secondary" d="M50,198 C112,188 135,172 170,168 C220,162 250,145 285,150 C330,154 365,132 405,126 C455,118 510,116 590,108"/>
+            </svg>
+            <div class="legend"><span><i class="dot"></i>Current concept interest</span><span><i class="dot orange"></i>Previous benchmark</span></div>
+          </div>
+        </article>
+
+        <article class="card chart-card">
+          <h2 class="section-title">Bars, donut and progress</h2>
+          <div class="chart-wrap" aria-label="Bar chart and donut chart examples">
+            <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example chart components">
+              <line class="chart-grid" x1="40" y1="44" x2="350" y2="44"/><line class="chart-grid" x1="40" y1="94" x2="350" y2="94"/><line class="chart-grid" x1="40" y1="144" x2="350" y2="144"/><line class="chart-axis" x1="40" y1="210" x2="350" y2="210"/>
+              <rect class="bar-neutral" x="62" y="112" width="32" height="98" rx="7"/><rect class="bar-neutral" x="112" y="82" width="32" height="128" rx="7"/><rect class="bar-active" x="162" y="52" width="32" height="158" rx="7"/><rect class="bar-neutral" x="212" y="126" width="32" height="84" rx="7"/><rect class="bar-neutral" x="262" y="92" width="32" height="118" rx="7"/>
+              <text class="chart-label" x="56" y="236">Reach</text><text class="chart-label" x="140" y="236">Emotion</text><text class="chart-label" x="245" y="236">Actions</text>
+              <circle class="donut-track" cx="480" cy="126" r="64" fill="none" stroke-width="18"/>
+              <circle class="donut-a" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="210 402" transform="rotate(-90 480 126)"/>
+              <circle class="donut-b" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="92 402" stroke-dashoffset="-216" transform="rotate(-90 480 126)"/>
+              <circle class="donut-c" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="58 402" stroke-dashoffset="-314" transform="rotate(-90 480 126)"/>
+              <text x="480" y="120" text-anchor="middle" class="chart-label">TOTAL</text><text x="480" y="148" text-anchor="middle" fill="var(--color-text)" style="font:900 28px var(--font)">86%</text>
+            </svg>
+            <div class="legend"><span><i class="dot"></i>Main segment</span><span><i class="dot orange"></i>Secondary</span><span><i class="dot purple"></i>Support</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid two" id="patterns" style="margin-top: var(--space-5);">
+        <article class="card">
+          <h2 class="section-title">Sidebar, filters and chips</h2>
+          <div class="app-layout-demo">
+            <aside class="sidebar-demo" aria-label="Example sidebar">
+              <div class="side-link active"><span>Overview</span><span>12</span></div>
+              <div class="side-link"><span>Concepts</span><span>8</span></div>
+              <div class="side-link"><span>Vendors</span><span>18</span></div>
+              <div class="side-link"><span>Budget</span><span>3</span></div>
+            </aside>
+            <div>
+              <h3 class="card-title">Filter pattern</h3>
+              <p class="muted">Use removable chips for active filters. They need visible fill and border contrast, otherwise they read as disabled or decorative.</p>
+              <span class="filter-chip">Helsinki ×</span><span class="filter-chip">Client-ready ×</span><span class="filter-chip">AI concept ×</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2 class="section-title">Modals and toasts</h2>
+          <div class="modal-preview">
+            <div class="dialog" role="dialog" aria-label="Example modal preview">
+              <h3 class="card-title">Send concept to review?</h3>
+              <p class="muted">Use modals for focused confirmation. Secondary actions use visible borders/backgrounds so they do not disappear into dark or light surfaces.</p>
+              <div class="top-actions"><button class="button button-primary" type="button">Send to review</button><button class="button button-secondary" type="button">Cancel</button></div>
+            </div>
+          </div>
+          <div class="toast-demo" style="margin-top: var(--space-4);">
+            <div class="toast success"><i class="toast-icon"></i><div><strong>Saved</strong><br><span class="muted">The concept draft is ready for client review.</span></div></div>
+            <div class="toast warning"><i class="toast-icon"></i><div><strong>Check budget</strong><br><span class="muted">Two production items still need estimates.</span></div></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid three" style="margin-top: var(--space-5);">
+        <article class="card"><h2 class="card-title">Avatars</h2><div class="avatar-row"><span class="avatar">JL</span><div><strong>Jarno</strong><br><span class="muted">Owner / reviewer</span></div></div></article>
+        <article class="card"><h2 class="card-title">File cards</h2><div class="file-card"><div class="avatar-row"><span class="file-icon">PDF</span><div><strong>Event brief</strong><br><span class="muted">Updated today</span></div></div><button class="button button-secondary" type="button">Open</button></div></article>
+        <article class="card"><h2 class="card-title">Loading states</h2><div class="skeleton-stack"><i class="skeleton" style="width: 80%"></i><i class="skeleton" style="width: 100%"></i><i class="skeleton" style="width: 62%"></i></div><div class="loader-demo"><span class="logo-loader" aria-label="Loading"><img src="../assets/lataamo-brandmark-transparent.png" alt="" /></span><span><strong>Creating concept</strong><br><span class="muted">Logo itself rotates for AI generation; skeletons preserve loading layout.</span></span></div></article>
+      </section>
+
+      <section class="card" style="margin-top: var(--space-5);">
+        <h2 class="section-title">Timeline / activity feed</h2>
+        <div class="timeline">
+          <div class="timeline-item"><i class="timeline-dot"></i><div><strong>Concept summary generated</strong><br><span class="muted">Use compact timeline items for activity, not oversized cards.</span></div></div>
+          <div class="timeline-item"><i class="timeline-dot"></i><div><strong>Vendor shortlist attached</strong><br><span class="muted">Status dots can use semantic colors or one brand accent.</span></div></div>
+        </div>
+      </section>
+
+
+      <p class="footer">Lataamo rule: keep the app readable first; use the orange/magenta energy to highlight moments of action.</p>
+    </main>
+  </div>
+  <script>
+    const root = document.documentElement;
+    const saved = localStorage.getItem('lataamo-theme');
+    if (saved) root.dataset.theme = saved;
+    const button = document.getElementById('themeToggle');
+    function syncLabel() { button.textContent = root.dataset.theme === 'dark' ? 'Light mode' : 'Dark mode'; }
+    syncLabel();
+    button.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('lataamo-theme', root.dataset.theme);
+      syncLabel();
+    });
+
+    const templateSelect = document.getElementById('templateSelect');
+    templateSelect.addEventListener('change', (event) => {
+      window.location.href = event.target.value;
+    });
+  </script>
+</body>
+</html>

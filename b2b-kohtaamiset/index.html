@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>B2B-tapahtuman arvo syntyy oikeista kohtaamisista | Lataamo</title>
+  <meta name="description" content="Selkeä infografiikka B2B-tapahtumien tärkeimmästä arvosta: oikeiden ihmisten merkityksellisistä kohtaamisista." />
+  <meta property="og:title" content="B2B-tapahtuman arvo syntyy oikeista kohtaamisista" />
+  <meta property="og:description" content="B2B-tapahtumien tärkein arvo ei synny yksittäisistä puheenvuoroista, vaan oikeiden ihmisten kohtaamisesta." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-orange: #FF6B35;
+      --brand-orange-deep: #FF5500;
+      --brand-magenta: #EC0382;
+      --brand-magenta-deep: #D70376;
+      --brand-purple: #37104b;
+      --brand-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
+      --font: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: #F7F4F2;
+      --surface: #FFFFFF;
+      --ink: #111111;
+      --muted: #5F565B;
+      --soft: #82777D;
+      --line: #E6E0E3;
+      --shadow: 0 14px 34px rgba(17, 17, 17, 0.08);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,107,53,.18), transparent 30%),
+        radial-gradient(circle at 90% 8%, rgba(236,3,130,.14), transparent 28%),
+        linear-gradient(180deg, #fff 0%, var(--bg) 58%, #FFF1EA 100%);
+      line-height: 1.45;
+    }
+
+    .page { max-width: 1180px; margin: 0 auto; padding: 28px 24px 52px; }
+    .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; font-weight: 900; letter-spacing: -.02em; }
+    .brand img { width: 40px; height: 40px; object-fit: contain; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 430px;
+      padding: clamp(30px, 5vw, 58px);
+      border-radius: 34px;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(17,17,17,.96), rgba(55,16,75,.92)), var(--brand-gradient);
+      box-shadow: 0 28px 76px rgba(215,3,118,.20), 0 14px 34px rgba(17,17,17,.12);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -160px;
+      top: -170px;
+      border-radius: 42%;
+      background: var(--brand-gradient);
+      opacity: .42;
+      transform: rotate(18deg);
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 860px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; color: #FFD7EA; font-size: 12px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 24px; height: 3px; border-radius: 99px; background: var(--brand-gradient); }
+    h1 { margin: 0; font-size: clamp(42px, 6.1vw, 78px); line-height: .96; letter-spacing: -.065em; font-weight: 900; text-wrap: balance; }
+    .lead { margin: 22px 0 0; max-width: 780px; color: rgba(255,255,255,.84); font-size: clamp(18px, 2vw, 24px); line-height: 1.38; font-weight: 700; letter-spacing: -.025em; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+    .stat {
+      position: relative;
+      overflow: hidden;
+      min-height: 210px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shadow);
+    }
+    .stat::after { content: ""; position: absolute; right: -30px; top: -30px; width: 118px; height: 118px; border-radius: 30px; transform: rotate(18deg); background: rgba(236,3,130,.08); }
+    .stat strong { display: block; margin-bottom: 16px; font-size: clamp(62px, 8vw, 92px); line-height: .82; letter-spacing: -.08em; font-weight: 900; color: var(--brand-magenta-deep); }
+    .stat:nth-child(2) strong { color: var(--brand-orange-deep); }
+    .stat:nth-child(3) strong { background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .stat h2 { margin: 0 0 8px; font-size: 20px; line-height: 1.15; letter-spacing: -.035em; }
+    .stat p { margin: 0; color: var(--muted); font-weight: 600; }
+
+    .insight {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, .72fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: stretch;
+    }
+    .statement, .shift {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .statement {
+      padding: clamp(26px, 4vw, 38px);
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .statement .label { color: var(--brand-magenta-deep); font-size: 12px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .statement blockquote { margin: 12px 0 0; font-size: clamp(28px, 3.7vw, 46px); line-height: 1.12; letter-spacing: -.06em; font-weight: 900; text-wrap: balance; }
+    .shift {
+      padding: 28px;
+      color: #fff;
+      background: linear-gradient(135deg, #111 0%, var(--brand-purple) 70%, #D70376 145%);
+    }
+    .shift h2 { margin: 0 0 18px; font-size: 24px; line-height: 1.12; letter-spacing: -.04em; }
+    .shift-row { padding: 15px 0; border-top: 1px solid rgba(255,255,255,.18); }
+    .shift-row b { display: block; margin-bottom: 4px; color: #FFD7EA; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+    .shift-row span { color: rgba(255,255,255,.82); font-weight: 650; }
+
+
+    .bottom-line {
+      margin-top: 18px;
+      padding: 26px 28px;
+      border-radius: 18px 30px 30px 18px;
+      border-left: 8px solid var(--brand-magenta-deep);
+      color: #fff;
+      background: linear-gradient(135deg, #111 0%, var(--brand-purple) 72%, #D70376 150%);
+      box-shadow: 0 18px 46px rgba(17,17,17,.12);
+      font-size: clamp(20px, 2.4vw, 30px);
+      line-height: 1.22;
+      letter-spacing: -.035em;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+
+    @media (max-width: 900px) {
+      .stats, .insight { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+    }
+    @media (max-width: 560px) {
+      .page { padding: 20px 14px 36px; }
+      .hero, .stat, .statement, .shift { border-radius: 22px; }
+      h1 { font-size: clamp(38px, 12vw, 58px); }
+      .lead { font-size: 17px; }
+      .stat { min-height: auto; }
+    }
+    @media print {
+      body { background: #fff; }
+      .page { max-width: none; padding: 16px; }
+      .hero, .stat, .statement, .shift { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="brand" aria-label="Lataamo">
+      <img src="../assets/lataamo-brandmark-transparent.png" alt="Lataamo" />
+      <span>Lataamo</span>
+    </header>
+
+    <section class="hero" aria-label="Pääviesti">
+      <div class="hero-inner">
+        <div class="eyebrow">Fakta ja oivallus</div>
+        <h1>B2B-tapahtuman suurin arvo syntyy oikeista kohtaamisista.</h1>
+        <p class="lead">Tutkimusten perusteella tapahtuman arvo ei synny yksittäisistä puheenvuoroista, vaan siitä, että oikeat ihmiset pääsevät keskustelemaan oikeista aiheista.</p>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Tutkimusnostot">
+      <article class="stat">
+        <strong>81 %</strong>
+        <h2>arvostaa asiantuntijayhteyksiä</h2>
+        <p>Osallistujat pitävät erityisen tärkeänä mahdollisuutta verkostoitua asiantuntijoiden kanssa.</p>
+      </article>
+      <article class="stat">
+        <strong>68 %</strong>
+        <h2>haluaa luoda uusia yhteyksiä</h2>
+        <p>Uudet yhteydet syntyvät helpommin, kun kohtaamiselle on selkeä syy ja yhteinen aihe.</p>
+      </article>
+      <article class="stat">
+        <strong>64 %</strong>
+        <h2>arvostaa vertaisten ajatuksia</h2>
+        <p>Ajatusten vaihto samankaltaisessa tilanteessa olevien kanssa vahvistaa tapahtuman arvoa.</p>
+      </article>
+    </section>
+
+    <section class="insight" aria-label="Keskeinen tulkinta">
+      <article class="statement">
+        <div class="label">Tärkein huomio</div>
+        <blockquote>Yritysjohtajat eivät etsi mahdollisimman montaa käyntikorttia. He etsivät muutamaa merkityksellistä keskustelua.</blockquote>
+      </article>
+      <article class="shift">
+        <h2>Mitä tämä tarkoittaa tapahtuman suunnittelussa?</h2>
+        <div class="shift-row"><b>Vähemmän sattumaa</b><span>Kohtaamisia ei jätetä taukojen varaan.</span></div>
+        <div class="shift-row"><b>Enemmän merkitystä</b><span>Ihmisiä tuodaan yhteen samankaltaisten haasteiden ja vastuiden äärelle.</span></div>
+        <div class="shift-row"><b>Vahvempi luottamus</b><span>Hyvät keskustelut koetaan usein arvokkaammiksi kuin yksittäiset puheenvuorot.</span></div>
+      </article>
+    </section>
+
+
+    <section class="bottom-line" aria-label="Ydinviesti">
+      Paras B2B-tapahtuma ei tavoittele mahdollisimman montaa kontaktia. Se kasvattaa oikeiden keskustelujen todennäköisyyttä.
+    </section>
+  </main>
+</body>
+</html>
