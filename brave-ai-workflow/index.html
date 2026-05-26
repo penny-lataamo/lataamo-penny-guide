@@ -120,7 +120,7 @@
     .wrap { width: min(1440px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 56px; }
 
     .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      display: flex; align-items: center; justify-content: flex-start; gap: 16px;
       position: sticky; top: 12px; z-index: 20;
       padding: 10px 10px 10px 14px; margin-bottom: 28px;
       background: color-mix(in srgb, var(--color-surface) 92%, transparent);
@@ -128,21 +128,10 @@
       box-shadow: 0 10px 28px rgba(17,17,17,.06);
       backdrop-filter: blur(16px);
     }
-    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; color: inherit; }
     .brand img { width: 38px; height: 38px; display: block; flex: 0 0 auto; }
     .brand strong { display: block; font-size: 14px; font-weight: 900; letter-spacing: -.02em; white-space: nowrap; }
     .brand span { display: block; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--color-text-soft); white-space: nowrap; }
-    .actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
-    .button {
-      min-height: 40px; border-radius: var(--radius-md); padding: 0 14px;
-      font: 800 13px / 1 var(--font-body); border: 1px solid transparent;
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      text-decoration: none; cursor: pointer;
-    }
-    .button-primary { background: var(--brand-gradient); color: #fff; box-shadow: 0 10px 24px rgba(215,3,118,.18); }
-    .button-secondary { background: var(--color-secondary-bg); color: var(--color-secondary-text); border-color: var(--color-secondary-border); }
-    .button:hover { transform: translateY(-1px); }
-    .button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
 
     .hero {
       display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr); gap: 20px; align-items: stretch;
@@ -245,7 +234,6 @@
     .footer-note { margin-top: 18px; padding: 24px; border-radius: var(--radius-2xl); background: var(--brand-gradient); color: #fff; display: flex; gap: 18px; justify-content: space-between; align-items: center; box-shadow: var(--shadow-deep); }
     .footer-note h2 { margin: 0; font-size: clamp(24px, 3vw, 42px); line-height: 1; letter-spacing: -.06em; }
     .footer-note p { margin: 8px 0 0; color: rgba(255,255,255,.80); font-weight: 650; max-width: 780px; }
-    .footer-note .button { flex: 0 0 auto; background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.34); color: #fff; }
 
     @media (max-width: 1320px) {
       .system-map { grid-template-columns: 1fr; }
@@ -258,19 +246,16 @@
     @media (max-width: 720px) {
       .wrap { width: min(100% - 24px, 1440px); padding-top: 14px; }
       .topbar { position: static; align-items: flex-start; flex-direction: column; }
-      .actions { width: 100%; justify-content: stretch; }
-      .actions .button { flex: 1 1 auto; }
       .hero-main { min-height: 0; }
       .hero-grid, .journey, .steps-grid, .outcomes { grid-template-columns: 1fr; }
       .section-head { display: block; }
       .section-head p { margin-top: 10px; }
       .footer-note { display: block; }
-      .footer-note .button { margin-top: 18px; width: 100%; }
       .hero-chip { min-height: 0; }
       .brand strong, .brand span { white-space: normal; }
     }
     @media print {
-      .topbar, .button { display: none !important; }
+      .topbar { display: none !important; }
       body { background: #fff; }
       body::before { display: none; }
       .wrap { width: 100%; padding: 0; }
@@ -285,11 +270,6 @@
         <img alt="Lataamo" src="https://penny-lataamo.github.io/lataamo-penny-guide/assets/lataamo-brandmark-transparent.png" />
         <span><strong>Lataamo Creative</strong><span>BRAVE-prosessi</span></span>
       </a>
-      <nav class="actions" aria-label="Pikatoiminnot">
-        <a class="button button-secondary" href="#workflow">Katso prosessi</a>
-        <a class="button button-secondary" href="#playbook">Toteutuslista</a>
-        <button class="button button-primary" type="button" id="themeToggle">Vaihda teema</button>
-      </nav>
     </header>
 
     <section class="hero" aria-labelledby="page-title">
@@ -436,19 +416,7 @@
         <h2>Lopputulos: oikeat ihmiset, paremmat keskustelut, käyttökelpoinen asiakasymmärrys.</h2>
         <p>Osallistuja saa selkeät kontaktisuositukset. Sanoma saa koonnin siitä, mitä markkinointijohtajat tarvitsevat seuraavaksi.</p>
       </div>
-      <a class="button" href="#page-title">Takaisin alkuun</a>
     </section>
   </main>
-
-  <script>
-    const root = document.documentElement;
-    const savedTheme = localStorage.getItem('lataamo-brave-theme');
-    if (savedTheme) root.dataset.theme = savedTheme;
-    document.getElementById('themeToggle').addEventListener('click', () => {
-      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = next;
-      localStorage.setItem('lataamo-brave-theme', next);
-    });
-  </script>
 </body>
 </html>
