@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="fi" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BRAVE-kokemuspolku — Lataamo</title>
+  <meta name="description" content="Toiminnallinen BRAVE-teeman prosessivisualisointi: kutsusta jälkimarkkinointiin." />
+  <meta property="og:title" content="BRAVE-kokemuspolku" />
+  <meta property="og:description" content="Yksi yhtenäinen tapahtumamatka kutsusta jälkimarkkinointiin — actionable process infographic." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-orange: #FF6B35;
+      --brand-orange-deep: #FF5500;
+      --brand-magenta: #EC0382;
+      --brand-magenta-deep: #D70376;
+      --brand-purple: #37104B;
+      --brand-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
+      --font-display: 'Big Shoulders Display', Montserrat, Inter, system-ui, sans-serif;
+      --font-body: Montserrat, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 28px;
+      --radius-xxl: 36px;
+      --radius-pill: 999px;
+    }
+
+    :root,
+    [data-theme="light"] {
+      color-scheme: light;
+      --color-bg: #F7F4F2;
+      --color-surface: #FFFFFF;
+      --color-surface-raised: rgba(255,255,255,.92);
+      --color-surface-subtle: #FFF1EA;
+      --color-text: #111111;
+      --color-text-muted: #5F565B;
+      --color-text-soft: #82777D;
+      --color-border: #E6E0E3;
+      --color-border-strong: #CFC5CB;
+      --color-action-bg: #D70376;
+      --color-action-bg-hover: #B90263;
+      --color-action-text: #FFFFFF;
+      --color-link: #B90263;
+      --shadow-card: 0 16px 42px rgba(17, 17, 17, 0.08);
+      --shadow-hero: 0 28px 80px rgba(215, 3, 118, 0.18), 0 10px 30px rgba(17,17,17,.10);
+      --glow-magenta: rgba(236,3,130,.18);
+      --glow-orange: rgba(255,107,53,.18);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --color-bg: #111012;
+      --color-surface: #1A171B;
+      --color-surface-raised: rgba(35,31,36,.92);
+      --color-surface-subtle: #2B1724;
+      --color-text: #F7F3F5;
+      --color-text-muted: #C9BDC4;
+      --color-text-soft: #9D9098;
+      --color-border: rgba(255,255,255,.12);
+      --color-border-strong: rgba(255,255,255,.22);
+      --color-action-bg: #EC0382;
+      --color-action-bg-hover: #FF2A9B;
+      --color-action-text: #FFFFFF;
+      --color-link: #FF7ABF;
+      --shadow-card: 0 20px 60px rgba(0,0,0,.38);
+      --shadow-hero: 0 28px 90px rgba(236,3,130,.22), 0 10px 34px rgba(0,0,0,.42);
+      --glow-magenta: rgba(236,3,130,.25);
+      --glow-orange: rgba(255,107,53,.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at 8% -4%, var(--glow-orange), transparent 32%),
+        radial-gradient(circle at 91% 2%, var(--glow-magenta), transparent 30%),
+        radial-gradient(circle at 46% 0%, rgba(55,16,75,.12), transparent 38%),
+        linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg) 52%, color-mix(in srgb, var(--color-action-bg) 8%, var(--color-bg)) 100%);
+      font-size: 15px;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--color-link); text-underline-offset: 3px; }
+    img, svg { max-width: 100%; }
+    p, h1, h2, h3, h4 { margin-top: 0; }
+    .page { width: min(1240px, calc(100% - 32px)); margin: 0 auto; padding: var(--space-6) 0 var(--space-12); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      min-height: 70px;
+      padding: var(--space-3) max(16px, calc((100vw - 1240px) / 2));
+      background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+      border-bottom: 1px solid var(--color-border);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; min-width: max-content; text-decoration: none; color: var(--color-text); }
+    .brand img { width: 42px; height: 42px; object-fit: contain; }
+    .brand strong { display: block; font-family: var(--font-display); font-size: 27px; line-height: .9; letter-spacing: .04em; text-transform: uppercase; }
+    .brand span { display: block; margin-top: 3px; color: var(--color-text-muted); font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .nav { display: flex; align-items: center; gap: 4px; }
+    .nav a { color: var(--color-text-muted); text-decoration: none; font-weight: 900; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; padding: 9px 11px; border-radius: var(--radius-pill); }
+    .nav a:hover, .nav a.active { color: var(--color-text); background: var(--color-surface-subtle); }
+    .actions { display: flex; align-items: center; gap: var(--space-2); }
+
+    .button {
+      min-height: 40px;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font: 900 13px/1 var(--font-body);
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .button-accent { background: var(--brand-gradient); color: #fff; box-shadow: 0 12px 28px rgba(236,3,130,.20); }
+    .button-secondary { background: var(--color-surface-raised); color: var(--color-text); border-color: var(--color-border-strong); }
+    .button-secondary:hover { border-color: var(--color-action-bg); }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(330px, .95fr);
+      gap: var(--space-5);
+      align-items: stretch;
+      margin: var(--space-8) 0 var(--space-5);
+    }
+
+    .hero-main,
+    .hero-side,
+    .card,
+    .rail-card,
+    .matrix,
+    .decision-card {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-main {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(28px, 5vw, 58px);
+      min-height: 560px;
+      color: #fff;
+      border: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.16), transparent 30%),
+        linear-gradient(135deg, rgba(17,17,17,.96), rgba(55,16,75,.88)),
+        var(--brand-gradient);
+      box-shadow: var(--shadow-hero);
+    }
+    .hero-main::before {
+      content: "BRAVE";
+      position: absolute;
+      right: -58px;
+      top: 20px;
+      font-family: var(--font-display);
+      font-size: clamp(120px, 16vw, 220px);
+      font-weight: 900;
+      line-height: .75;
+      letter-spacing: .04em;
+      color: rgba(255,255,255,.055);
+      transform: rotate(-4deg);
+      pointer-events: none;
+    }
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      inset: auto -12% -34% 34%;
+      height: 300px;
+      border-radius: 999px;
+      background: var(--brand-gradient);
+      filter: blur(70px);
+      opacity: .42;
+      pointer-events: none;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,.86);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-4);
+      position: relative;
+      z-index: 1;
+    }
+    .kicker::before { content: ""; width: 34px; height: 4px; border-radius: 99px; background: var(--brand-gradient); }
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(56px, 8.4vw, 112px);
+      line-height: .82;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .lead {
+      position: relative;
+      z-index: 1;
+      max-width: 740px;
+      margin: var(--space-5) 0 0;
+      color: rgba(255,255,255,.83);
+      font-size: clamp(17px, 1.9vw, 22px);
+      font-weight: 650;
+      letter-spacing: -.02em;
+    }
+    .hero-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; margin-top: var(--space-8); }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 9px 13px; border-radius: var(--radius-pill); border: 1px solid rgba(255,255,255,.24); background: rgba(255,255,255,.10); color: #fff; font-weight: 900; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+    .hero-punchline { position: relative; z-index: 1; margin-top: var(--space-10); padding: var(--space-5); border-radius: var(--radius-lg); background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18); }
+    .hero-punchline b { display: block; margin-bottom: 5px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.68); }
+    .hero-punchline span { display: block; font-size: clamp(20px, 2.1vw, 29px); font-weight: 900; line-height: 1.1; letter-spacing: -.035em; }
+
+    .hero-side { padding: var(--space-5); display: grid; gap: var(--space-4); }
+    .brief-title { font-family: var(--font-display); font-size: 38px; text-transform: uppercase; line-height: .92; letter-spacing: .035em; margin-bottom: 6px; }
+    .muted { color: var(--color-text-muted); }
+    .signal-grid { display: grid; gap: var(--space-3); }
+    .signal {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background: color-mix(in srgb, var(--color-action-bg) 7%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-action-bg) 20%, var(--color-border));
+    }
+    .brave-stack {
+      margin-top: auto;
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      color: #fff;
+      background: linear-gradient(135deg, rgba(17,17,17,.94), rgba(55,16,75,.88)), var(--brand-gradient);
+      overflow: hidden;
+      position: relative;
+    }
+    .brave-stack::after { content: ""; position: absolute; width: 150px; height: 150px; right: -54px; bottom: -70px; border-radius: 42px; background: var(--brand-gradient); opacity: .44; transform: rotate(18deg); }
+    .brave-stack b { display: block; margin-bottom: 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.72); }
+    .brave-stack span { position: relative; z-index: 1; display: block; font-size: 19px; line-height: 1.18; font-weight: 900; letter-spacing: -.035em; }
+    .signal-icon { width: 44px; height: 44px; border-radius: 16px; display: grid; place-items: center; color: #fff; background: var(--brand-gradient); font-weight: 900; box-shadow: 0 10px 24px rgba(236,3,130,.18); }
+    .signal b { display: block; margin-bottom: 3px; font-weight: 900; letter-spacing: -.02em; }
+    .signal span { color: var(--color-text-muted); font-size: 13px; font-weight: 650; }
+
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-6); margin: var(--space-10) 0 var(--space-5); }
+    h2 { margin: 0; font-family: var(--font-display); font-size: clamp(44px, 6.2vw, 84px); line-height: .84; text-transform: uppercase; letter-spacing: .035em; }
+    .section-head p { margin: 0; max-width: 460px; color: var(--color-text-muted); font-weight: 650; }
+
+    .journey {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-4);
+    }
+    .journey::before {
+      content: "";
+      position: absolute;
+      left: 6%; right: 6%; top: 64px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--brand-gradient);
+      opacity: .28;
+      pointer-events: none;
+    }
+    .touchpoint {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 406px;
+      padding: var(--space-5);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-raised);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .touchpoint::after {
+      content: "";
+      position: absolute;
+      right: -42px; top: -42px;
+      width: 126px; height: 126px;
+      border-radius: 34px;
+      background: var(--brand-gradient);
+      opacity: .10;
+      transform: rotate(18deg);
+      pointer-events: none;
+    }
+    .node { width: 54px; height: 54px; border-radius: 18px; display: grid; place-items: center; color: #fff; background: var(--brand-gradient); font: 900 20px/1 var(--font-body); box-shadow: 0 12px 30px rgba(236,3,130,.22); margin-bottom: var(--space-4); }
+    .stage { display: inline-block; width: fit-content; margin-bottom: 9px; color: var(--color-link); font-size: 11px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .touchpoint h3 { margin: 0 0 9px; font-size: 21px; line-height: 1.12; letter-spacing: -.04em; }
+    .touchpoint p { color: var(--color-text-muted); font-weight: 600; margin-bottom: var(--space-4); }
+    .move { margin-top: auto; padding: var(--space-4); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--brand-orange) 10%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--brand-orange) 28%, var(--color-border)); }
+    .move b { display: block; font-size: 12px; color: var(--color-text); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+    .move span { display: block; color: var(--color-text-muted); font-size: 13px; font-weight: 650; }
+
+    .rail-wrap { display: grid; grid-template-columns: .76fr 1.24fr; gap: var(--space-5); align-items: stretch; }
+    .rail-card { padding: var(--space-6); overflow: hidden; }
+    .rail-card.dark {
+      color: #fff;
+      border: 0;
+      background: linear-gradient(135deg, rgba(17,17,17,.95), rgba(55,16,75,.90)), var(--brand-gradient);
+    }
+    .rail-card.dark .muted { color: rgba(255,255,255,.74); }
+    .rail-map { display: grid; gap: 13px; }
+    .rail-row { display: grid; grid-template-columns: 132px 1fr 116px; gap: 12px; align-items: center; }
+    .rail-label { color: rgba(255,255,255,.72); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .track { height: 18px; border-radius: 999px; background: rgba(255,255,255,.14); overflow: hidden; border: 1px solid rgba(255,255,255,.12); }
+    .track span { display: block; height: 100%; border-radius: inherit; background: var(--brand-gradient); box-shadow: 0 0 20px rgba(255,107,53,.32); }
+    .rail-outcome { justify-self: end; color: rgba(255,255,255,.84); font-size: 12px; font-weight: 800; }
+    .principles { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-4); }
+    .principle { padding: var(--space-5); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-action-bg) 6%, var(--color-surface)); border: 1px solid color-mix(in srgb, var(--color-action-bg) 18%, var(--color-border)); }
+    .principle b { display: block; margin-bottom: 8px; font-size: 15px; letter-spacing: -.02em; }
+    .principle span { display: block; color: var(--color-text-muted); font-weight: 620; }
+
+    .matrix { padding: var(--space-6); }
+    .matrix-grid { display: grid; grid-template-columns: 1.05fr repeat(3, 1fr); gap: 1px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border); background: var(--color-border); }
+    .cell { min-height: 92px; padding: var(--space-4); background: var(--color-surface); }
+    .cell.header { min-height: auto; background: color-mix(in srgb, var(--color-action-bg) 10%, var(--color-surface)); color: var(--color-text); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .cell.axis { font-weight: 900; color: var(--color-text); }
+    .cell small { display: block; margin-top: 5px; color: var(--color-text-muted); font-weight: 650; }
+    .cell strong { display: block; color: var(--color-link); margin-bottom: 4px; }
+
+    .decision-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--space-4); }
+    .decision-card { padding: var(--space-5); min-height: 260px; }
+    .decision-card h3 { margin: 0 0 var(--space-3); font-size: 22px; line-height: 1.1; letter-spacing: -.04em; }
+    .checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .checklist li { display: grid; grid-template-columns: 25px 1fr; gap: 10px; align-items: start; color: var(--color-text-muted); font-weight: 650; }
+    .checklist li::before { content: "✓"; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 9px; color: #fff; background: var(--brand-gradient); font-weight: 900; font-size: 13px; }
+
+    .canvas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+    .card { padding: var(--space-6); }
+    .card h3 { font-size: 24px; line-height: 1.06; letter-spacing: -.045em; margin-bottom: 10px; }
+    .cards-stack { display: grid; gap: 12px; margin-top: var(--space-4); }
+    .mini-card { display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 13px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-surface) 72%, transparent); }
+    .mini-dot { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 13px; background: var(--brand-gradient); color: #fff; font-weight: 900; }
+    .mini-card b { display: block; margin-bottom: 2px; }
+    .mini-card span { color: var(--color-text-muted); font-size: 13px; font-weight: 650; }
+
+    .footer-note {
+      margin-top: var(--space-10);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-4);
+      align-items: center;
+      padding: var(--space-6);
+      border-radius: var(--radius-xl);
+      color: #fff;
+      background: var(--brand-gradient);
+      box-shadow: 0 20px 54px rgba(236,3,130,.22);
+    }
+    .footer-note h2 { font-size: clamp(38px, 5vw, 64px); }
+    .footer-note p { margin: 8px 0 0; color: rgba(255,255,255,.80); font-weight: 650; max-width: 820px; }
+    .footer-note .button-secondary { color: #fff; border-color: rgba(255,255,255,.38); background: rgba(255,255,255,.14); }
+
+    @media (max-width: 1040px) {
+      .hero, .rail-wrap, .canvas { grid-template-columns: 1fr; }
+      .journey { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .journey::before { display: none; }
+      .nav { display: none; }
+      .decision-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .topbar { position: static; flex-wrap: wrap; align-items: flex-start; }
+      .actions { width: 100%; flex-wrap: wrap; }
+      .button { flex: 1 1 auto; }
+      .page { width: min(100% - 24px, 1240px); padding-top: var(--space-4); }
+      .hero-main { min-height: auto; }
+      .hero-side, .hero-main, .card, .matrix, .rail-card, .decision-card { border-radius: var(--radius-lg); padding: var(--space-5); }
+      .journey, .principles { grid-template-columns: 1fr; }
+      .touchpoint { min-height: auto; }
+      .section-head { display: block; }
+      .section-head p { margin-top: var(--space-3); }
+      .matrix { overflow-x: auto; }
+      .matrix-grid { min-width: 760px; }
+      .rail-row { grid-template-columns: 1fr; gap: 6px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+      .rail-outcome { justify-self: start; }
+      .footer-note { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(49px, 16vw, 78px); }
+      h2 { font-size: clamp(40px, 14vw, 64px); }
+    }
+    @media print {
+      .topbar, .actions { display: none; }
+      body { background: #fff; }
+      .page { width: auto; padding: 12px; }
+      .hero-main, .card, .touchpoint, .matrix, .decision-card, .rail-card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Sivun navigaatio">
+    <a class="brand" href="../" aria-label="Lataamo Penny guide">
+      <img src="../assets/lataamo-brandmark-transparent.png" alt="Lataamo" />
+      <span><strong>Lataamo</strong><span>BRAVE journey</span></span>
+    </a>
+    <nav class="nav" aria-label="Sisällysluettelo">
+      <a class="active" href="#polku">Polku</a>
+      <a href="#rytmi">Rytmi</a>
+      <a href="#matrix">Matrix</a>
+      <a href="#päätökset">Päätökset</a>
+    </nav>
+    <div class="actions">
+      <button class="button button-secondary" id="themeToggle" type="button">Dark mode</button>
+      <a class="button button-accent" href="#päätökset">Tee tästä tuotantoplan</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero" aria-label="BRAVE-kokemuspolun intro">
+      <article class="hero-main">
+        <div class="kicker">Actionable event workflow</div>
+        <h1>BRAVE ei ole teema. Se on osallistujan matka.</h1>
+        <p class="lead">Tämä prosessi muuttaa kahdeksan erillistä kohtauspistettä yhdeksi tuotettavaksi kokemukseksi: odotus → siirtymä → yhteys → yllätys → sisältö → maku → visuaalinen maailma → arkeen jäävä jälki.</p>
+        <div class="hero-tags" aria-label="Kokemuksen vaiheet">
+          <span class="pill">Kutsu</span>
+          <span class="pill">Asema</span>
+          <span class="pill">Juna</span>
+          <span class="pill">Verkatehdas</span>
+          <span class="pill">Ohjelma</span>
+          <span class="pill">Jälki</span>
+        </div>
+        <div class="hero-punchline">
+          <b>Ydinajatus</b>
+          <span>Jokainen kohtaaminen kysyy osallistujalta saman kysymyksen: “Mitä rohkeaa minä teen seuraavaksi?”</span>
+        </div>
+      </article>
+
+      <aside class="hero-side" aria-label="Prosessin kolme ohjaavaa sääntöä">
+        <div>
+          <div class="brief-title">Kolme sääntöä suunnitteluun</div>
+          <p class="muted">Pidä nämä mukana jokaisessa päätöksessä, jotta teema ei jää lavan taustagrafiikaksi.</p>
+        </div>
+        <div class="signal-grid">
+          <div class="signal"><span class="signal-icon">1</span><div><b>Rakenna odotus ennen tapahtumaa.</b><span>Perinteinen kutsu ei riitä, jos tapahtuman lupaus on rohkeus.</span></div></div>
+          <div class="signal"><span class="signal-icon">2</span><div><b>Tee siirtymästä sisältöä.</b><span>Asema ja juna eivät ole logistiikkaa vaan ensimmäinen näytös.</span></div></div>
+          <div class="signal"><span class="signal-icon">3</span><div><b>Jätä osallistujalle käyttökelpoinen jälki.</b><span>BRAVE jää elämään vain, jos se muuttuu pieneksi arjen teoksi.</span></div></div>
+        </div>
+        <div class="brave-stack"><b>Suunnittelun läpileikkaus</b><span>Kutsu herättää kysymyksen. Matka rakentaa yhteyden. Ohjelma antaa oivalluksen. Jälkisarja muuttaa sen teoksi.</span></div>
+      </aside>
+    </section>
+
+    <section id="polku" aria-label="Kahdeksan kohtauspisteen kokemuspolku">
+      <div class="section-head">
+        <h2>8 kohtauspisteen BRAVE-polku</h2>
+        <p>Jokaisessa vaiheessa on tuotettava sekä tunne että seuraava teko. Kortin alaosa kertoo konkreettisen suunnitteluliikkeen.</p>
+      </div>
+
+      <div class="journey">
+        <article class="touchpoint">
+          <div class="node">01</div>
+          <span class="stage">Ennen</span>
+          <h3>Kutsu ja ennakkomarkkinointi</h3>
+          <p>Kutsu ei vain informoi — se avaa BRAVE-maailman ja nostaa odotusarvon.</p>
+          <div class="move"><b>Rohkea teko</b><span>Lähetä kutsu, jossa osallistuja tekee pienen valinnan, lupauksen tai oman “brave move” -noston jo ennen tapahtumaa.</span></div>
+        </article>
+
+        <article class="touchpoint">
+          <div class="node">02</div>
+          <span class="stage">Ensivaikutelma</span>
+          <h3>Saapuminen rautatieasemalle</h3>
+          <p>Vastaanotto, opastus, henkilöstö, musiikki ja visuaaliset elementit tekevät teemasta fyysisen.</p>
+          <div class="move"><b>Rohkea teko</b><span>Muuta asema “portiksi”: tunnistettava hostaus, sound cue, selkeä BRAVE-opastus ja ensimmäinen kuvallinen merkki.</span></div>
+        </article>
+
+        <article class="touchpoint">
+          <div class="node">03</div>
+          <span class="stage">Siirtymä</span>
+          <h3>Junamatka</h3>
+          <p>Matka voi olla verkostoitumisen pääalusta eikä vain kuljetus paikasta toiseen.</p>
+          <div class="move"><b>Rohkea teko</b><span>Rakenna junaan fasilitoitu “conversation carriage”: lyhyet keskustelukortit, paikkakunta-/toimiala-mix ja vaihtopisteet.</span></div>
+        </article>
+
+        <article class="touchpoint">
+          <div class="node">04</div>
+          <span class="stage">Kynnys</span>
+          <h3>Saapuminen Verkatehtaalle</h3>
+          <p>Yllätys ennen ohjelman alkua vahvistaa, että tapahtuma on jo käynnissä.</p>
+          <div class="move"><b>Rohkea teko</b><span>Tee “threshold moment”: näyttävä vastaanotto, nopea osallistava ele tai salaperäinen ensimmäinen tehtävä ennen saliin menoa.</span></div>
+        </article>
+
+        <article class="touchpoint">
+          <div class="node">05</div>
+          <span class="stage">Sisältö</span>
+          <h3>Asiaosuus</h3>
+          <p>Rohkeus näkyy ohjelmassa, mutta formaatin pitää tuntua uudelta eikä vain teemapuheilta.</p>
+          <div class="move"><b>Rohkea teko</b><span>Päätä: uusi sisältömekaniikka vai AIDA + puheiden nauhoitus. Tee rohkeudesta osallistujan valinta, ei vain lavan aihe.</span></div>
+        </article>
+
+        <article class="touchpoint">
+          <div class="node">06</div>
+          <span class="stage">Aistit</span>
+          <h3>Ruoka ja juoma</h3>
+          <p>Teema pitää maistaa: ruokailu voi kertoa rohkeudesta, valinnoista ja yllätyksestä.</p>
+          <div class="move"><b>Rohkea teko</b><span>Nimeä annokset tai tarjoilupisteet BRAVE-ulottuvuuksien mukaan; lisää yksi odottamaton makupari tai valintatilanne.</span></div>
+        </article>
+
+        <article class="touchpoint">
+          <div class="node">07</div>
+          <span class="stage">Yhtenäisyys</span>
+          <h3>Visuaalinen maailma</h3>
+          <p>Ilmeen pitää ulottua kutsuista opasteisiin, junaan, materiaaleihin, esityksiin ja henkilökunnan asuihin.</p>
+          <div class="move"><b>Rohkea teko</b><span>Luo yksi modulaarinen BRAVE-kit: värit, typografia, ikonit, opasteet, henkilöstöelementit, materiaalipohjat ja presentaatioilme.</span></div>
+        </article>
+
+        <article class="touchpoint">
+          <div class="node">08</div>
+          <span class="stage">Jälki</span>
+          <h3>Jälkimarkkinointi</h3>
+          <p>Tavoite ei ole vain kiitosviesti vaan teeman jatkuminen osallistujan arjessa.</p>
+          <div class="move"><b>Rohkea teko</b><span>Lähetä 3–7 päivän BRAVE-sarja: oma lupaus, puheiden klipit, verkostokontaktit ja yksi arkeen vietävä mikrohaaste.</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="rytmi" aria-label="Kokemuksen dramaturgia">
+      <div class="section-head">
+        <h2>Suunnittele rytmi, älä osia</h2>
+        <p>BRAVE toimii, kun intensiteetti nousee ennen asiaosuutta ja jatkuu kevyempänä arkeen.</p>
+      </div>
+
+      <div class="rail-wrap">
+        <article class="rail-card dark">
+          <h3 class="brief-title">Tunnekäyrä</h3>
+          <p class="muted">Kunkin vaiheen pitää kasvattaa rohkeutta: uteliaisuus → yhteys → valmius → oivallus → teko.</p>
+          <div class="rail-map" aria-label="Tunnekäyrän tasot">
+            <div class="rail-row"><span class="rail-label">Kutsu</span><div class="track"><span style="width: 30%"></span></div><span class="rail-outcome">odotus</span></div>
+            <div class="rail-row"><span class="rail-label">Asema</span><div class="track"><span style="width: 44%"></span></div><span class="rail-outcome">portti</span></div>
+            <div class="rail-row"><span class="rail-label">Juna</span><div class="track"><span style="width: 58%"></span></div><span class="rail-outcome">yhteys</span></div>
+            <div class="rail-row"><span class="rail-label">Verkatehdas</span><div class="track"><span style="width: 74%"></span></div><span class="rail-outcome">yllätys</span></div>
+            <div class="rail-row"><span class="rail-label">Asiaosuus</span><div class="track"><span style="width: 92%"></span></div><span class="rail-outcome">oivallus</span></div>
+            <div class="rail-row"><span class="rail-label">Ruoka</span><div class="track"><span style="width: 70%"></span></div><span class="rail-outcome">jakaminen</span></div>
+            <div class="rail-row"><span class="rail-label">Jälki</span><div class="track"><span style="width: 50%"></span></div><span class="rail-outcome">teko</span></div>
+          </div>
+        </article>
+
+        <article class="rail-card">
+          <h3 class="brief-title">Neljä tuotantoperiaatetta</h3>
+          <div class="principles">
+            <div class="principle"><b>1. Teema näkyy ennen kuin se sanotaan.</b><span>Aseman hostaus, opasteet, musiikki ja visuaalit kertovat BRAVEsta ennen ohjelmaa.</span></div>
+            <div class="principle"><b>2. Verkostoituminen suunnitellaan, ei toivota.</b><span>Junamatkalle annetaan rytmi, kysymykset ja kohtaamisen rakenne.</span></div>
+            <div class="principle"><b>3. Asiaosuuden formaatti tukee rohkeutta.</b><span>Pelkkä puhe rohkeudesta ei riitä; osallistuja tekee, valitsee tai sitoutuu.</span></div>
+            <div class="principle"><b>4. Jälkimarkkinointi palauttaa hetken arkeen.</b><span>Jälkiviesti tuo oman lupauksen, klipit ja seuraavan mikrohaasteen takaisin osallistujalle.</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="matrix" aria-label="BRAVE-tuotantomatrix">
+      <div class="section-head">
+        <h2>Tuotantomatrix</h2>
+        <p>Käytä tätä nopeasti työpajassa: jokainen rivi tarvitsee omistajan, sisällön ja yhden mitattavan seuraavan askeleen.</p>
+      </div>
+
+      <article class="matrix">
+        <div class="matrix-grid" role="table" aria-label="BRAVE-tuotantomatrix">
+          <div class="cell header" role="columnheader">Kohtauspiste</div>
+          <div class="cell header" role="columnheader">Tunne</div>
+          <div class="cell header" role="columnheader">Tuotettava elementti</div>
+          <div class="cell header" role="columnheader">Seuraava päätös</div>
+
+          <div class="cell axis">Kutsu + ennakko<small>Odotusarvon rakentaminen</small></div>
+          <div class="cell"><strong>Uteliaisuus</strong>“Tämä ei ole tavallinen kutsu.”</div>
+          <div class="cell">Interaktiivinen ennakkotehtävä / brave promise / teaser</div>
+          <div class="cell">Kuinka rohkea kutsu voi olla suhteessa asiakkaan brändiin?</div>
+
+          <div class="cell axis">Asema + juna<small>Ensivaikutelma ja verkosto</small></div>
+          <div class="cell"><strong>Yhteys</strong>“Olen osa tätä matkaa.”</div>
+          <div class="cell">Hostaus, opastus, musiikki, conversation carriage</div>
+          <div class="cell">Mikä osuus matkasta fasilitoidaan ja mikä jätetään vapaaksi?</div>
+
+          <div class="cell axis">Verkatehdas + ohjelma<small>Kynnys ja sisältö</small></div>
+          <div class="cell"><strong>Valmius</strong>“Tänään uskalletaan tehdä jotain.”</div>
+          <div class="cell">Threshold moment, uusi formaatti / AIDA + nauhoitus</div>
+          <div class="cell">Tarvitaanko uusi ohjelmamekaniikka vai riittääkö tuttu formaatti uudella twistillä?</div>
+
+          <div class="cell axis">Ruoka + visuaalit + jälki<small>Aistit ja arkeen vienti</small></div>
+          <div class="cell"><strong>Muisti</strong>“Vien tämän mukanani.”</div>
+          <div class="cell">BRAVE-menukieli, visuaalinen kit, jälkisarja</div>
+          <div class="cell">Mikä konkreettinen arjen teko osallistujalle jää?</div>
+        </div>
+      </article>
+    </section>
+
+    <section id="päätökset" aria-label="Päätökset ja seuraavat askeleet">
+      <div class="section-head">
+        <h2>Seuraavat päätökset</h2>
+        <p>Jotta ideasta tulee tuotantoa, lukitse ensin nämä kolme kokonaisuutta.</p>
+      </div>
+
+      <div class="decision-grid">
+        <article class="decision-card">
+          <h3>1. Valitse BRAVE-mekaniikka</h3>
+          <ul class="checklist">
+            <li>Onko osallistujalla oma rohkea valinta ennen tapahtumaa?</li>
+            <li>Jatkuuko sama valinta asemalla, junassa ja ohjelmassa?</li>
+            <li>Voiko valinnan palauttaa jälkimarkkinoinnissa osallistujalle?</li>
+          </ul>
+        </article>
+
+        <article class="decision-card">
+          <h3>2. Päätä matkatuotannon taso</h3>
+          <ul class="checklist">
+            <li>Onko asema vain opastus vai ensimmäinen kohtaus?</li>
+            <li>Onko juna verkostoitumisen päänäyttämö?</li>
+            <li>Mitä ääni-, valo-, hostaus- ja opastuselementtejä voidaan toteuttaa realistisesti?</li>
+          </ul>
+        </article>
+
+        <article class="decision-card">
+          <h3>3. Lukitse sisältöformaatti</h3>
+          <ul class="checklist">
+            <li>Käytetäänkö AIDA + puheiden nauhoitus vai rakennetaanko uusi rohkeusformaatti?</li>
+            <li>Miten osallistuja aktivoidaan ilman että asiaosuudesta tulee temppurata?</li>
+            <li>Mikä on yksi klippi, lause tai tehtävä, joka kantaa jälkimarkkinoinnin?</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section aria-label="Toteutuksen canvas">
+      <div class="section-head">
+        <h2>BRAVE-canvas tiimille</h2>
+        <p>Kahden palstan työpohja seuraavaan ideointiin tai asiakkaan kanssa käytävään keskusteluun.</p>
+      </div>
+
+      <div class="canvas">
+        <article class="card">
+          <h3>Mitä pitää ratkaista heti?</h3>
+          <p class="muted">Näillä on suurin vaikutus budjettiin, tuotantoon ja kokemuksen uskottavuuteen.</p>
+          <div class="cards-stack">
+            <div class="mini-card"><span class="mini-dot">A</span><div><b>Matka konseptina</b><span>Asema + juna + Verkatehdas suunnitellaan yhtenä avauksena.</span></div></div>
+            <div class="mini-card"><span class="mini-dot">B</span><div><b>Visuaalinen kit</b><span>Sama BRAVE-ilme kutsuun, opasteisiin, junaan, esityksiin ja henkilöstöön.</span></div></div>
+            <div class="mini-card"><span class="mini-dot">C</span><div><b>Osallistujan oma jälki</b><span>Ennakkotehtävästä syntyy materiaali, joka palaa jälkiviestissä.</span></div></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Mikä tekee tästä brilliant?</h3>
+          <p class="muted">Ei lisää koristeita, vaan yksi läpileikkaava logiikka: jokainen vaihe vie rohkeutta kohti käytännön tekoa.</p>
+          <div class="cards-stack">
+            <div class="mini-card"><span class="mini-dot">1</span><div><b>Teema muuttuu toiminnaksi</b><span>Osallistuja ei vain kuule rohkeudesta, vaan tekee pieniä rohkeita siirtoja.</span></div></div>
+            <div class="mini-card"><span class="mini-dot">2</span><div><b>Logistiikka muuttuu dramaturgiaksi</b><span>Junamatka ja saapuminen nostetaan kokemuksen kannalta arvokkaiksi hetkiiksi.</span></div></div>
+            <div class="mini-card"><span class="mini-dot">3</span><div><b>Jälkimarkkinointi muuttuu jatkumoksi</b><span>Tapahtuman jälkeen ei vain kiitetä, vaan palautetaan lupaus arkeen.</span></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="footer-note" aria-label="Yhteenveto">
+      <div>
+        <h2>Tuotannon kysymys</h2>
+        <p><strong>Missä kohtaa osallistuja uskaltaa tehdä jotain, mitä hän ei olisi tehnyt ilman tätä tapahtumaa?</strong> Jos jokainen päätös vastaa tähän, BRAVE kantaa kutsusta jälkimarkkinointiin.</p>
+      </div>
+      <button class="button button-secondary" type="button" onclick="window.print()">Print / PDF</button>
+    </section>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const saved = localStorage.getItem('lataamo-brave-theme');
+    if (saved) root.dataset.theme = saved;
+    const button = document.getElementById('themeToggle');
+    function syncLabel() {
+      button.textContent = root.dataset.theme === 'dark' ? 'Light mode' : 'Dark mode';
+    }
+    syncLabel();
+    button.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('lataamo-brave-theme', root.dataset.theme);
+      syncLabel();
+    });
+
+    const navLinks = [...document.querySelectorAll('.nav a')];
+    const sections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+      });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
