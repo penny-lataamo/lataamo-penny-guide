@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en" data-theme="liquid">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lataamo Liquid RX — Atmospheric Glass UI System Example</title>
+  <meta name="description" content="A radically different Lataamo app UI system template: atmospheric liquid glass, soft focus depth, thin white strokes and oversized Helvetica-like typography." />
+  <style>
+    :root {
+      --brand-orange: #FF6B35;
+      --brand-magenta: #EC0382;
+      --rx-blue: #779BAD;
+      --rx-blue-deep: #536D7A;
+      --rx-yellow: #F1EA99;
+      --rx-black: #040505;
+      --rx-fog: #F3F3F3;
+      --rx-white: #FFFFFF;
+      --rx-ink: rgba(255,255,255,.96);
+      --rx-ink-soft: rgba(255,255,255,.80);
+      --rx-ink-faint: rgba(255,255,255,.62);
+      --rx-line: rgba(255,255,255,.42);
+      --rx-line-soft: rgba(255,255,255,.20);
+      --rx-glass: rgba(119,155,173,.24);
+      --rx-glass-strong: rgba(255,255,255,.18);
+      --rx-dark-glass: rgba(6,14,19,.36);
+      --font: "Helvetica Neue", Helvetica, Arial, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+      --radius-sm: 14px; --radius-md: 22px; --radius-lg: 34px; --radius-xl: 52px; --radius-pill: 999px;
+      --blur: blur(26px) saturate(1.28);
+      --stroke-shadow: 0 0 22px rgba(255,255,255,.16), inset 0 1px 0 rgba(255,255,255,.36);
+      --float-shadow: 0 34px 90px rgba(5,18,25,.28), inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--rx-fog); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--rx-ink);
+      font-family: var(--font);
+      font-size: 15px;
+      line-height: 1.42;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 24% 76%, rgba(241,234,153,.84), transparent 19%),
+        radial-gradient(circle at 72% 24%, rgba(255,255,255,.55), transparent 18%),
+        radial-gradient(circle at 36% 20%, rgba(150,187,203,.72), transparent 33%),
+        linear-gradient(145deg, #83aabd 0%, #779BAD 42%, #53616a 100%);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.52) 0 20px, transparent 20px calc(100% - 20px), rgba(0,0,0,.50) calc(100% - 20px)),
+        radial-gradient(circle at 22% 82%, rgba(241,234,153,.70), transparent 16%),
+        radial-gradient(circle at 75% 28%, rgba(243,243,243,.46), transparent 14%);
+      filter: blur(18px);
+      opacity: .78;
+      transform: scale(1.04);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .18;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; }
+    .app-shell { position: relative; z-index: 1; width: min(1440px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 52px; }
+
+    .topbar {
+      position: sticky;
+      top: 16px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(170px, auto) 1fr auto;
+      align-items: center;
+      gap: var(--space-4);
+      min-height: 76px;
+      padding: 12px 16px;
+      border: 1px solid var(--rx-line-soft);
+      border-radius: var(--radius-pill);
+      background: rgba(139,171,187,.26);
+      box-shadow: var(--float-shadow);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: max-content; color: var(--rx-white); text-decoration: none; }
+    .brand img { width: 34px; height: 34px; object-fit: contain; filter: brightness(0) invert(1) drop-shadow(0 0 18px rgba(255,255,255,.20)); opacity: .95; }
+    .brand span { font-size: 15px; font-weight: 400; letter-spacing: -.035em; }
+    .nav { justify-self: center; display: flex; align-items: center; gap: 5px; padding: 5px; border: 1px solid var(--rx-line-soft); border-radius: var(--radius-pill); background: rgba(255,255,255,.08); }
+    .nav a { color: var(--rx-ink-soft); text-decoration: none; font-size: 13px; font-weight: 400; letter-spacing: -.02em; padding: 9px 14px; border-radius: var(--radius-pill); }
+    .nav a.active { color: var(--rx-black); background: rgba(255,255,255,.92); box-shadow: 0 14px 34px rgba(4,5,5,.16); }
+    .top-actions { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-2); flex-wrap: wrap; }
+    .template-switch { position: relative; display: inline-flex; align-items: center; min-height: 42px; padding: 2px; border: 1px solid var(--rx-line-soft); border-radius: var(--radius-pill); background: rgba(255,255,255,.10); backdrop-filter: var(--blur); }
+    .template-switch::before { content: "Template"; padding-left: 13px; color: var(--rx-ink-faint); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .template-switch select { min-height: 38px; min-width: 168px; margin-left: 8px; padding: 0 34px 0 12px; border: 1px solid rgba(255,255,255,.22); border-radius: var(--radius-pill); appearance: none; cursor: pointer; color: var(--rx-white); background: rgba(4,5,5,.20); outline: 0; }
+    .template-switch::after { content: "⌄"; position: absolute; right: 13px; top: 50%; transform: translateY(-56%); color: var(--rx-white); pointer-events: none; }
+
+    .button { min-height: 42px; border-radius: var(--radius-pill); padding: 0 16px; border: 1px solid var(--rx-line-soft); display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; color: var(--rx-white); background: rgba(255,255,255,.10); text-decoration: none; white-space: nowrap; box-shadow: var(--stroke-shadow); }
+    .button-primary, .button-accent { color: var(--rx-black); background: rgba(255,255,255,.96); border-color: rgba(255,255,255,.70); box-shadow: 0 18px 42px rgba(4,5,5,.24), inset 0 1px 0 rgba(255,255,255,.7); }
+    .button-secondary { background: rgba(255,255,255,.09); }
+    .button-ghost { background: transparent; box-shadow: none; }
+    .button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid rgba(241,234,153,.58); outline-offset: 3px; }
+
+    .page { padding-top: 30px; }
+    .hero { position: relative; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(340px,.95fr); gap: 28px; align-items: stretch; min-height: 560px; margin-bottom: var(--space-6); }
+    .hero-copy { position: relative; padding: clamp(26px, 4vw, 62px); border: 1px solid var(--rx-line-soft); border-radius: var(--radius-xl); overflow: hidden; background: rgba(119,155,173,.20); box-shadow: var(--float-shadow); backdrop-filter: var(--blur); }
+    .hero-copy::before { content:""; position:absolute; inset: auto -8% -8% 14%; height: 230px; border-radius: 50%; background: rgba(241,234,153,.58); filter: blur(24px); opacity: .9; }
+    .eyebrow { position: relative; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 68px; color: var(--rx-ink-soft); font-size: 22px; font-weight: 300; letter-spacing: -.05em; }
+    .eyebrow::before { content:""; width: 116px; height: 40px; border: 1px solid var(--rx-line); border-radius: var(--radius-pill); background: rgba(255,255,255,.06); box-shadow: var(--stroke-shadow); }
+    h1, h2, h3, p { margin-top: 0; }
+    .page-title { position: relative; max-width: 940px; margin: 0 0 22px; font-size: clamp(54px, 7.2vw, 112px); line-height: .89; letter-spacing: -.085em; font-weight: 300; text-wrap: balance; }
+    .page-description { position: relative; max-width: 720px; margin: 0; color: var(--rx-ink-soft); font-size: clamp(18px, 1.8vw, 26px); font-weight: 300; letter-spacing: -.045em; }
+    .phone-stage { position: relative; min-height: 560px; border-radius: var(--radius-xl); overflow: hidden; background: rgba(255,255,255,.08); border: 1px solid var(--rx-line-soft); box-shadow: var(--float-shadow); backdrop-filter: var(--blur); }
+    .phone-stage::before { content:""; position:absolute; left: 12%; right: -10%; top: 16%; height: 58%; border-radius: 48px; border: 1px solid var(--rx-line); background: linear-gradient(150deg, rgba(255,255,255,.20), rgba(255,255,255,.05)); filter: blur(.2px); transform: rotate(-5deg); }
+    .phone-stage::after { content:""; position:absolute; width: 320px; height: 210px; left: -30px; bottom: 42px; border-radius: 50%; background: rgba(241,234,153,.66); filter: blur(32px); }
+    .rx-logo-pill { position: absolute; left: 42px; top: 42px; min-height: 50px; display:flex; align-items:center; gap: 12px; padding: 0 22px; border-radius: var(--radius-pill); border: 1px solid var(--rx-line); background: rgba(255,255,255,.08); color: var(--rx-white); box-shadow: var(--stroke-shadow); }
+    .rx-dna { width: 22px; height: 28px; position: relative; }
+    .rx-dna::before, .rx-dna::after { content:""; position:absolute; inset: 0; border-left: 2px solid currentColor; border-right: 2px solid currentColor; border-radius: 50%; transform: skewY(-28deg); opacity: .9; }
+    .rx-dna::after { transform: skewY(28deg); opacity: .55; }
+    .float-card { position: absolute; display: grid; align-content: center; gap: 6px; min-height: 126px; padding: 26px 30px; border: 1px solid var(--rx-line); border-radius: 48px; background: rgba(255,255,255,.10); color: var(--rx-white); box-shadow: var(--stroke-shadow); backdrop-filter: blur(22px) saturate(1.3); }
+    .float-card strong { font-size: 30px; font-weight: 300; letter-spacing: -.055em; }
+    .float-card span { color: var(--rx-ink-soft); font-size: 17px; font-weight: 300; }
+    .float-card.one { left: 46px; top: 180px; width: 54%; transform: rotate(-3deg); }
+    .float-card.two { right: 38px; top: 258px; width: 45%; background: rgba(255,255,255,.18); }
+    .float-card.three { left: 66px; bottom: 74px; width: 48%; }
+    .float-card.four { right: -16px; bottom: 108px; width: 36%; background: rgba(4,5,5,.28); }
+
+    .grid { display: grid; gap: var(--space-5); }
+    .metrics { grid-template-columns: repeat(4, minmax(0,1fr)); margin-bottom: var(--space-5); }
+    .two { grid-template-columns: minmax(0,1.12fr) minmax(320px,.88fr); }
+    .three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .card { position: relative; overflow: hidden; border: 1px solid var(--rx-line-soft); border-radius: var(--radius-lg); background: rgba(255,255,255,.10); box-shadow: var(--float-shadow); backdrop-filter: var(--blur); padding: var(--space-6); }
+    .card::after { content:""; position:absolute; inset:0; pointer-events:none; background: linear-gradient(145deg, rgba(255,255,255,.22), transparent 34%, rgba(4,5,5,.06)); opacity:.62; }
+    .card > * { position: relative; z-index: 1; }
+    .card-accent { background: rgba(255,255,255,.14); }
+    .metric-label { color: var(--rx-ink-soft); font-size: 13px; font-weight: 300; letter-spacing: -.02em; }
+    .metric-value { display:block; margin-top: 10px; color: var(--rx-white); font-size: clamp(36px, 4vw, 62px); line-height: .92; font-weight: 300; letter-spacing: -.075em; }
+    .section-title { margin:0 0 18px; font-size: clamp(27px, 3vw, 44px); line-height: .94; letter-spacing: -.07em; font-weight: 300; }
+    .card-title { margin:0 0 8px; font-size: 24px; line-height: 1; letter-spacing: -.055em; font-weight: 300; }
+    .muted { color: var(--rx-ink-soft); }
+    .small { color: var(--rx-ink-faint); font-size: 12px; }
+    .toolbar { display:flex; justify-content:space-between; align-items:center; gap: var(--space-3); margin-bottom: var(--space-4); }
+    .tabs { display:flex; gap: 6px; padding: 5px; border: 1px solid var(--rx-line-soft); border-radius: var(--radius-pill); background: rgba(255,255,255,.06); }
+    .tab { border:0; border-radius: var(--radius-pill); padding: 9px 14px; background: transparent; color: var(--rx-ink-soft); cursor: pointer; }
+    .tab.active { color: var(--rx-black); background: rgba(255,255,255,.88); }
+    .field { margin-top: var(--space-4); }
+    label { display:block; margin-bottom:7px; color: var(--rx-ink-soft); font-size:12px; letter-spacing:.04em; text-transform: uppercase; }
+    .input, .select, .textarea { width:100%; border:1px solid var(--rx-line-soft); border-radius: 28px; min-height:50px; padding: 13px 16px; color: var(--rx-white); background: rgba(4,5,5,.16); outline:0; box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+    .textarea { min-height: 126px; resize: vertical; }
+    .input:focus, .select:focus, .textarea:focus { border-color: rgba(241,234,153,.66); box-shadow: 0 0 0 4px rgba(241,234,153,.16), inset 0 1px 0 rgba(255,255,255,.18); }
+    .alert { display:flex; gap: var(--space-3); align-items:flex-start; padding: var(--space-4); border:1px solid rgba(241,234,153,.34); border-radius: 30px; background: rgba(241,234,153,.14); }
+    .alert-dot { width: 13px; height:13px; margin-top:5px; border-radius:50%; background: var(--rx-yellow); box-shadow: 0 0 28px rgba(241,234,153,.82); }
+    .badge { display:inline-flex; align-items:center; min-height:30px; gap: 6px; padding: 0 11px; border-radius: var(--radius-pill); border:1px solid var(--rx-line-soft); background: rgba(255,255,255,.08); color: var(--rx-white); font-size:12px; white-space:nowrap; }
+    .badge-brand { border-color: rgba(241,234,153,.42); background: rgba(241,234,153,.16); }
+    .badge-success { background: rgba(255,255,255,.90); color: var(--rx-black); }
+    .badge-warning { background: rgba(4,5,5,.24); }
+    .empty { text-align:center; border:1px dashed var(--rx-line); border-radius: 34px; padding: var(--space-8); background: rgba(255,255,255,.07); }
+
+    .table-scroll { overflow-x:auto; border-radius: 30px; border: 1px solid var(--rx-line-soft); background: rgba(255,255,255,.06); }
+    table { width:100%; min-width: 720px; border-collapse: collapse; }
+    th, td { padding: 18px 18px; text-align:left; border-bottom: 1px solid rgba(255,255,255,.12); }
+    th { color: var(--rx-ink-faint); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 400; }
+    tr:last-child td { border-bottom: 0; }
+    tr:hover td { background: rgba(255,255,255,.06); }
+    .template-list { display:grid; gap: var(--space-3); }
+    .template-item { display:grid; grid-template-columns: 150px 1fr; gap: var(--space-3); padding: var(--space-4); border:1px solid var(--rx-line-soft); border-radius: 28px; background: rgba(255,255,255,.07); }
+    .template-item code { color: var(--rx-yellow); font-weight: 400; }
+
+    .chart-wrap { padding: var(--space-4); border-radius: 30px; border: 1px solid var(--rx-line-soft); background: rgba(4,5,5,.13); overflow: hidden; }
+    .chart { width:100%; display:block; }
+    .chart-grid { stroke: rgba(255,255,255,.12); }
+    .chart-axis { stroke: rgba(255,255,255,.28); }
+    .chart-label { fill: rgba(255,255,255,.52); font: 400 11px var(--font); }
+    .chart-primary { stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 10px rgba(255,255,255,.32)); }
+    .chart-secondary { stroke: var(--rx-yellow); fill: none; stroke-width: 2; stroke-linecap: round; opacity: .8; }
+    .chart-area { fill: url(#liquidAreaGradient); }
+    .bar-neutral { fill: rgba(255,255,255,.18); }
+    .bar-active { fill: var(--rx-yellow); }
+    .donut-track { stroke: rgba(255,255,255,.13); }
+    .donut-a { stroke: #fff; }
+    .donut-b { stroke: var(--rx-yellow); }
+    .donut-c { stroke: var(--brand-magenta); opacity: .70; }
+    .legend { display:flex; flex-wrap:wrap; gap: var(--space-3); margin-top: var(--space-3); color: var(--rx-ink-soft); font-size:12px; }
+    .legend span { display:inline-flex; align-items:center; gap:6px; }
+    .dot { width:9px; height:9px; border-radius:50%; background:#fff; box-shadow: 0 0 14px rgba(255,255,255,.42); }
+    .dot.yellow { background: var(--rx-yellow); }
+    .dot.magenta { background: var(--brand-magenta); }
+
+    .app-layout-demo { display:grid; grid-template-columns: 240px minmax(0,1fr); gap: var(--space-5); }
+    .sidebar-demo { padding: var(--space-3); border:1px solid var(--rx-line-soft); border-radius: 30px; background: rgba(255,255,255,.06); }
+    .side-link { display:flex; justify-content:space-between; gap:8px; padding: 13px 14px; border-radius: var(--radius-pill); color: var(--rx-ink-soft); }
+    .side-link.active { color: var(--rx-black); background: rgba(255,255,255,.90); }
+    .filter-chip { display:inline-flex; align-items:center; margin: 4px 4px 0 0; padding:8px 12px; border-radius:var(--radius-pill); border:1px solid rgba(255,255,255,.28); background:rgba(255,255,255,.09); font-size:12px; }
+    .modal-preview { padding: var(--space-5); border-radius: 34px; background: rgba(4,5,5,.14); border:1px solid var(--rx-line-soft); }
+    .dialog { max-width: 520px; margin: 0 auto; padding: var(--space-6); border-radius: 38px; border:1px solid var(--rx-line); background: rgba(255,255,255,.14); box-shadow: var(--float-shadow); backdrop-filter: var(--blur); }
+    .toast-demo { display:grid; gap: var(--space-3); margin-top: var(--space-4); }
+    .toast { display:grid; grid-template-columns:auto 1fr; gap: var(--space-3); padding: var(--space-4); border-radius: 28px; border:1px solid var(--rx-line-soft); background: rgba(255,255,255,.08); }
+    .toast-icon { width:12px; height:12px; margin-top:5px; border-radius:50%; background: var(--rx-yellow); box-shadow:0 0 24px rgba(241,234,153,.72); }
+    .avatar-row { display:flex; align-items:center; gap: var(--space-3); }
+    .avatar { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; color: var(--rx-black); background: rgba(255,255,255,.94); font-size:12px; }
+    .file-card { display:flex; justify-content:space-between; align-items:center; gap:var(--space-3); padding:var(--space-4); border:1px solid var(--rx-line-soft); border-radius:28px; background:rgba(255,255,255,.08); }
+    .file-icon { width:40px; height:40px; border-radius:16px; display:grid; place-items:center; color:var(--rx-black); background:var(--rx-yellow); font-size:11px; }
+    .skeleton-stack { display:grid; gap: 10px; }
+    .skeleton { height: 13px; border-radius: var(--radius-pill); background: linear-gradient(90deg, rgba(255,255,255,.12), rgba(255,255,255,.62), rgba(255,255,255,.12)); background-size: 220% 100%; animation: shimmer 1.5s ease-in-out infinite; }
+    @keyframes shimmer { to { background-position-x: -220%; } }
+    .loader-demo { display:flex; align-items:center; gap:var(--space-3); margin-top:var(--space-4); padding:var(--space-4); border-radius:30px; border:1px solid var(--rx-line-soft); background:rgba(255,255,255,.08); }
+    .logo-loader { width:56px; height:56px; border-radius:50%; display:grid; place-items:center; border:1px solid var(--rx-line); background:rgba(255,255,255,.09); box-shadow:var(--stroke-shadow); }
+    .logo-loader img { width:36px; height:36px; filter: brightness(0) invert(1); animation: drift 1.8s ease-in-out infinite; }
+    @keyframes drift { 50% { transform: translateY(-3px) rotate(7deg); } }
+    .timeline { display:grid; gap: var(--space-4); }
+    .timeline-item { display:grid; grid-template-columns: 18px 1fr; gap: var(--space-3); }
+    .timeline-dot { width:10px; height:10px; border-radius:50%; margin-top:7px; background:var(--rx-yellow); box-shadow:0 0 0 5px rgba(241,234,153,.16), 0 0 28px rgba(241,234,153,.72); }
+    .footer { color: var(--rx-ink-faint); font-size: 13px; margin: var(--space-8) 4px 0; }
+
+    .theme-bright body, [data-theme="bright"] body { color: var(--rx-black); }
+    [data-theme="bright"] body {
+      background:
+        radial-gradient(circle at 22% 78%, rgba(241,234,153,.72), transparent 19%),
+        radial-gradient(circle at 68% 22%, rgba(119,155,173,.45), transparent 28%),
+        linear-gradient(135deg, #eef0f1 0%, #dfe5e8 48%, #c8d2d6 100%);
+    }
+    [data-theme="bright"] { --rx-ink: rgba(4,5,5,.92); --rx-ink-soft: rgba(4,5,5,.70); --rx-ink-faint: rgba(4,5,5,.52); --rx-line: rgba(255,255,255,.72); --rx-line-soft: rgba(4,5,5,.10); --rx-glass: rgba(255,255,255,.42); }
+    [data-theme="bright"] .card, [data-theme="bright"] .topbar, [data-theme="bright"] .hero-copy, [data-theme="bright"] .phone-stage { background: rgba(255,255,255,.34); }
+    [data-theme="bright"] .brand img, [data-theme="bright"] .logo-loader img { filter: none; }
+    [data-theme="bright"] .template-switch select, [data-theme="bright"] .input, [data-theme="bright"] .select, [data-theme="bright"] .textarea { color: var(--rx-black); background: rgba(255,255,255,.35); }
+    [data-theme="bright"] .button, [data-theme="bright"] .brand, [data-theme="bright"] .rx-logo-pill, [data-theme="bright"] .float-card { color: var(--rx-black); }
+
+    @media (max-width: 1080px) {
+      .topbar { grid-template-columns: 1fr; border-radius: 34px; }
+      .nav { justify-self: stretch; overflow-x: auto; }
+      .hero, .two { grid-template-columns: 1fr; }
+      .metrics, .three { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 700px) {
+      .app-shell { width: min(100% - 20px, 1440px); padding-top: 10px; }
+      .top-actions, .toolbar { align-items: stretch; justify-content: flex-start; }
+      .button { width: 100%; }
+      .template-switch, .template-switch select { width: 100%; }
+      .hero { min-height: auto; }
+      .hero-copy, .card { padding: var(--space-5); border-radius: 30px; }
+      .eyebrow { margin-bottom: 42px; font-size: 18px; }
+      .page-title { font-size: clamp(48px, 14vw, 76px); }
+      .phone-stage { min-height: 520px; }
+      .float-card.one, .float-card.two, .float-card.three, .float-card.four { left: 24px; right: 24px; width: auto; }
+      .float-card.two { top: 272px; }
+      .float-card.three { bottom: 114px; }
+      .float-card.four { bottom: 28px; }
+      .metrics, .three, .app-layout-demo { grid-template-columns: 1fr; }
+      .template-item { grid-template-columns: 1fr; }
+      .file-card, .loader-demo { align-items:flex-start; flex-direction: column; }
+      .chart { min-width: 560px; }
+      .chart-wrap { overflow-x:auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="../brand-guide/">
+        <img src="../assets/lataamo-brandmark-transparent.png" alt="Lataamo brandmark" />
+        <span>Lataamo Liquid RX</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="active" href="#dashboard">Dashboard</a>
+        <a href="#form">Concepts</a>
+        <a href="#table">Vendors</a>
+        <a href="#templates">Templates</a>
+      </nav>
+      <div class="top-actions">
+        <label class="template-switch" for="templateSelect">
+          <select id="templateSelect" aria-label="Choose template style">
+            <option value="../brand-guide/">Sharp app system</option>
+            <option value="../brand-guide-sense/">Soft glass system</option>
+            <option value="../brand-guide-mobile/">Mobile app trio</option>
+            <option value="../brand-guide-liquid/" selected>Liquid RX system</option>
+          </select>
+        </label>
+        <button class="button button-secondary" id="themeToggle" type="button">Bright mode</button>
+        <button class="button button-accent" type="button">Create concept</button>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="hero" id="dashboard">
+        <div class="hero-copy">
+          <div class="eyebrow">Select all that apply</div>
+          <h1 class="page-title">Liquid-glass Lataamo apps with cinematic depth.</h1>
+          <p class="page-description">This template deliberately breaks away from the sharp orange/pink system: huge light typography, translucent capsules, soft-focus depth, blue-grey air and one pale yellow signal layer.</p>
+        </div>
+        <aside class="phone-stage" aria-label="Liquid glass mobile-style preview">
+          <div class="rx-logo-pill"><span class="rx-dna" aria-hidden="true"></span><span>Lataamo RX</span></div>
+          <div class="float-card one"><span>01</span><strong>Energy levels</strong></div>
+          <div class="float-card two"><span>02</span><strong>Libido</strong></div>
+          <div class="float-card three"><span>03</span><strong>Muscle mass</strong></div>
+          <div class="float-card four"><span>04</span><strong>Mood</strong></div>
+        </aside>
+      </section>
+
+      <section class="grid metrics" aria-label="Metrics">
+        <article class="card card-accent"><span class="metric-label">Brief completeness</span><strong class="metric-value">91%</strong></article>
+        <article class="card"><span class="metric-label">Open actions</span><strong class="metric-value">7</strong></article>
+        <article class="card"><span class="metric-label">Vendor options</span><strong class="metric-value">18</strong></article>
+        <article class="card"><span class="metric-label">Client-ready items</span><strong class="metric-value">4</strong></article>
+      </section>
+
+      <section class="grid two" style="margin-top: var(--space-5);">
+        <article class="card" id="form">
+          <div class="toolbar">
+            <h2 class="section-title" style="margin:0">Concept generator</h2>
+            <div class="tabs" role="tablist" aria-label="Concept steps">
+              <button class="tab active" type="button">Brief</button>
+              <button class="tab" type="button">Journey</button>
+              <button class="tab" type="button">Output</button>
+            </div>
+          </div>
+          <p class="muted">Same underlying form elements, but rendered as quiet translucent input wells with high-air spacing and thin borders.</p>
+          <div class="field"><label for="eventName">Event name</label><input class="input" id="eventName" value="Future Customer Forum" /></div>
+          <div class="field"><label for="objective">Objective</label><select class="select" id="objective"><option>Strengthen customer relationship</option><option>Launch new service</option><option>Build internal culture</option></select></div>
+          <div class="field"><label for="memory">Desired memory trace</label><textarea class="textarea" id="memory">Participants should feel that the brand understands their future and gives them practical momentum.</textarea></div>
+          <div class="top-actions" style="margin-top: var(--space-5);"><button class="button button-primary" type="button">Build participant journey</button><button class="button button-ghost" type="button">Save draft</button></div>
+        </article>
+
+        <aside class="card card-accent">
+          <h2 class="section-title">Production pulse</h2>
+          <div class="alert"><span class="alert-dot" aria-hidden="true"></span><div><strong>Next best step</strong><br><span class="muted">Confirm the emotional arc before locking venue layout.</span></div></div>
+          <h3 class="card-title" style="margin-top: var(--space-5);">Component states</h3>
+          <p><span class="badge badge-brand">Brand moment</span> <span class="badge badge-success">Approved</span> <span class="badge badge-warning">Needs input</span></p>
+          <p class="muted">Status colors are semantic; the yellow glow is reserved for the single “attention” layer.</p>
+          <div class="empty"><h3 class="card-title">Empty state</h3><p class="muted">No concepts yet. Create the first event concept and turn the brief into a participant journey.</p><button class="button button-accent" type="button">Create first concept</button></div>
+        </aside>
+      </section>
+
+      <section class="card" id="table" style="margin-top: var(--space-5);">
+        <div class="toolbar"><h2 class="section-title" style="margin:0">Data table pattern</h2><button class="button button-secondary" type="button">Filter</button></div>
+        <div class="table-scroll"><table>
+          <thead><tr><th>Action</th><th>Owner</th><th>Status</th><th>Next step</th></tr></thead>
+          <tbody>
+            <tr><td>Define hero moment</td><td>Creative</td><td><span class="badge badge-brand">In progress</span></td><td>Draft two directions</td></tr>
+            <tr><td>Check AV constraints</td><td>Production</td><td><span class="badge badge-warning">Needs input</span></td><td>Confirm venue specs</td></tr>
+            <tr><td>Draft invitation copy</td><td>Content</td><td><span class="badge badge-success">Ready</span></td><td>Send to client review</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section class="grid three" id="templates" style="margin-top: var(--space-5);">
+        <article class="card"><h2 class="card-title">Dashboard template</h2><p class="muted">Hero atmosphere, floating metrics, main cards, side panel and optional data table.</p></article>
+        <article class="card"><h2 class="card-title">Form template</h2><p class="muted">Capsule tabs, translucent fields, preview panel and pill action bar.</p></article>
+        <article class="card"><h2 class="card-title">Detail template</h2><p class="muted">Title metadata, summary glass card, tabs, activity notes and related actions.</p></article>
+      </section>
+
+      <section class="card" style="margin-top: var(--space-5);">
+        <h2 class="section-title">Implementation map</h2>
+        <div class="template-list">
+          <div class="template-item"><code>tokens.css</code><span>Image-derived tokens: blue-grey #779BAD, signal yellow #F1EA99, black edge #040505, fog white #F3F3F3, thin luminous borders.</span></div>
+          <div class="template-item"><code>components.css</code><span>Buttons, cards, fields, badges, tables, nav and alerts consume only liquid-glass semantic tokens.</span></div>
+          <div class="template-item"><code>templates.css</code><span>Dashboard, form, detail and table layouts keep the same reusable component inventory as the other brand templates.</span></div>
+        </div>
+      </section>
+
+      <section class="grid two" id="charts" style="margin-top: var(--space-5);">
+        <article class="card chart-card card-accent">
+          <div class="toolbar"><h2 class="section-title" style="margin:0">Charts and graphs</h2><span class="badge badge-brand">Data viz</span></div>
+          <p class="muted">Use white for the main line, yellow for the highlighted comparison, and very faint grids so charts stay atmospheric.</p>
+          <div class="chart-wrap" aria-label="Line and area chart example">
+            <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example event interest line chart">
+              <defs><linearGradient id="liquidAreaGradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
+              <line class="chart-grid" x1="50" y1="40" x2="590" y2="40"/><line class="chart-grid" x1="50" y1="90" x2="590" y2="90"/><line class="chart-grid" x1="50" y1="140" x2="590" y2="140"/><line class="chart-grid" x1="50" y1="190" x2="590" y2="190"/><line class="chart-axis" x1="50" y1="218" x2="590" y2="218"/>
+              <text class="chart-label" x="50" y="240">Mon</text><text class="chart-label" x="155" y="240">Tue</text><text class="chart-label" x="260" y="240">Wed</text><text class="chart-label" x="365" y="240">Thu</text><text class="chart-label" x="470" y="240">Fri</text><text class="chart-label" x="560" y="240">Sat</text>
+              <path class="chart-area" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42 L590,218 L50,218 Z"/><path class="chart-primary" d="M50,185 C110,150 135,160 170,132 C215,96 245,120 285,92 C330,62 365,78 405,58 C455,32 500,70 590,42"/><path class="chart-secondary" d="M50,198 C112,188 135,172 170,168 C220,162 250,145 285,150 C330,154 365,132 405,126 C455,118 510,116 590,108"/>
+            </svg>
+            <div class="legend"><span><i class="dot"></i>Current concept interest</span><span><i class="dot yellow"></i>Previous benchmark</span></div>
+          </div>
+        </article>
+
+        <article class="card chart-card">
+          <h2 class="section-title">Bars, donut and progress</h2>
+          <div class="chart-wrap" aria-label="Bar chart and donut chart examples">
+            <svg class="chart" viewBox="0 0 620 260" role="img" aria-label="Example chart components">
+              <line class="chart-grid" x1="40" y1="44" x2="350" y2="44"/><line class="chart-grid" x1="40" y1="94" x2="350" y2="94"/><line class="chart-grid" x1="40" y1="144" x2="350" y2="144"/><line class="chart-axis" x1="40" y1="210" x2="350" y2="210"/>
+              <rect class="bar-neutral" x="62" y="112" width="32" height="98" rx="15"/><rect class="bar-neutral" x="112" y="82" width="32" height="128" rx="15"/><rect class="bar-active" x="162" y="52" width="32" height="158" rx="15"/><rect class="bar-neutral" x="212" y="126" width="32" height="84" rx="15"/><rect class="bar-neutral" x="262" y="92" width="32" height="118" rx="15"/>
+              <text class="chart-label" x="56" y="236">Reach</text><text class="chart-label" x="140" y="236">Emotion</text><text class="chart-label" x="245" y="236">Actions</text>
+              <circle class="donut-track" cx="480" cy="126" r="64" fill="none" stroke-width="18"/><circle class="donut-a" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="210 402" transform="rotate(-90 480 126)"/><circle class="donut-b" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="92 402" stroke-dashoffset="-216" transform="rotate(-90 480 126)"/><circle class="donut-c" cx="480" cy="126" r="64" fill="none" stroke-width="18" stroke-linecap="round" stroke-dasharray="58 402" stroke-dashoffset="-314" transform="rotate(-90 480 126)"/>
+              <text x="480" y="120" text-anchor="middle" class="chart-label">TOTAL</text><text x="480" y="148" text-anchor="middle" fill="var(--rx-ink)" style="font:300 32px var(--font); letter-spacing:-.06em">86%</text>
+            </svg>
+            <div class="legend"><span><i class="dot"></i>Main segment</span><span><i class="dot yellow"></i>Secondary</span><span><i class="dot magenta"></i>Lataamo signal</span></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="grid two" id="patterns" style="margin-top: var(--space-5);">
+        <article class="card">
+          <h2 class="section-title">Sidebar, filters and chips</h2>
+          <div class="app-layout-demo">
+            <aside class="sidebar-demo" aria-label="Example sidebar">
+              <div class="side-link active"><span>Overview</span><span>12</span></div><div class="side-link"><span>Concepts</span><span>8</span></div><div class="side-link"><span>Vendors</span><span>18</span></div><div class="side-link"><span>Budget</span><span>3</span></div>
+            </aside>
+            <div><h3 class="card-title">Filter pattern</h3><p class="muted">Chips stay delicate: visible enough for app work, but not heavy enough to break the cinematic glass layer.</p><span class="filter-chip">Helsinki ×</span><span class="filter-chip">Client-ready ×</span><span class="filter-chip">AI concept ×</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2 class="section-title">Modals and toasts</h2>
+          <div class="modal-preview"><div class="dialog" role="dialog" aria-label="Example modal preview"><h3 class="card-title">Send concept to review?</h3><p class="muted">Use modals as suspended glass panels over the same blurred atmosphere.</p><div class="top-actions"><button class="button button-primary" type="button">Send to review</button><button class="button button-secondary" type="button">Cancel</button></div></div></div>
+          <div class="toast-demo"><div class="toast"><i class="toast-icon"></i><div><strong>Saved</strong><br><span class="muted">The concept draft is ready for client review.</span></div></div><div class="toast"><i class="toast-icon"></i><div><strong>Check budget</strong><br><span class="muted">Two production items still need estimates.</span></div></div></div>
+        </article>
+      </section>
+
+      <section class="grid three" style="margin-top: var(--space-5);">
+        <article class="card"><h2 class="card-title">Avatars</h2><div class="avatar-row"><span class="avatar">JL</span><div><strong>Jarno</strong><br><span class="muted">Owner / reviewer</span></div></div></article>
+        <article class="card"><h2 class="card-title">File cards</h2><div class="file-card"><div class="avatar-row"><span class="file-icon">PDF</span><div><strong>Event brief</strong><br><span class="muted">Updated today</span></div></div><button class="button button-secondary" type="button">Open</button></div></article>
+        <article class="card"><h2 class="card-title">Loading states</h2><div class="skeleton-stack"><i class="skeleton" style="width:80%"></i><i class="skeleton" style="width:100%"></i><i class="skeleton" style="width:62%"></i></div><div class="loader-demo"><span class="logo-loader" aria-label="Loading"><img src="../assets/lataamo-brandmark-transparent.png" alt="" /></span><span><strong>Creating concept</strong><br><span class="muted">Float animation replaces the usual hard spinner.</span></span></div></article>
+      </section>
+
+      <section class="card" style="margin-top: var(--space-5);">
+        <h2 class="section-title">Timeline / activity feed</h2>
+        <div class="timeline">
+          <div class="timeline-item"><i class="timeline-dot"></i><div><strong>Concept summary generated</strong><br><span class="muted">Use compact timeline items for activity, not oversized cards.</span></div></div>
+          <div class="timeline-item"><i class="timeline-dot"></i><div><strong>Vendor shortlist attached</strong><br><span class="muted">Signal dots can use the yellow glow or semantic state colors.</span></div></div>
+        </div>
+      </section>
+
+      <p class="footer">Lataamo rule for Liquid RX: preserve the reusable app component inventory, but allow the visual atmosphere to become cinematic, soft-focus and radically non-corporate.</p>
+    </main>
+  </div>
+  <script>
+    const root = document.documentElement;
+    const button = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('lataamo-liquid-theme');
+    if (saved) root.dataset.theme = saved;
+    function syncLabel() { button.textContent = root.dataset.theme === 'bright' ? 'Atmospheric mode' : 'Bright mode'; }
+    syncLabel();
+    button.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'bright' ? 'liquid' : 'bright';
+      localStorage.setItem('lataamo-liquid-theme', root.dataset.theme);
+      syncLabel();
+    });
+    document.getElementById('templateSelect').addEventListener('change', (event) => { window.location.href = event.target.value; });
+  </script>
+</body>
+</html>
