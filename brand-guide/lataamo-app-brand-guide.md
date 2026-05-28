@@ -402,6 +402,7 @@ Rules:
 - Row text: `14px` for dense operational data.
 - Use subtle borders and hover states.
 - Do not use gradient table headers in data-heavy views; it reduces readability.
+- On mobile, do **not** rely on horizontal table scrolling as the default presentation. Convert operational tables into stacked row cards with visible field labels (`Action`, `Owner`, `Status`, `Next step`) so the section feels designed for mobile instead of squeezed into a desktop table. Horizontal scroll is acceptable only for genuinely wide analytical datasets where preserving columns matters more than quick scanning.
 
 ### Badges and status
 
