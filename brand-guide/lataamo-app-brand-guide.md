@@ -47,7 +47,7 @@ components:
 
 # Lataamo app brand guide for AI developers
 
-Updated: 2026-05-25  
+Updated: 2026-05-28  
 Audience: AI developers building internal tools, dashboards, client portals, prototypes and event-production apps for Lataamo.  
 Status: Minimal implementation guide and token system, not a full official visual identity manual.
 
@@ -63,6 +63,7 @@ Key updates:
 - The gradient remains a brand accent, not the default surface for every element.
 - The example page is now a component/template lab rather than a campaign-style landing page.
 - Published example pages now include a template switcher dropdown for approved template families only; light/dark mode lives inside each template as its own toggle.
+- The guide now treats radically different visual templates as **style variants over the same component system**. If the style uses liquid glass, cinematic blur or other custom material treatments, native browser select menus are not acceptable as the visible dropdown because the opened menu cannot be reliably styled.
 
 ## 2. Research basis for app UI decisions
 
@@ -381,6 +382,20 @@ Use:
 }
 ```
 
+#### Selects and dropdowns
+
+For normal sharp/utility app screens, native `<select>` is acceptable when the closed control matches the token system and the OS-opened menu does not harm the visual direction.
+
+For expressive style variants — especially **Liquid RX / glass / cinematic UI** — use a custom styled listbox/select component for visible dropdowns. Native opened select menus inherit browser/operating-system styling and can break the art direction with grey system rows, blue selection bars and hard black borders.
+
+Rules:
+
+- The closed trigger, open menu and options must all use the same semantic/component tokens as the surrounding style.
+- The open menu needs its own surface, border, radius, elevation/blur and selected/hover states.
+- Keep accessible semantics: trigger button with `aria-haspopup="listbox"`, `aria-expanded`, option roles, visible focus state, Escape-to-close and click-outside close.
+- Template switchers should use the same dropdown component as form selects inside the style variant; do not mix a polished glass page with an unstyled native menu.
+- If a native select is kept for implementation simplicity, do not show screenshots or client-facing previews with the menu open.
+
 ### Tables
 
 - Header text: `12–13px`, uppercase optional, high contrast.
@@ -431,6 +446,19 @@ Minimum element catalogue for every new template:
 - Feedback states: alert, toast/notification, empty state and modal/dialog.
 - Tokens/anatomy: color swatches or token notes plus a short “how to compose this template” section.
 - Light/dark mode: every element must be demonstrated or verified in both modes.
+
+### Visual style variants
+
+The approved template list can contain visually very different variants, but they must remain interoperable as an app system. A new variant should change the surface model, density, typography, lighting and component treatment — not only the palette.
+
+Current variant examples:
+
+- **Sharp app system:** functional Lataamo orange/magenta brand system for readable dashboards.
+- **Soft glass system:** warm neumorphic/glass variant with rounded surfaces and soft shadows.
+- **Mobile app trio:** mobile-first app template pattern.
+- **Liquid RX system:** dusty blue/yellow atmospheric liquid-glass variant with huge light Helvetica-like typography, translucent capsules, thin luminous strokes and custom glass dropdowns.
+
+Variant rule: every style must include the same core catalogue — nav, template selector, metrics, forms, buttons, badges, data/table treatment, charts, modal/toast, empty/loading states and activity/timeline — so AI developers can compare styles without losing component coverage.
 
 ### Dashboard template
 
@@ -559,6 +587,7 @@ Before shipping a Lataamo app screen:
 - [ ] Gradient is used as accent/emphasis, not everywhere.
 - [ ] Components are reusable and template-friendly.
 - [ ] New template pages include the required element catalogue: buttons, badges, nav, forms, cards/lists, data table/structured data, alert/toast, empty state, modal/dialog, tokens/anatomy.
+- [ ] Dropdowns/selects match the open-state visual design. For glass/cinematic variants, avoid native opened select menus; use a styled listbox component.
 - [ ] Tables and forms remain calm and readable.
 - [ ] Copy is action-oriented and human, not generic AI/SaaS filler.
 
@@ -572,6 +601,7 @@ User-provided source of truth:
 - Requirement update: app-scale UI, light/dark mode and a system that makes future changes/templates easy for devs.
 - Requirement update: toasts must be more noticeable than surrounding UI, tags/chips must not be invisible, loaders should use the logo creatively alongside skeletons, secondary buttons must follow proper contrast/control-visibility rules, and example screens must be mobile-optimized.
 - User-provided transparent logo asset should be preferred in app examples and loader patterns.
+- Requirement update: template variants may be visually radical, but the guide must explicitly cover variant rules and dropdown/open-menu styling so native browser controls do not break the visual system.
 
 Observed public Lataamo source:
 

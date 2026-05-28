@@ -100,9 +100,26 @@
     .nav a.active { color: var(--rx-black); background: rgba(255,255,255,.92); box-shadow: 0 14px 34px rgba(4,5,5,.16); }
     .top-actions { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-2); flex-wrap: wrap; }
     .template-switch { position: relative; display: inline-flex; align-items: center; min-height: 42px; padding: 2px; border: 1px solid var(--rx-line-soft); border-radius: var(--radius-pill); background: rgba(255,255,255,.10); backdrop-filter: var(--blur); }
-    .template-switch::before { content: "Template"; padding-left: 13px; color: var(--rx-ink-faint); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .template-switch::before { content: none; }
+    .template-switch-label { padding-left: 13px; color: var(--rx-ink-faint); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
     .template-switch select { min-height: 38px; min-width: 168px; margin-left: 8px; padding: 0 34px 0 12px; border: 1px solid rgba(255,255,255,.22); border-radius: var(--radius-pill); appearance: none; cursor: pointer; color: var(--rx-white); background: rgba(4,5,5,.20); outline: 0; }
-    .template-switch::after { content: "⌄"; position: absolute; right: 13px; top: 50%; transform: translateY(-56%); color: var(--rx-white); pointer-events: none; }
+    .template-switch::after { content: none; }
+
+    .custom-select { position: relative; }
+    .custom-select .select-trigger { width: 100%; min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 14px; border: 1px solid rgba(255,255,255,.22); border-radius: var(--radius-pill); padding: 0 14px 0 16px; color: var(--rx-white); background: rgba(4,5,5,.20); box-shadow: inset 0 1px 0 rgba(255,255,255,.12); cursor: pointer; text-align: left; }
+    .custom-select .select-trigger::after { content: "⌄"; color: currentColor; transform: translateY(-1px); }
+    .custom-select[data-open="true"] .select-trigger { border-color: rgba(241,234,153,.66); box-shadow: 0 0 0 4px rgba(241,234,153,.16), inset 0 1px 0 rgba(255,255,255,.18); }
+    .select-menu { position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 10px); display: grid; gap: 8px; padding: 10px; margin: 0; list-style: none; border: 1px solid rgba(255,255,255,.34); border-radius: 24px; background: rgba(44,65,75,.97); color: var(--rx-white); box-shadow: 0 28px 70px rgba(4,5,5,.42), inset 0 1px 0 rgba(255,255,255,.24); backdrop-filter: blur(34px) saturate(1.45); -webkit-backdrop-filter: blur(34px) saturate(1.45); }
+    .select-menu[hidden] { display: none; }
+    .select-option { min-height: 42px; display: flex; align-items: center; padding: 0 13px; border: 1px solid transparent; border-radius: 18px; cursor: pointer; color: rgba(255,255,255,.88); background: rgba(255,255,255,.035); }
+    .select-option:hover { color: var(--rx-white); background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.24); }
+    .select-option[aria-selected="true"] { color: var(--rx-white); background: rgba(241,234,153,.18); border-color: rgba(241,234,153,.52); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 0 22px rgba(241,234,153,.14); }
+    .select-option[aria-selected="true"]::after { content: "✓"; margin-left: auto; color: var(--rx-yellow); text-shadow: 0 0 18px rgba(241,234,153,.75); }
+    .template-switch { min-width: 304px; }
+    .template-switch .select-trigger { min-height: 38px; margin-left: 8px; min-width: 168px; }
+    .field .custom-select { width: 100%; }
+    .field .select-trigger { min-height: 50px; border-radius: 28px; padding: 0 16px; }
+    .field .select-menu { position: static; margin-top: 10px; }
 
     .button { min-height: 42px; border-radius: var(--radius-pill); padding: 0 16px; border: 1px solid var(--rx-line-soft); display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; color: var(--rx-white); background: rgba(255,255,255,.10); text-decoration: none; white-space: nowrap; box-shadow: var(--stroke-shadow); }
     .button-primary, .button-accent { color: var(--rx-black); background: rgba(255,255,255,.96); border-color: rgba(255,255,255,.70); box-shadow: 0 18px 42px rgba(4,5,5,.24), inset 0 1px 0 rgba(255,255,255,.7); }
@@ -155,7 +172,7 @@
     .field { margin-top: var(--space-4); }
     label { display:block; margin-bottom:7px; color: var(--rx-ink-soft); font-size:12px; letter-spacing:.04em; text-transform: uppercase; }
     .input, .select, .textarea { width:100%; border:1px solid var(--rx-line-soft); border-radius: 28px; min-height:50px; padding: 13px 16px; color: var(--rx-white); background: rgba(4,5,5,.16); outline:0; box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
-    .textarea { min-height: 126px; resize: vertical; }
+    .textarea { min-height: 126px; resize: none; }
     .input:focus, .select:focus, .textarea:focus { border-color: rgba(241,234,153,.66); box-shadow: 0 0 0 4px rgba(241,234,153,.16), inset 0 1px 0 rgba(255,255,255,.18); }
     .alert { display:flex; gap: var(--space-3); align-items:flex-start; padding: var(--space-4); border:1px solid rgba(241,234,153,.34); border-radius: 30px; background: rgba(241,234,153,.14); }
     .alert-dot { width: 13px; height:13px; margin-top:5px; border-radius:50%; background: var(--rx-yellow); box-shadow: 0 0 28px rgba(241,234,153,.82); }
@@ -231,7 +248,8 @@
     [data-theme="bright"] { --rx-ink: rgba(4,5,5,.92); --rx-ink-soft: rgba(4,5,5,.70); --rx-ink-faint: rgba(4,5,5,.52); --rx-line: rgba(255,255,255,.72); --rx-line-soft: rgba(4,5,5,.10); --rx-glass: rgba(255,255,255,.42); }
     [data-theme="bright"] .card, [data-theme="bright"] .topbar, [data-theme="bright"] .hero-copy, [data-theme="bright"] .phone-stage { background: rgba(255,255,255,.34); }
     [data-theme="bright"] .brand img, [data-theme="bright"] .logo-loader img { filter: none; }
-    [data-theme="bright"] .template-switch select, [data-theme="bright"] .input, [data-theme="bright"] .select, [data-theme="bright"] .textarea { color: var(--rx-black); background: rgba(255,255,255,.35); }
+    [data-theme="bright"] .template-switch select, [data-theme="bright"] .input, [data-theme="bright"] .select, [data-theme="bright"] .textarea, [data-theme="bright"] .custom-select .select-trigger { color: var(--rx-black); background: rgba(255,255,255,.35); }
+    [data-theme="bright"] .select-menu { color: var(--rx-black); background: rgba(228,235,238,.72); }
     [data-theme="bright"] .button, [data-theme="bright"] .brand, [data-theme="bright"] .rx-logo-pill, [data-theme="bright"] .float-card { color: var(--rx-black); }
 
     @media (max-width: 1080px) {
@@ -244,7 +262,7 @@
       .app-shell { width: min(100% - 20px, 1440px); padding-top: 10px; }
       .top-actions, .toolbar { align-items: stretch; justify-content: flex-start; }
       .button { width: 100%; }
-      .template-switch, .template-switch select { width: 100%; }
+      .template-switch, .template-switch select, .template-switch .select-trigger { width: 100%; }
       .hero { min-height: auto; }
       .hero-copy, .card { padding: var(--space-5); border-radius: 30px; }
       .eyebrow { margin-bottom: 42px; font-size: 18px; }
@@ -276,14 +294,16 @@
         <a href="#templates">Templates</a>
       </nav>
       <div class="top-actions">
-        <label class="template-switch" for="templateSelect">
-          <select id="templateSelect" aria-label="Choose template style">
-            <option value="../brand-guide/">Sharp app system</option>
-            <option value="../brand-guide-sense/">Soft glass system</option>
-            <option value="../brand-guide-mobile/">Mobile app trio</option>
-            <option value="../brand-guide-liquid/" selected>Liquid RX system</option>
-          </select>
-        </label>
+        <div class="template-switch custom-select" data-select data-action="navigate">
+          <span class="template-switch-label">Template</span>
+          <button class="select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Choose template style">Liquid RX system</button>
+          <ul class="select-menu" role="listbox" hidden>
+            <li class="select-option" role="option" data-value="../brand-guide/">Sharp app system</li>
+            <li class="select-option" role="option" data-value="../brand-guide-sense/">Soft glass system</li>
+            <li class="select-option" role="option" data-value="../brand-guide-mobile/">Mobile app trio</li>
+            <li class="select-option" role="option" data-value="../brand-guide-liquid/" aria-selected="true">Liquid RX system</li>
+          </ul>
+        </div>
         <button class="button button-secondary" id="themeToggle" type="button">Bright mode</button>
         <button class="button button-accent" type="button">Create concept</button>
       </div>
@@ -324,7 +344,7 @@
           </div>
           <p class="muted">Same underlying form elements, but rendered as quiet translucent input wells with high-air spacing and thin borders.</p>
           <div class="field"><label for="eventName">Event name</label><input class="input" id="eventName" value="Future Customer Forum" /></div>
-          <div class="field"><label for="objective">Objective</label><select class="select" id="objective"><option>Strengthen customer relationship</option><option>Launch new service</option><option>Build internal culture</option></select></div>
+          <div class="field"><label id="objectiveLabel">Objective</label><div class="custom-select" data-select><button class="select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="objectiveLabel">Strengthen customer relationship</button><ul class="select-menu" role="listbox" hidden><li class="select-option" role="option" aria-selected="true">Strengthen customer relationship</li><li class="select-option" role="option">Launch new service</li><li class="select-option" role="option">Build internal culture</li></ul></div></div>
           <div class="field"><label for="memory">Desired memory trace</label><textarea class="textarea" id="memory">Participants should feel that the brand understands their future and gives them practical momentum.</textarea></div>
           <div class="top-actions" style="margin-top: var(--space-5);"><button class="button button-primary" type="button">Build participant journey</button><button class="button button-ghost" type="button">Save draft</button></div>
         </article>
@@ -443,7 +463,36 @@
       localStorage.setItem('lataamo-liquid-theme', root.dataset.theme);
       syncLabel();
     });
-    document.getElementById('templateSelect').addEventListener('change', (event) => { window.location.href = event.target.value; });
+    document.querySelectorAll('[data-select]').forEach((select) => {
+      const trigger = select.querySelector('.select-trigger');
+      const menu = select.querySelector('.select-menu');
+      const options = [...select.querySelectorAll('.select-option')];
+      function close() { select.dataset.open = 'false'; trigger.setAttribute('aria-expanded', 'false'); menu.hidden = true; }
+      function open() { select.dataset.open = 'true'; trigger.setAttribute('aria-expanded', 'true'); menu.hidden = false; }
+      close();
+      trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        select.dataset.open === 'true' ? close() : open();
+      });
+      options.forEach((option) => {
+        option.addEventListener('click', () => {
+          options.forEach((item) => item.removeAttribute('aria-selected'));
+          option.setAttribute('aria-selected', 'true');
+          trigger.textContent = option.textContent;
+          close();
+          if (select.dataset.action === 'navigate') window.location.href = option.dataset.value;
+        });
+      });
+      select.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') close();
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); select.dataset.open === 'true' ? close() : open(); }
+      });
+    });
+    document.addEventListener('click', () => document.querySelectorAll('[data-select]').forEach((select) => {
+      select.dataset.open = 'false';
+      select.querySelector('.select-trigger').setAttribute('aria-expanded', 'false');
+      select.querySelector('.select-menu').hidden = true;
+    }));
   </script>
 </body>
 </html>
