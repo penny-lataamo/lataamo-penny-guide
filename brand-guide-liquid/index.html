@@ -258,12 +258,12 @@
       .hero, .two { grid-template-columns: 1fr; }
       .metrics, .three { grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
-    @media (max-width: 700px) {
+    @media (max-width: 1080px) {
       .app-shell { width: min(100% - 20px, 1440px); padding-top: 10px; padding-bottom: 72px; }
       .top-actions, .toolbar { align-items: stretch; justify-content: flex-start; }
       .button { width: 100%; }
       .template-switch, .template-switch select, .template-switch .select-trigger { width: 100%; }
-      .topbar { top: 8px; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand controls"; gap: 8px; min-height: 0; padding: 8px; border-radius: 28px; }
+      .topbar { top: 8px; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand controls"; gap: 8px; min-height: 0; padding: 8px; border-radius: 28px; backdrop-filter: none; -webkit-backdrop-filter: none; }
       .brand { grid-area: brand; gap: 8px; }
       .brand img { width: 28px; height: 28px; }
       .brand span { max-width: 78px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
@@ -280,7 +280,7 @@
       .hero { min-height: auto; }
       .hero-copy, .card { padding: var(--space-5); border-radius: 30px; }
       .eyebrow { margin-bottom: 42px; font-size: 18px; }
-      .page-title { font-size: clamp(48px, 14vw, 76px); }
+      .page-title { font-size: clamp(48px, 14vw, 76px); line-height: .98; letter-spacing: -.075em; }
       .phone-stage { min-height: 520px; }
       .float-card.one, .float-card.two, .float-card.three, .float-card.four { left: 24px; right: 24px; width: auto; }
       .float-card.two { top: 272px; }
