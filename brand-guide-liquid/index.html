@@ -259,10 +259,24 @@
       .metrics, .three { grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
     @media (max-width: 700px) {
-      .app-shell { width: min(100% - 20px, 1440px); padding-top: 10px; }
+      .app-shell { width: min(100% - 20px, 1440px); padding-top: 10px; padding-bottom: 72px; }
       .top-actions, .toolbar { align-items: stretch; justify-content: flex-start; }
       .button { width: 100%; }
       .template-switch, .template-switch select, .template-switch .select-trigger { width: 100%; }
+      .topbar { top: 8px; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "brand controls"; gap: 8px; min-height: 0; padding: 8px; border-radius: 28px; }
+      .brand { grid-area: brand; gap: 8px; }
+      .brand img { width: 28px; height: 28px; }
+      .brand span { max-width: 78px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+      .nav { position: fixed; left: 10px; right: 10px; bottom: 10px; z-index: 45; justify-self: auto; width: auto; gap: 3px; padding: 3px; overflow-x: auto; scrollbar-width: none; box-shadow: 0 18px 58px rgba(4,5,5,.32), inset 0 1px 0 rgba(255,255,255,.20); }
+      .nav::-webkit-scrollbar { display: none; }
+      .nav a { flex: 0 0 auto; padding: 7px 10px; font-size: 12px; }
+      .topbar .top-actions { grid-area: controls; align-items: center; justify-content: flex-end; flex-wrap: nowrap; gap: 6px; }
+      .topbar .button { width: auto; min-height: 34px; padding: 0 10px; font-size: 12px; }
+      .topbar .button-accent { display: none; }
+      .topbar .template-switch { width: auto; min-width: 0; max-width: 148px; min-height: 34px; padding: 1px; }
+      .topbar .template-switch-label { display: none; }
+      .topbar .template-switch .select-trigger { width: 142px; min-width: 0; min-height: 32px; margin-left: 0; padding: 0 10px; font-size: 12px; }
+      .topbar .template-switch .select-menu { left: auto; right: 0; min-width: 228px; }
       .hero { min-height: auto; }
       .hero-copy, .card { padding: var(--space-5); border-radius: 30px; }
       .eyebrow { margin-bottom: 42px; font-size: 18px; }
