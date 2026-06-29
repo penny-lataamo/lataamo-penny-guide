@@ -184,9 +184,10 @@
       <div class="brand"><div class="mark"><img src="assets/lataamo-brandmark.svg" alt="Lataamo logo mark" /></div><div class="brand-word"><strong>Lataamo</strong><span>Penny guide</span></div></div>
       <nav class="topnav" aria-label="Guide sections">
         <a class="badge" href="#brief">Start here</a>
+        <a class="navlink" href="#slack">Slack basics</a>
         <a class="navlink" href="#workflows">Workflows</a>
-        <a class="navlink" href="#quality">Quality checks</a>
-        <a class="navlink" href="#prompts">Prompt library</a>
+        <a class="navlink" href="#verify">Verify</a>
+        <a class="navlink" href="#prompts">Prompts</a>
       </nav>
     </header>
 
@@ -244,6 +245,19 @@
       </div>
     </section>
 
+    <section id="slack" aria-label="How to use Penny in Slack">
+      <div class="section-title">
+        <h2>How to use Penny in Slack.</h2>
+        <p>Keep the work easy to follow for both humans and Penny. Threads are the operating system.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon">💬</div><h3>Start with the task</h3><p>Use a DM or a relevant Slack thread. State the assignment, audience and output first, then add details.</p></article>
+        <article class="card"><div class="icon">📎</div><h3>Attach or paste sources</h3><p>Add links, files, notes, prior decisions and examples. If Penny should use only those sources, say so.</p></article>
+        <article class="card"><div class="icon">🧵</div><h3>One thread per task</h3><p>Keep corrections, decisions and follow-ups in the same thread. If the thread gets messy, ask for a continuation note.</p></article>
+        <article class="card"><div class="icon">🌐</div><h3>Name the language</h3><p>Ask for Finnish, English or bilingual output. Say whether it is internal, client-facing, supplier-facing or participant-facing.</p></article>
+      </div>
+    </section>
+
     <section aria-label="What Penny can do">
       <div class="section-title">
         <h2>Use Penny for complete work.</h2>
@@ -287,6 +301,24 @@
         <div class="prompt-box" aria-label="Example prompt">
           <code><span class="muted-code">Example:</span>
 Find 3–5 Helsinki venues for 150 people in September. Premium but warm vibe. Include capacity, location, source links, price signals if available, logistics risks, and a clear recommendation. Output as a comparison table for internal use, and tell me what must be confirmed before client use.</code>
+        </div>
+      </div>
+    </section>
+
+    <section id="verify" aria-label="What to verify before client use">
+      <div class="section-title">
+        <h2>What to verify before client use.</h2>
+        <p>If a wrong fact would embarrass Lataamo or hurt production, ask Penny to verify it — then human-check what matters.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="icon">💶</div><h3>Commercial facts</h3><p>Prices, availability, contract terms, cancellation rules, capacity, package contents and what is included or excluded.</p></article>
+        <article class="card"><div class="icon">🚚</div><h3>Production facts</h3><p>Access, loading, travel time, permits, restrictions, technical specs, staffing, safety and dependencies.</p></article>
+        <article class="card"><div class="icon">🧾</div><h3>Claims and copy</h3><p>Client claims, sustainability claims, speaker bios, dates, names, references and anything that sounds too confident.</p></article>
+        <article class="card"><div class="icon">🔐</div><h3>Sensitive judgement</h3><p>Privacy, legal, HR, safety, final budgets, client promises and relationship-sensitive decisions need human approval.</p></article>
+      </div>
+      <div class="example-panel" style="margin-top:16px">
+        <div class="examples">
+          <div class="example"><b>Verification prompt</b><p>Before this goes to the client, mark each claim as verified, assumed, risky or needs approval. Give source links where possible and list what a human must still confirm.</p></div>
         </div>
       </div>
     </section>
@@ -348,6 +380,20 @@ Find 3–5 Helsinki venues for 150 people in September. Premium but warm vibe. I
             <div class="memory-item"><div class="check cross">×</div><div><b>Do not accept generic event language</b><span>Ask for concrete what / how / why, production implications and why it fits this client.</span></div></div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section aria-label="Bad prompts and better prompts">
+      <div class="section-title">
+        <h2>Bad prompt → better prompt.</h2>
+        <p>Make Penny mark gaps instead of guessing. Give the decision, source and quality bar.</p>
+      </div>
+      <div class="example-panel">
+        <div class="examples">
+          <div class="example"><b>Too vague</b><p><em>Bad:</em> Find venues. <br><em>Better:</em> Find 5 Helsinki venues for a 150-person B2B evening event in September, premium but relaxed, near public transport. Include capacity, source links, price signals, risks and top recommendation.</p></div>
+          <div class="example"><b>Too much guessing</b><p><em>Bad:</em> Make a proposal for this client. <br><em>Better:</em> Make a first proposal outline using only these notes. Mark missing facts and questions before anything becomes client-ready.</p></div>
+          <div class="example"><b>Too little proof</b><p><em>Bad:</em> Can we promise this? <br><em>Better:</em> Check whether this promise is supported by our material. Separate safe claim, risky claim and needs approval.</p></div>
+        </div>
       </div>
     </section>
 
