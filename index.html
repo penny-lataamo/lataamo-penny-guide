@@ -23,16 +23,6 @@
       --brand-magenta: #D70376;
       --brand-purple: #37104b;
       --brand-gradient: linear-gradient(135deg, #FF6B35 0%, #FF5500 30%, #EC0382 70%, #D70376 100%);
-      --blue: #EC0382;
-      --blue-soft: #fff0f7;
-      --green: #FF5500;
-      --green-soft: #fff1e8;
-      --orange: #FF6B35;
-      --orange-soft: #fff3ec;
-      --purple: #D70376;
-      --purple-soft: #fff0f7;
-      --pink: #EC0382;
-      --pink-soft: #fff0f7;
       --line: rgba(0,0,0,.10);
       --shadow: rgba(0,0,0,.04) 0 4px 18px, rgba(0,0,0,.027) 0 2px 8px, rgba(0,0,0,.02) 0 .8px 3px;
       --radius: 24px;
@@ -52,66 +42,45 @@
       line-height: 1.45;
     }
 
+    a { color: inherit; }
     .wrap { max-width: 1180px; margin: 0 auto; padding: 34px 22px 56px; }
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 18px;
-      margin-bottom: 40px;
-    }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.03em; }
-    .mark {
-      width: 46px; height: 46px; border-radius: 0; display: grid; place-items: center;
-      background: transparent; color: white; box-shadow: none; font-size: 0;
-    }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 36px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -.03em; flex-shrink: 0; }
+    .mark { width: 46px; height: 46px; display: grid; place-items: center; font-size: 0; }
     .mark img { width: 46px; height: 46px; display: block; }
     .brand-word { display: flex; flex-direction: column; line-height: 1; }
     .brand-word strong { font-family: 'Bebas Neue', Inter, sans-serif; font-size: 28px; letter-spacing: .045em; font-weight: 400; }
     .brand-word span { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 800; margin-top: 2px; }
-    .badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      border-radius: 999px; padding: 9px 14px; font-size: 12px; font-weight: 800;
-      color: #fff; background: var(--brand-gradient); border: 0;
-      letter-spacing: .05em; text-transform: uppercase; box-shadow: rgba(236,3,130,.18) 0 10px 28px;
-    }
 
-    .hero {
-      display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; align-items: stretch;
-      margin-bottom: 24px;
+    .topnav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+    .navlink, .badge {
+      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 9px 14px;
+      font-size: 12px; font-weight: 900; text-decoration: none; letter-spacing: .05em; text-transform: uppercase;
     }
-    .hero-card, .card, .formula, .quick-brief, .memory-panel, .example-panel {
-      background: rgba(255,255,255,.90); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+    .badge { color: #fff; background: var(--brand-gradient); border: 0; box-shadow: rgba(236,3,130,.18) 0 10px 28px; }
+    .navlink { color: #37104b; background: rgba(255,255,255,.72); border: 1px solid var(--line); }
+    .navlink:hover { background: #fff; transform: translateY(-1px); }
+
+    .hero { display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; align-items: stretch; margin-bottom: 24px; }
+    .hero-card, .card, .formula, .quick-brief, .memory-panel, .example-panel, .workflow-card, .dos-panel {
+      background: rgba(255,255,255,.90); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(10px);
     }
     .hero-card {
       position: relative; overflow: hidden; padding: clamp(28px, 5vw, 56px); min-height: 468px; display: flex; flex-direction: column; justify-content: space-between;
-      color: #fff; background:
-        linear-gradient(135deg, rgba(17,17,17,.94), rgba(55,16,75,.88)),
-        var(--brand-gradient);
-      border: 0; box-shadow: rgba(215,3,118,.22) 0 24px 70px, rgba(0,0,0,.10) 0 8px 26px;
+      color: #fff; background: linear-gradient(135deg, rgba(17,17,17,.94), rgba(55,16,75,.88)), var(--brand-gradient); border: 0;
+      box-shadow: rgba(215,3,118,.22) 0 24px 70px, rgba(0,0,0,.10) 0 8px 26px;
     }
-    .hero-card:before {
-      content: "LATAAMO CREATIVE"; position: absolute; right: -78px; top: 34px;
-      padding: 9px 84px; transform: rotate(18deg); background: var(--brand-gradient); color: #fff;
-      font-family: 'Bebas Neue', Inter, sans-serif; font-size: 20px; letter-spacing: .08em; opacity: .92;
-    }
+    .hero-card:before { content: "LATAAMO CREATIVE"; position: absolute; right: -78px; top: 34px; padding: 9px 84px; transform: rotate(18deg); background: var(--brand-gradient); color: #fff; font-family: 'Bebas Neue', Inter, sans-serif; font-size: 20px; letter-spacing: .08em; opacity: .92; }
     .hero-intro { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 28px; align-items: start; position: relative; z-index: 1; }
     .kicker { color: #fff; font-weight: 900; text-transform: uppercase; letter-spacing: .18em; font-size: 12px; margin-bottom: 12px; }
     h1, h2 { font-family: 'Bebas Neue', Inter, sans-serif; font-weight: 400; text-transform: uppercase; }
     h1 { margin: 0; font-size: clamp(44px, 5.8vw, 76px); line-height: .90; letter-spacing: .015em; max-width: 760px; }
     .lead { margin: 20px 0 0; max-width: 670px; color: rgba(255,255,255,.84); font-size: clamp(17px, 1.9vw, 22px); font-weight: 600; letter-spacing: -.02em; }
     .avatar-cardlet { position: relative; justify-self: end; width: min(190px, 100%); }
-    .avatar-frame {
-      position: relative; border-radius: 34px; padding: 8px;
-      background: var(--brand-gradient);
-      box-shadow: rgba(236,3,130,.28) 0 18px 42px, rgba(0,0,0,.10) 0 6px 18px;
-      transform: rotate(2deg);
-    }
+    .avatar-frame { position: relative; border-radius: 34px; padding: 8px; background: var(--brand-gradient); box-shadow: rgba(236,3,130,.28) 0 18px 42px, rgba(0,0,0,.10) 0 6px 18px; transform: rotate(2deg); }
     .avatar-frame img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 27px; border: 3px solid rgba(255,255,255,.78); }
-    .avatar-tag {
-      position: absolute; left: -14px; bottom: -12px; max-width: 154px;
-      border-radius: 16px; padding: 11px 13px; background: rgba(255,255,255,.98); color: #111;
-      border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 13px; font-weight: 900; line-height: 1.15;
-    }
-    .avatar-tag span { display: block; color: var(--pink); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
+    .avatar-tag { position: absolute; left: -14px; bottom: -12px; max-width: 162px; border-radius: 16px; padding: 11px 13px; background: rgba(255,255,255,.98); color: #111; border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 13px; font-weight: 900; line-height: 1.15; }
+    .avatar-tag span { display: block; color: var(--brand-pink); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px; }
     .hero-footer { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; position: relative; z-index: 1; }
     .pill { border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.10); color: #fff; border-radius: 999px; padding: 10px 14px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
 
@@ -120,40 +89,45 @@
     .mini .num { font-family: 'Bebas Neue', Inter, sans-serif; font-size: 58px; line-height: .82; font-weight: 400; letter-spacing: .02em; background: var(--brand-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .mini h3 { margin: 12px 0 6px; font-size: 21px; letter-spacing: -.035em; }
     .mini p { margin: 0; color: var(--muted); font-weight: 500; }
-    .mini:after { content: ""; position: absolute; right: -24px; top: -24px; width: 110px; height: 110px; border-radius: 32px; transform: rotate(18deg); opacity: .72; }
-    .m1:after { background: var(--green-soft); } .m2:after { background: var(--orange-soft); } .m3:after { background: var(--purple-soft); }
+    .mini:after { content: ""; position: absolute; right: -24px; top: -24px; width: 110px; height: 110px; border-radius: 32px; transform: rotate(18deg); opacity: .72; background: #fff1e8; }
 
     .section-title { margin: 44px 0 18px; display: flex; align-items: end; justify-content: space-between; gap: 20px; }
     h2 { margin: 0; font-size: clamp(44px, 5.8vw, 70px); line-height: .88; letter-spacing: .025em; }
-    .section-title p { margin: 0; color: var(--muted); font-weight: 600; max-width: 410px; }
-
+    .section-title p { margin: 0; color: var(--muted); font-weight: 600; max-width: 430px; }
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .card { padding: 22px; min-height: 242px; display: flex; flex-direction: column; gap: 12px; }
-    .icon { width: 44px; height: 44px; border-radius: 15px; display: grid; place-items: center; font-size: 22px; font-weight: 800; }
-    .blue, .green, .orange, .purple, .pink { background: var(--brand-gradient); color: #fff; box-shadow: rgba(236,3,130,.18) 0 10px 24px; }
-    .card h3 { margin: 0; font-size: 21px; line-height: 1.12; letter-spacing: -.04em; }
-    .card p { margin: 0; color: var(--muted); font-size: 15px; font-weight: 500; }
-    .card strong { color: var(--ink); }
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .card { padding: 22px; min-height: 228px; display: flex; flex-direction: column; gap: 12px; }
+    .icon { width: 44px; height: 44px; border-radius: 15px; display: grid; place-items: center; font-size: 22px; font-weight: 800; background: var(--brand-gradient); color: #fff; box-shadow: rgba(236,3,130,.18) 0 10px 24px; }
+    .card h3, .workflow-card h3, .memory-panel h3 { margin: 0; font-size: 21px; line-height: 1.12; letter-spacing: -.04em; }
+    .card p, .workflow-card p { margin: 0; color: var(--muted); font-size: 15px; font-weight: 500; }
+    .card strong, .workflow-card strong { color: var(--ink); }
 
-    .formula { padding: 26px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
-    .quick-brief { padding: 26px; margin: 4px 0 10px; display: grid; grid-template-columns: .75fr 1.25fr; gap: 22px; align-items: stretch; }
+    .quick-brief { padding: 26px; margin: 4px 0 10px; display: grid; grid-template-columns: .7fr 1.3fr; gap: 22px; align-items: stretch; }
     .quick-brief h2 { font-size: clamp(38px, 5vw, 58px); }
     .quick-brief .section-title { display: block; margin: 0; }
     .brief-lines { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
     .brief-line { border: 1px solid var(--line); border-radius: 16px; padding: 15px; background: rgba(255,248,242,.82); }
-    .brief-line b { display: block; margin-bottom: 5px; color: var(--brand-pink); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; }
+    .brief-line b, .example b, .workflow-card b { display: block; margin-bottom: 5px; color: var(--brand-pink); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; }
     .brief-line span { color: var(--muted); font-weight: 600; font-size: 14px; }
-    .prompt-box { background: linear-gradient(135deg, #111 0%, #37104b 100%); color: white; border-radius: 18px; padding: 22px; box-shadow: rgba(215,3,118,.18) 0 18px 42px; }
-    .prompt-box code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 15px; line-height: 1.55; color: #f3f3f3; }
-    .prompt-box .muted-code { color: #94cfff; }
+
+    .workflow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .workflow-card { padding: 24px; display: grid; grid-template-columns: 54px 1fr; gap: 16px; align-items: start; }
+    .workflow-card .icon { margin-top: 2px; }
+    .workflow-card ul { margin: 12px 0 0; padding-left: 19px; color: var(--muted); font-weight: 550; }
+    .workflow-card li { margin: 5px 0; }
+
+    .formula { padding: 26px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; align-items: center; }
     .steps { display: grid; gap: 12px; }
     .step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
     .bubble { width: 34px; height: 34px; border-radius: 999px; background: var(--brand-gradient); color: white; display: grid; place-items: center; font-weight: 900; font-size: 14px; }
     .step b { display: block; letter-spacing: -.025em; }
     .step span { color: var(--muted); font-weight: 500; }
+    .prompt-box { background: linear-gradient(135deg, #111 0%, #37104b 100%); color: white; border-radius: 18px; padding: 22px; box-shadow: rgba(215,3,118,.18) 0 18px 42px; }
+    .prompt-box code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 15px; line-height: 1.55; color: #f3f3f3; white-space: pre-wrap; }
+    .prompt-box .muted-code { color: #ffc2e4; }
 
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .memory-panel, .example-panel { padding: 28px; }
+    .memory-panel, .example-panel, .dos-panel { padding: 28px; }
     .memory-list { display: grid; gap: 12px; margin-top: 18px; }
     .memory-item { display: grid; grid-template-columns: 30px 1fr; gap: 12px; align-items: start; }
     .check { width: 30px; height: 30px; border-radius: 10px; display: grid; place-items: center; background: var(--brand-gradient); color: #fff; font-weight: 900; }
@@ -163,22 +137,23 @@
 
     .examples { display: grid; gap: 12px; margin-top: 18px; }
     .example { border: 1px solid var(--line); border-radius: 16px; padding: 15px; background: rgba(246,245,244,.6); }
-    .example b { display: block; margin-bottom: 4px; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--brand-pink); }
     .example p { margin: 0; font-weight: 600; color: #31302e; }
+    .example em { color: var(--muted); font-style: normal; font-weight: 700; }
 
     .footer-note { margin-top: 24px; padding: 22px; border-radius: 22px; background: var(--brand-gradient); color: white; display: flex; justify-content: space-between; gap: 20px; align-items: center; box-shadow: rgba(215,3,118,.20) 0 18px 44px; }
-    .footer-note p { margin: 0; color: rgba(255,255,255,.78); font-weight: 600; }
+    .footer-note p { margin: 0; color: rgba(255,255,255,.84); font-weight: 650; }
     .footer-note strong { color: white; }
     .footer-note .badge { white-space: nowrap; flex-shrink: 0; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.30); box-shadow: none; }
 
     @media (max-width: 920px) {
       .hero, .formula, .quick-brief, .two-col { grid-template-columns: 1fr; }
-      .brief-lines { grid-template-columns: repeat(2, 1fr); }
+      .brief-lines, .grid { grid-template-columns: repeat(2, 1fr); }
+      .grid.three, .workflow-grid { grid-template-columns: 1fr; }
       .hero-intro { grid-template-columns: 1fr; }
       .avatar-cardlet { justify-self: start; width: 168px; order: -1; margin-bottom: 8px; }
-      .grid { grid-template-columns: repeat(2, 1fr); }
       .hero-card { min-height: 360px; }
       .topbar { align-items: flex-start; flex-direction: column; }
+      .topnav { justify-content: flex-start; }
     }
     @media (max-width: 560px) {
       .wrap { padding: 22px 14px 36px; }
@@ -186,18 +161,20 @@
       .section-title { display: block; }
       .section-title p { margin-top: 10px; }
       .footer-note { display: block; }
-      .hero-card, .card, .formula, .quick-brief, .memory-panel, .example-panel { border-radius: 19px; }
+      .hero-card, .card, .formula, .quick-brief, .memory-panel, .example-panel, .workflow-card, .dos-panel { border-radius: 19px; }
       h1 { font-size: clamp(40px, 12.5vw, 54px); }
       h2 { font-size: clamp(40px, 13vw, 56px); }
       .hero-card:before { right: -72px; top: 20px; font-size: 16px; }
       .avatar-cardlet { width: 148px; }
       .prompt-box code { font-size: 13px; }
+      .workflow-card { grid-template-columns: 1fr; }
     }
 
     @media print {
       body { background: white; }
       .wrap { max-width: none; padding: 18px; }
-      .hero-card, .card, .formula, .memory-panel, .example-panel { box-shadow: none; break-inside: avoid; }
+      .topnav, script { display: none; }
+      .hero-card, .card, .formula, .memory-panel, .example-panel, .workflow-card, .dos-panel { box-shadow: none; break-inside: avoid; }
     }
   </style>
 </head>
@@ -205,11 +182,12 @@
   <main class="wrap">
     <header class="topbar" aria-label="Page header">
       <div class="brand"><div class="mark"><img src="assets/lataamo-brandmark.svg" alt="Lataamo logo mark" /></div><div class="brand-word"><strong>Lataamo</strong><span>Penny guide</span></div></div>
-      <div class="badge">Slack guide · for everyone on the team</div>
-      <a class="badge" href="nordea-sustainability/" style="text-decoration:none">Nordea sustainability</a>
-      <a class="badge" href="b2b-kohtaamiset/" style="text-decoration:none">B2B kohtaamiset</a>
-      <a class="badge" href="brand-guide/" style="text-decoration:none">App brand example</a>
-      <a class="badge" href="brave-journey/" style="text-decoration:none">BRAVE journey</a>
+      <nav class="topnav" aria-label="Guide sections">
+        <a class="badge" href="#brief">Start here</a>
+        <a class="navlink" href="#workflows">Workflows</a>
+        <a class="navlink" href="#quality">Quality checks</a>
+        <a class="navlink" href="#prompts">Prompt library</a>
+      </nav>
     </header>
 
     <section class="hero" aria-label="Intro">
@@ -217,218 +195,183 @@
         <div class="hero-intro">
           <div>
             <div class="kicker">Meet Penny</div>
-            <h1>Brief her like a fast junior producer.</h1>
-            <p class="lead">Penny is Lataamo’s AI agent in Slack. Give her a clear outcome, useful context, and the format you want — she will research, structure, draft, compare, and create.</p>
+            <h1>Brief her like a sharp extra producer.</h1>
+            <p class="lead">Penny is Lataamo’s AI teammate in Slack. Use her for research, comparisons, client drafts, production sanity checks, concept critique, Docs, Sheets and useful web pages — but give her the goal, context, constraints and quality bar.</p>
           </div>
           <figure class="avatar-cardlet" aria-label="Penny avatar">
-            <div class="avatar-frame">
-              <img src="assets/penny-avatar.png" alt="Penny, Lataamo’s AI agent avatar" />
-            </div>
+            <div class="avatar-frame"><img src="assets/penny-avatar.png" alt="Penny, Lataamo’s AI agent avatar" /></div>
             <figcaption class="avatar-tag"><span>Hello, I’m Penny</span>Your AI producer in Slack</figcaption>
           </figure>
         </div>
         <div class="hero-footer">
-          <span class="pill">Research</span>
-          <span class="pill">Vendor comparisons</span>
-          <span class="pill">Client drafts</span>
-          <span class="pill">Ideas</span>
+          <span class="pill">Sources</span>
+          <span class="pill">Recommendations</span>
           <span class="pill">Docs & sheets</span>
+          <span class="pill">Council critique</span>
+          <span class="pill">Verification</span>
         </div>
       </div>
 
       <aside class="side-stack" aria-label="Three essentials">
-        <div class="card mini m1">
+        <div class="card mini">
           <div class="num">1</div>
-          <h3>One thread = one working context</h3>
-          <p>Keep each task in one Slack thread when possible.</p>
+          <h3>Ask for a finished output</h3>
+          <p>“Find, compare, cite, recommend and tell me what still needs checking.”</p>
         </div>
-        <div class="card mini m2">
+        <div class="card mini">
           <div class="num">2</div>
-          <h3>Ask for the output</h3>
-          <p>“Find, compare, cite sources, and recommend.”</p>
+          <h3>Keep the working context together</h3>
+          <p>One Slack thread per task works best. Paste the links, files, decisions and constraints Penny needs.</p>
         </div>
-        <div class="card mini m3">
+        <div class="card mini">
           <div class="num">3</div>
-          <h3>Tell her what matters</h3>
-          <p>Date, city, capacity, budget, tone, audience, constraints.</p>
+          <h3>Demand proof before client use</h3>
+          <p>For facts, prices, capacity, contacts, pages, Docs or Sheets: ask Penny to verify the actual source or output.</p>
         </div>
       </aside>
     </section>
 
-    <section class="quick-brief" aria-label="Fast briefing structure">
+    <section id="brief" class="quick-brief" aria-label="Fast briefing structure">
       <div class="section-title">
         <h2>Brief Penny in 4 lines.</h2>
-        <p>Copy this structure when you want a useful answer fast.</p>
+        <p>Use this when you want a useful answer fast. Short is fine — vague is expensive.</p>
       </div>
       <div class="brief-lines">
-        <div class="brief-line"><b>Task</b><span>What should Penny do?</span></div>
-        <div class="brief-line"><b>Context</b><span>Client, event, audience, date, city, budget, constraints.</span></div>
-        <div class="brief-line"><b>Output</b><span>Slack bullets, table, Google Sheet, client email, checklist.</span></div>
-        <div class="brief-line"><b>Quality</b><span>Sources, caveats, recommendation, and next action.</span></div>
+        <div class="brief-line"><b>1. Goal</b><span>What should Penny deliver or decide?</span></div>
+        <div class="brief-line"><b>2. Context</b><span>Client, event, audience, city, date, budget, vibe, constraints, links.</span></div>
+        <div class="brief-line"><b>3. Output</b><span>Slack bullets, table, Google Sheet, Google Doc, client email, checklist, page.</span></div>
+        <div class="brief-line"><b>4. Quality</b><span>Sources, caveats, recommendation, council critique, verification, next action.</span></div>
       </div>
     </section>
 
     <section aria-label="What Penny can do">
       <div class="section-title">
         <h2>Use Penny for complete work.</h2>
-        <p>Do not only ask where to look. Ask her to make the thing usable.</p>
+        <p>Do not only ask where to look. Ask her to make the thing usable for the next meeting, client message or production decision.</p>
       </div>
       <div class="grid">
-        <article class="card">
-          <div class="icon blue">🔎</div>
-          <h3>Research with sources</h3>
-          <p>Ask Penny to find options, open sources, check facts, and list what still needs confirmation.</p>
-        </article>
-        <article class="card">
-          <div class="icon green">📊</div>
-          <h3>Compare options</h3>
-          <p>Ask for a table with fit, pros/cons, risks, price signals, next checks, and a recommendation.</p>
-        </article>
-        <article class="card">
-          <div class="icon orange">✍️</div>
-          <h3>Draft useful copy</h3>
-          <p>Ask for emails, concepts, briefs, summaries, scripts, client text, or social posts in the right tone.</p>
-        </article>
-        <article class="card">
-          <div class="icon purple">🧰</div>
-          <h3>Make assets</h3>
-          <p>For bigger work, ask for a Google Sheet, Google Doc, PDF-ready text, checklist, or web page.</p>
-        </article>
+        <article class="card"><div class="icon">🔎</div><h3>Research with sources</h3><p>Ask Penny to open sources, separate facts from interpretation, and list caveats. Search snippets are not enough for important work.</p></article>
+        <article class="card"><div class="icon">📊</div><h3>Compare options</h3><p>Ask for fit, pros/cons, risks, price signals, logistics, contacts, next checks and a clear top recommendation.</p></article>
+        <article class="card"><div class="icon">✍️</div><h3>Draft usable copy</h3><p>Ask for paste-ready Finnish or English: emails, client summaries, proposals, speaker notes, scripts and follow-ups.</p></article>
+        <article class="card"><div class="icon">🧰</div><h3>Create assets</h3><p>For bigger tasks, ask for a Google Doc, Sheet, visual page, checklist, PDF-ready text or continuation note — not just a chat answer.</p></article>
       </div>
     </section>
 
-    <section aria-label="High value use cases">
+    <section id="workflows" aria-label="Lataamo workflows">
       <div class="section-title">
-        <h2>Ask for decisions, not just information.</h2>
-        <p>The best requests give Penny a job to finish and a clear way to judge the answer. If the brief is missing something important, Penny may ask a few questions before starting.</p>
+        <h2>Best Lataamo workflows.</h2>
+        <p>These are the tasks where Penny saves most time when the brief is concrete and the output format is clear.</p>
       </div>
-      <div class="grid">
-        <article class="card">
-          <div class="icon blue">🏟️</div>
-          <h3>Find event options</h3>
-          <p>“Find 5 venues/suppliers/speakers that fit this brief. Include sources, fit, caveats, and top pick.”</p>
-        </article>
-        <article class="card">
-          <div class="icon green">🧭</div>
-          <h3>Turn chaos into next steps</h3>
-          <p>Paste rough notes and ask for decisions, open questions, owners, timeline, and missing info.</p>
-        </article>
-        <article class="card">
-          <div class="icon orange">🎭</div>
-          <h3>Build concepts</h3>
-          <p>Ask for 3 distinct creative directions with audience journey, visual world, wow moment, and risks.</p>
-        </article>
-        <article class="card">
-          <div class="icon purple">✅</div>
-          <h3>Prepare client-ready output</h3>
-          <p>Ask Penny to polish the final version: concise, structured, sourced, and ready for human review.</p>
-        </article>
+      <div class="workflow-grid">
+        <article class="workflow-card"><div class="icon">🏟️</div><div><b>Venue / supplier shortlist</b><h3>From “find options” to a usable recommendation</h3><p>Give capacity, date, city, budget, audience, vibe, hard constraints and what has already been ruled out.</p><ul><li>Ask for sources, contacts, logistics and fit.</li><li>Ask Penny to flag what must be confirmed by phone or email.</li></ul></div></article>
+        <article class="workflow-card"><div class="icon">🧾</div><div><b>Client or prospect briefing</b><h3>Turn scattered input into a structured brief</h3><p>Paste notes, links, prior decisions and desired tone. Ask for quick-read first, then details, caveats and next questions.</p><ul><li>Use Google Doc when others need to reuse it.</li><li>Ask for Finnish copy when it will go to a Finnish client.</li></ul></div></article>
+        <article class="workflow-card"><div class="icon">🎭</div><div><b>Concept and proposal work</b><h3>Generate directions, then challenge them</h3><p>Ask for 2–4 distinct options, then ask Penny to run a client / producer / participant / commercial critique.</p><ul><li>Require green / reshape / kill.</li><li>Ask for the cheapest useful next test.</li></ul></div></article>
+        <article class="workflow-card"><div class="icon">🧭</div><div><b>Meeting notes and production chaos</b><h3>Make decisions, owners and risks visible</h3><p>Paste raw notes and ask for decisions, open questions, owners, deadlines, dependencies, risks and the three most important follow-ups.</p><ul><li>Ask for a checklist when work moves to production.</li><li>Ask “what could fail?” before the plan is locked.</li></ul></div></article>
+        <article class="workflow-card"><div class="icon">📈</div><div><b>Research base or lead list</b><h3>Use Sheets when comparison matters</h3><p>When there are many options, ask Penny to create or update a structured Sheet with sources, fit, caveats and next actions.</p><ul><li>Good for vendors, venues, inspiration examples and prospect lists.</li><li>Ask for polished formatting and a concise Slack summary.</li></ul></div></article>
+        <article class="workflow-card"><div class="icon">🧪</div><div><b>Pages, apps and automations</b><h3>Ask Penny to build and verify, not just edit</h3><p>If Penny creates a page, widget, Doc, Sheet, script or automation, ask for the live link and what was actually checked.</p><ul><li>“Verify before reporting back” is the magic phrase.</li><li>Ask what remains unverified or needs human approval.</li></ul></div></article>
       </div>
     </section>
 
     <section aria-label="Prompt formula">
       <div class="section-title">
-        <h2>The best prompt formula</h2>
-        <p>Short is fine — but include the decision-making ingredients.</p>
+        <h2>The strongest request formula.</h2>
+        <p>Use this whenever the work has real stakes or will be shown to a client.</p>
       </div>
       <div class="formula">
         <div class="steps">
-          <div class="step"><div class="bubble">1</div><div><b>Outcome</b><span>What should Penny deliver: table, draft, shortlist, plan, checklist, or recommendation?</span></div></div>
-          <div class="step"><div class="bubble">2</div><div><b>Context</b><span>Event type, audience, city, date, budget, vibe, constraints, and what has already been decided.</span></div></div>
-          <div class="step"><div class="bubble">3</div><div><b>Format</b><span>Slack bullets, comparison table, client-facing text, Google Sheet, Google Doc, or ready-to-send email.</span></div></div>
-          <div class="step"><div class="bubble">4</div><div><b>Quality bar</b><span>Ask for sources, clear reasoning, caveats, top recommendation, and next checks.</span></div></div>
+          <div class="step"><div class="bubble">1</div><div><b>Role and outcome</b><span>“Act as a producer / researcher / creative lead. Deliver a shortlist / plan / client-ready draft / recommendation.”</span></div></div>
+          <div class="step"><div class="bubble">2</div><div><b>Context and constraints</b><span>Paste the relevant Slack notes, files, links, dates, budget, audience, tone, decisions and non-negotiables.</span></div></div>
+          <div class="step"><div class="bubble">3</div><div><b>Output format</b><span>Tell whether you want Slack bullets, a table, Google Sheet, Google Doc, ready-to-send email, checklist or page.</span></div></div>
+          <div class="step"><div class="bubble">4</div><div><b>Quality bar</b><span>Ask for sources, caveats, recommendation, risks, council critique, verification and next checks.</span></div></div>
         </div>
         <div class="prompt-box" aria-label="Example prompt">
-          <code><span class="muted-code">Example:</span><br>
-Find 3–5 Helsinki venues for 150 people in September. Premium but warm vibe. Include capacity, location, source links, pricing signals if available, and a clear recommendation. Output as a comparison table for internal use.</code>
+          <code><span class="muted-code">Example:</span>
+Find 3–5 Helsinki venues for 150 people in September. Premium but warm vibe. Include capacity, location, source links, price signals if available, logistics risks, and a clear recommendation. Output as a comparison table for internal use, and tell me what must be confirmed before client use.</code>
         </div>
       </div>
     </section>
 
-    <section aria-label="Session and memory">
+    <section id="quality" aria-label="How Penny gets better work done">
       <div class="section-title">
-        <h2>What Penny knows — and what you need to tell her</h2>
-        <p>No AI jargon needed. Paste task details, and tell Penny explicitly what should carry forward.</p>
-      </div>
-      <div class="two-col">
-        <article class="memory-panel">
-          <div class="icon pink">💬</div>
-          <h3>Current thread = short-term context</h3>
-          <div class="memory-list">
-            <div class="memory-item"><div class="check">✓</div><div><b>Use one Slack thread per task</b><span>Penny follows the task best when the brief, files, corrections, and decisions stay together.</span></div></div>
-            <div class="memory-item"><div class="check">✓</div><div><b>Paste task details</b><span>Penny cannot freely search all Slack history. Add the relevant notes, links, files, dates, decisions, and constraints.</span></div></div>
-            <div class="memory-item"><div class="check cross">!</div><div><b>Very long threads can lose detail</b><span>If the task has evolved a lot, restate the latest brief and desired output.</span></div></div>
-          </div>
-        </article>
-
-        <article class="memory-panel">
-          <div class="icon green">🧠</div>
-          <h3>Memory = durable preferences</h3>
-          <div class="memory-list">
-            <div class="memory-item"><div class="check">✓</div><div><b>Good to remember</b><span>Team preferences, recurring workflows, office location, output style, stable conventions.</span></div></div>
-            <div class="memory-item"><div class="check">✓</div><div><b>Internal vendor database</b><span>Penny can use Lataamo’s vendor database as a helpful reference, but it is incomplete — important vendor facts must still be verified externally.</span></div></div>
-            <div class="memory-item"><div class="check cross">×</div><div><b>Not good to remember</b><span>One-off deadlines, temporary drafts, old event details, information that will soon be stale.</span></div></div>
-            <div class="memory-item"><div class="check">✓</div><div><b>Say it explicitly</b><span>Use “Remember this for future tasks” or “For this task only…” so Penny knows what should carry forward.</span></div></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section aria-label="How Penny gets better work done">
-      <div class="section-title">
-        <h2>Ask Penny to challenge, check, and continue cleanly.</h2>
-        <p>For important work, you can ask Penny to use stronger working habits. No AI jargon needed — these are simple quality requests.</p>
+        <h2>Ask Penny to challenge, check and continue cleanly.</h2>
+        <p>These are the newer habits that make Penny much more useful than a normal chatbot.</p>
       </div>
       <div class="grid">
-        <article class="card">
-          <div class="icon blue">🔥</div>
-          <h3>Challenge the idea first</h3>
-          <p>For concepts and proposals, ask: “Stress-test this before you recommend it.” Penny will look for weak assumptions, production risks, customer value, and a better next step.</p>
-        </article>
-        <article class="card">
-          <div class="icon green">🔍</div>
-          <h3>Ask for proof, not confidence</h3>
-          <p>For research, pages, Docs, Sheets, or builds, ask Penny to verify the actual output: open the link, check sources, test the form, inspect the page, or read the file back.</p>
-        </article>
-        <article class="card">
-          <div class="icon orange">🧾</div>
-          <h3>Use a continuation note</h3>
-          <p>If a task gets long, ask: “Make a continuation note.” Copy-paste it into a new Penny thread later so she knows the goal, decisions, links, verified work, open risks, and next action.</p>
-        </article>
-        <article class="card">
-          <div class="icon purple">👥</div>
-          <h3>Let Penny use extra workers</h3>
-          <p>For bigger tasks, ask Penny to split independent work: one stream for sources, one for fit, one for risks or critique. Penny then combines and verifies the final answer.</p>
-        </article>
+        <article class="card"><div class="icon">🔥</div><h3>Use the council</h3><p>For concepts, proposals and decisions: “Run a council: client reality, producer risk, creative lead, participant, commercial, evidence. Then give green / reshape / kill.”</p></article>
+        <article class="card"><div class="icon">🔍</div><h3>Ask for verification</h3><p>For facts and deliverables: “Verify the actual output before reporting back. Tell me exactly what you checked and what remains unverified.”</p></article>
+        <article class="card"><div class="icon">👥</div><h3>Use parallel workers</h3><p>For bigger tasks: “Split this into parallel streams: sources, fit, risks and critique. Combine the result into one recommendation.”</p></article>
+        <article class="card"><div class="icon">🧠</div><h3>Use memory carefully</h3><p>Say “remember this” only for durable preferences or conventions. Say “for this task only” for temporary facts, old event details and one-off deadlines.</p></article>
       </div>
-      <div class="example-panel" style="margin-top:16px">
-        <div class="examples">
-          <div class="example"><b>Strong concept request</b><p>Create 3 directions, then challenge them like a client, producer, participant, and commercial reviewer. Recommend green / reshape / kill and the cheapest useful test.</p></div>
-          <div class="example"><b>Strong verification request</b><p>Build or update this, then verify it before reporting back. Tell me exactly what you checked, what changed, and what remains unverified.</p></div>
-          <div class="example"><b>Strong continuation request</b><p>Make a continuation note I can copy-paste into a new Penny session. Include the current brief, locked decisions, important links, verified work, open risks, and where to pick up.</p></div>
-        </div>
+      <div class="two-col" style="margin-top:16px">
+        <article class="memory-panel">
+          <div class="icon">💬</div>
+          <h3>What Penny can and cannot know</h3>
+          <div class="memory-list">
+            <div class="memory-item"><div class="check">✓</div><div><b>Penny follows the current Slack thread</b><span>Keep one task in one thread when possible, and restate the latest brief if the discussion gets long.</span></div></div>
+            <div class="memory-item"><div class="check">✓</div><div><b>Paste the real source material</b><span>Penny cannot freely search all Slack history. Add the relevant files, links, comments, decisions and constraints.</span></div></div>
+            <div class="memory-item"><div class="check cross">!</div><div><b>Time-sensitive facts must be checked</b><span>Prices, availability, capacity, contacts, schedules and legal facts need source or human confirmation.</span></div></div>
+          </div>
+        </article>
+        <article class="memory-panel">
+          <div class="icon">🧾</div>
+          <h3>When the task gets long</h3>
+          <div class="memory-list">
+            <div class="memory-item"><div class="check">✓</div><div><b>Ask for a continuation note</b><span>Use it when you need to continue in a new thread: goal, locked decisions, links, verified work, open risks and next action.</span></div></div>
+            <div class="memory-item"><div class="check">✓</div><div><b>Ask for a reusable artifact</b><span>For work others will use, ask for a Doc, Sheet, checklist or published page instead of a long Slack answer.</span></div></div>
+            <div class="memory-item"><div class="check cross">×</div><div><b>Do not bury final decisions</b><span>Ask Penny to end with “recommended next action” and “what still needs a human decision”.</span></div></div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section aria-label="Examples">
+    <section aria-label="Do and do not">
       <div class="section-title">
-        <h2>Copy these prompts</h2>
-        <p>Small improvements in the brief create much better results.</p>
+        <h2>Small habits that change the result.</h2>
+        <p>Most weak answers come from missing context, missing format or missing quality bar.</p>
+      </div>
+      <div class="two-col">
+        <article class="dos-panel">
+          <div class="icon">✅</div>
+          <h3>Do this</h3>
+          <div class="memory-list">
+            <div class="memory-item"><div class="check">✓</div><div><b>Give the messy material</b><span>Paste rough notes, links and constraints. Penny can structure chaos if she can see it.</span></div></div>
+            <div class="memory-item"><div class="check">✓</div><div><b>Name the audience</b><span>Internal team, client, participant, supplier and leadership copy need different tone and detail.</span></div></div>
+            <div class="memory-item"><div class="check">✓</div><div><b>Ask for a recommendation</b><span>“Give options” is weaker than “compare options and recommend one with caveats”.</span></div></div>
+          </div>
+        </article>
+        <article class="dos-panel">
+          <div class="icon">⚠️</div>
+          <h3>Do not assume this</h3>
+          <div class="memory-list">
+            <div class="memory-item"><div class="check cross">×</div><div><b>Do not assume Penny saw the channel history</b><span>Paste the key context or link it in the thread.</span></div></div>
+            <div class="memory-item"><div class="check cross">×</div><div><b>Do not use unverified facts with clients</b><span>Ask Penny what she verified and what still needs checking.</span></div></div>
+            <div class="memory-item"><div class="check cross">×</div><div><b>Do not accept generic event language</b><span>Ask for concrete what / how / why, production implications and why it fits this client.</span></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="prompts" aria-label="Examples">
+      <div class="section-title">
+        <h2>Copy these prompts.</h2>
+        <p>Use as-is, then replace the specifics with your own event, client or task.</p>
       </div>
       <div class="example-panel">
         <div class="examples">
-          <div class="example"><b>Vendor research</b><p>Find and compare 5 suitable caterers for a 120-person evening event in Helsinki. Use Lataamo’s vendor database if useful, but verify with public sources. Include dietary flexibility, logistics, price signals, contacts, caveats, and recommendation.</p></div>
-          <div class="example"><b>Supplier shortlist</b><p>Find 4 possible AV, catering, or entertainment suppliers for this event. Output a comparison table with contact info, source links, fit, risks, and next checks.</p></div>
-          <div class="example"><b>Client copy</b><p>Turn this rough text into a polished Finnish client email. Keep it concise, warm, and confident. Make it ready to send, but mark anything I should verify first.</p></div>
-          <div class="example"><b>Meeting notes</b><p>Summarise this meeting into decisions, open questions, owners, deadlines, risks, and next steps. End with the 3 most important followups.</p></div>
-          <div class="example"><b>Concept ideas</b><p>Create 3 event concept directions for a B2B tech client. Include theme, guest journey, visual world, wow moment, production needs, risks, and why each concept fits.</p></div>
-          <div class="example"><b>Producer sanity check</b><p>Review this event plan like a producer. What is missing, what could fail, what needs confirmation, and what is the simplest next action?</p></div>
+          <div class="example"><b>Vendor research</b><p>Find and compare 5 suitable caterers for a 120-person evening event in Helsinki. Use Lataamo’s vendor database if useful, but verify with public sources. Include dietary flexibility, logistics, price signals, contacts, caveats and recommendation.</p></div>
+          <div class="example"><b>Venue shortlist</b><p>Find 3–5 venues for [audience / size / date / city]. Include capacity, location, vibe fit, practical risks, source links, contact path, and what we must confirm before showing the client.</p></div>
+          <div class="example"><b>Client copy</b><p>Turn this rough text into a polished Finnish client email. Keep it concise, warm and confident. Make it ready to send, but mark anything I should verify first.</p></div>
+          <div class="example"><b>Meeting notes</b><p>Summarise this meeting into decisions, open questions, owners, deadlines, risks and next steps. End with the 3 most important follow-ups and anything missing from the plan.</p></div>
+          <div class="example"><b>Concept council</b><p>Create 3 event directions for this brief. Then challenge them as client, producer, participant, creative lead and commercial reviewer. Recommend green / reshape / kill for each and the cheapest useful next test.</p></div>
+          <div class="example"><b>Research Sheet</b><p>Build this as a structured Google Sheet: options, source links, fit, caveats, evidence strength, recommended next action. Format it clearly and send a short Slack summary with the top recommendation.</p></div>
+          <div class="example"><b>Verification request</b><p>Before you say this is done, verify the actual output. Open the live link or source, check the key content, test the main path, then report exactly what changed, what you checked, and what remains unverified.</p></div>
+          <div class="example"><b>Continuation note</b><p>Make a continuation note I can copy-paste into a new Penny thread. Include the current brief, locked decisions, important links, verified work, open risks and where to pick up.</p></div>
         </div>
       </div>
     </section>
 
     <footer class="footer-note">
-      <p><strong>Final rule:</strong> Treat Penny like an extra producer with tools — give the goal, context, constraints, desired format, and ask for sources, caveats, recommendation, and next action. Verify prices, availability, capacity, contacts, schedules, and other time-sensitive facts before client use.</p>
+      <p><strong>Final rule:</strong> Treat Penny like an extra producer with tools. Give the goal, context, constraints and desired output; ask for sources, caveats, recommendation, verification and next action. Human-check prices, availability, capacity, contacts, schedules and anything client-critical.</p>
       <div class="badge">Verify critical facts before client use</div>
     </footer>
   </main>
